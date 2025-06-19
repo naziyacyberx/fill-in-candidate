@@ -1,0 +1,287 @@
+.form-group {
+    margin-bottom: 25px;
+  }
+
+  .remember-me-text{
+    margin: 0 !important;
+  }
+  
+  .mobile-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  
+  }
+  
+  .country-code {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-right: 1px solid #ccc;
+  }
+  
+  .country-code img {
+    width: 20px;
+    height: 14px;
+    margin-right: 5px;
+  }
+  
+  .mobile-input input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  
+  .login-section{
+      background-color: white;
+  }
+  
+  
+  .login-left-main{
+    background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #D3EBFF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  }
+  
+  .register-container {
+  
+      border-radius: 8px;
+  
+  padding: 20px 150px;
+      width: 100%;
+   
+      box-sizing: border-box;
+      height: 100%;
+      display: flex
+  ;
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .auth-logo {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+  
+    .auth-logo img {
+      width: 40%;
+      margin-bottom: 15px;
+    }
+  
+    .register-container h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: #000;
+      text-align: left;
+
+      font-weight: 900;
+    }
+  
+    .register-container p {
+      font-size: 16px;
+      color: #313131;
+      text-align: left;
+      margin-bottom: 30px;
+
+      font-weight: 500;
+    }
+  
+  
+  
+    .form-group label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #000000;
+   
+      font-weight: 500;
+    }
+  
+  
+  
+  
+    .form-group input:focus-visible{
+      outline: none !important;
+    }
+  
+    .form-group .toggle-icon {
+      position: absolute;
+      top: 70%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+      font-size: 16px;
+    }
+  
+    .terms {
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .terms input {
+      margin-right: 10px;
+    }
+  
+    .google-btn{
+      width: 100%;
+      padding: 12px;
+      background: #FF0800;
+  margin: 10px 0px 5px 0px;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: capitalize;
+      font-weight: 700;
+    }
+    
+
+    .login-btn{
+        background: linear-gradient(to right, #0367fc, #68d4e8) !important;
+        color: white !important;
+        margin-top: 30px;
+    }
+
+    .login-btn:hover{
+        background: linear-gradient(to right, #0254cf, #44a8b9) !important;
+    }
+
+
+
+    .google-btn:hover {
+      background-color: #d00000;
+    }
+  
+    .login-link {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+  
+    .login-link a {
+      color: #FF0800;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  
+    @media (max-width: 768px) {
+      .register-container {
+        padding: 15px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .register-container {
+        padding: 10px;
+      }
+    }
+  
+  
+  
+  
+  .google-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #F2F2F2;
+  color: black;
+  }
+  
+  
+  .google-btn:hover{
+    background: #d6d6d6;
+  }
+  
+  
+  
+   /*---------------------- LOG-IN-CSS -----------------------*/
+   .sign-up-terms{
+      display: flex;
+      justify-content: space-between;
+   }
+  
+   .sign-up-terms a{
+      text-decoration: none;
+      color: #FF0800;
+   font-weight: 400;
+   }
+  
+   .sign-up-terms a:hover{
+      color: #cc0802;
+   }
+  
+   .react-tel-input .form-control{
+    width: 100% !important;
+    height: 40px !important;
+    margin-left: 12px !important;
+   }
+  
+  
+   .react-tel-input .selected-flag{
+  width: 45px !important;
+   }
+  
+   .react-tel-input .form-control:focus{
+    outline: none !important;
+    box-shadow: none !important;
+   }
+  
+   .form-control{
+    font-size: 17px !important;
+    line-height: 2 !important;
+   }
+
+
+   .form-control:focus , .form-check-input {
+    box-shadow: none !important;
+}
+
+.form-check{
+    margin-bottom: 0 !important;
+}
+
+.remember-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember-box button{
+    color: #0165FC;
+    margin: 0;
+    font-weight: 700;
+    cursor: pointer;
+    border: none ;
+    padding: 0;
+    background: transparent;
+}
+
+.remember-box h6:hover{
+    color: #024ab6;
+}
+
+.eye-main{
+  position: relative;
+}
+
+.password-toggle{
+  position: absolute;
+  top: 20%;
+right: 2%;
+}

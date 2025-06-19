@@ -1,0 +1,152 @@
+.nav-ul li {
+    list-style: none;
+    cursor: pointer;
+    position: relative; /* To position dropdown */
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.nav-ul {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    font-weight: 500;
+}
+
+.nav-col {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.dropdown-content {
+    display: none; 
+    position: absolute; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    z-index: 1; 
+    padding: 0px;
+}   
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+    width: 200px;
+    border: 1px solid #dcdcdc;
+    border-top: 0px !important;
+}
+
+.dropdown-content li {
+    padding: 10px 20px; /* Padding for dropdown items */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.dropdown-content li:hover {
+    background-color: #f0f0f0; /* Highlight effect on hover */
+}
+
+.logo{
+    width: 70%;
+    cursor: pointer;
+}
+
+.nav-main{
+    background-color: white !important;
+}
+
+.nav-dropdown{
+   
+}
+
+@media (max-width:425px) and (min-width:319px) {
+    .img-fluid{
+        width: 100%;
+        cursor: pointer;
+    }
+    .nav-col svg{
+        font-size: 25px;
+    }
+  }
+
+  @media (max-width:992px) and (min-width:319px) {
+ 
+    .nav-col svg{
+        font-size: 25px;
+    }
+  }
+
+  .btn-register{
+    background: linear-gradient(to right, #0367fc, #68d4e8);
+    border: none;
+    border-radius: 22px;
+    padding: 8px 30px !important;
+    color: white;
+        font-weight: 600;
+  }
+
+  .btn-login{
+    border: 2px solid #00000033;
+    border-radius: 22px;
+    padding: 7px 30px !important;
+    color: black;
+    background-color: #ffffff;
+    font-weight: 600;
+  }
+
+  .btn-nav{
+    display: flex;
+    grid-gap: 20px;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+  }
+
+  /* .message-icon {
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.message-icon:hover {
+  color: #007bff;
+} */
+
+.user-menu-popup {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 160px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+}
+
+.user-menu-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.user-menu-popup li {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.user-menu-popup li:hover {
+  background-color: #f0f0f0;
+}
+
+.message-icon {
+  color: #333;
+  transition: color 0.2s ease;
+  margin-right: 10px;
+}
+
+.message-icon:hover {
+  color: #007bff;
+}

@@ -1,0 +1,114 @@
+.card-box {
+    padding: 60px 0;
+    background: #fff;
+  }
+  .card-title-section {
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+  }
+  
+  .profile-card {
+    padding: 22px;
+    border-radius: 16px;
+    background-color: #F0F6FF;
+    transition: 0.3s ease;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    gap: 22px;
+  }
+  
+
+  
+
+  
+
+  .hiring-content h6 {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .hiring-content h2 {
+    font-size: 36px;
+    margin: 5px 0;
+  }
+  
+  .hiring-content p {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  .btn-search {
+    padding: 10px 20px;
+    background: #208df3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+  }
+
+
+  .hiring-box{
+    background-image: url(../../public/images/hiring-bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    /* padding: 80px 0px; */
+  }
+
+  .hiring-btn{
+    background: linear-gradient(to right, #0367fc, #68d4e8);
+    border: none;
+    border-radius: 22px;
+    padding: 10px 30px !important;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .applican-name {
+    font-weight: 700;
+    font-size: 24px;
+margin: 0;
+    word-break: break-all;
+  }
+  
+
+  .job-card-content p{
+        font-weight: 600;
+    font-size: 22px;
+    color: #0165FC !important;
+  }
+
+  .job-card-content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .job-category-img-box{
+    height: 70px;
+    width:70px;
+    background-color: #0165FC;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+  }
+
+    .profile-card .icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    width: 70%;
+    object-position: center;
+  }
+
+  .card-box .row{
+    --bs-gutter-y:30px !important;
+  }

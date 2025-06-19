@@ -1,0 +1,79 @@
+.report-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.report-popup {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.report-popup h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.report-popup label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.report-input,
+.report-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #f1f8ff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.report-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-report-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #0165fc, #6cd8e7);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.report-input, .report-textarea:focus-visible{
+    outline: none !important;
+}

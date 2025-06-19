@@ -1,0 +1,102 @@
+.messages-container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f5f6fa;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  gap: 10px;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.filter-buttons button {
+  border: none;
+  background-color: #f0f0f0;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-buttons button.active,
+.filter-buttons button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-item {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.message-item:hover {
+  background-color: #f9f9f9;
+}
+
+.message-icon {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #007bff;
+  margin-top: 5px;
+}
+
+.message-info {
+  flex: 1;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sender {
+  color: #333;
+}
+
+.time {
+  color: #999;
+  font-size: 13px;
+}
+
+.text {
+  color: #666;
+  margin: 0;
+}

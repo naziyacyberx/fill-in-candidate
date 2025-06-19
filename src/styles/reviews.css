@@ -1,0 +1,271 @@
+.reviews-section {
+  padding: 50px 0px;
+}
+
+.review_profile {
+  padding: 40px 20px;
+}
+
+.rating-section{
+  padding-top: 50px;
+}
+
+
+.review-main-heading {
+  font-size: 35px;
+  font-weight: 700;
+  padding-bottom: 40px;
+}
+
+.rating-slide-score h2 {
+  font-size: 36px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  gap: 6px;
+}
+
+.rating-slide-score p {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+}
+
+.rating-slide-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.rating-slide-bar {
+  font-size: 0.9rem;
+}
+
+.rating-slide-star {
+  width: 50px;
+  white-space: nowrap;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-slide-star span {
+  font-size: 15px;
+}
+
+.rating-slide-track {
+  background-color: #e0e0e0;
+  height: 8px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rating-slide-fill {
+  height: 100%;
+  background-color: #fbbf24; /* amber-400 / similar to orange-yellow */
+  border-radius: 5px;
+}
+
+.rating-slide-percent {
+  width: 50px;
+  text-align: end;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.range-main {
+  padding-left: 40px;
+  border-left: 2px solid #00000033;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-start-heading {
+  font-size: 32px;
+  margin-bottom: 6px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.view_rating_profile_img {
+  height: 150px;
+  width: 150px;
+}
+
+.testimonial-section {
+  padding: 50px 0px;
+}
+
+.testimonial-main-box {
+  border: 1px solid #0000001c;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  gap: 30px;
+}
+
+.testimonial-info-box {
+  width: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.testimonial-img-box {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 2px solid #dcdcdc;
+}
+
+.testimonial-img-box img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.testimonial-info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.testimonial-info-top h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+}
+
+.testimonial-info-top button {
+  padding: 4px 15px;
+  border-radius: 15px;
+  font-size: 15px;
+  width: max-content;
+  border: 1px solid #e1e9f3;
+  background-color: #f5f9ff;
+}
+
+.testimonial-info-box h5 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.testimonial-info-box p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+.testimonial-main-col{
+      display: flex
+;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.testimonial-filter-box{
+  display: flex;
+  gap: 20px;
+  padding: 30px 0px 50px 0px;
+}
+
+.testimonial-filter-box button{
+  color: black;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 25px;
+    padding: 10px 30px ;
+    border: 2px solid #0165FC4D;
+    background-color: transparent;
+}
+
+
+.testimonial-filter-box button:hover{
+background: #E9F2FF;
+color: #0165FC;
+}
+
+.testimonial-filter-box button.active {
+background: #E9F2FF;
+color: #0165FC;
+}
+
+
+
+.review-form-container {
+  background-color: #f5faff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.review-form-heading {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.review-form-subheading {
+  color: #347dff;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.review-stars {
+  font-size: 28px;
+  color: #f6b300;
+  margin-bottom: 20px;
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  border: 2px solid #58aaff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  resize: none;
+  font-size: 15px;
+}
+
+.review-image-input {
+  margin-bottom: 20px;
+}
+
+.submit-review-btn {
+  background: linear-gradient(to right, #3366ff, #6cd8e7);
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.review-star {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 24px;
+}
+
+.review-star.active {
+  color: #f5a623; /* gold */
+}
+
+

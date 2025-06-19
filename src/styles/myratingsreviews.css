@@ -1,0 +1,8 @@
+.review-card {
+  border-radius: 14px;
+  border: none;
+}
+
+.review-card .card-body {
+  padding: 1rem;
+}

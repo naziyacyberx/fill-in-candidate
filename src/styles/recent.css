@@ -1,0 +1,53 @@
+.recent-applicants {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .recent-applicants h2 {
+    font-weight: bold;
+  }
+  .recent-applicants h2 span {
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+  .applicant-card {
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.05);
+  }
+  .applicant-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 25%;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+
+
+  .applicant-role {
+    color: #007bff;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .applicant-meta {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rating {
+    color: #f1c40f;
+    font-size: 16px;
+  }
+  .see-all-btn {
+    background: linear-gradient(to right, #2b6ee3, #5ec3ff);
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+  
