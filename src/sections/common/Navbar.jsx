@@ -4,6 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaEnvelope, FaUserCircle } from "react-icons/fa";
 import NavbarSideBar from "./NavbarSideBar";
 import { FiMessageSquare } from "react-icons/fi";
+import { FaBell } from "react-icons/fa";
+import NotificationPopup from "../../components/Notificationpopup";
+import axios from "axios";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,10 +18,39 @@ const Navbar = () => {
   const menuRef = useRef(null);
   const currentPath = location.pathname + location.search;
 
+const [showNotifications, setShowNotifications] = useState(false);
+const [notifications, setNotifications] = useState([]);
+const fetchNotifications = async () => {
+  try {
+    const token = localStorage.getItem("fillInToken"); // token from localStorage
+    const response = await axios.get(
+      "https://fillin-admin.cyberxinfosolution.com/api/candidate/notification-list",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("res", response);
+    
+
+    if (response?.data?.status === "success") {
+      setNotifications(response.data.data);
+    }
+  } catch (error) {
+    console.error("Error fetching notifications", error);
+  }
+};
+
+
+
   // Check if token exists
   useEffect(() => {
     const token = localStorage.getItem("fillInToken");
     setIsLoggedIn(!!token);
+    fetchNotifications()
   }, [location]);
 
   // Close menu when clicking outside
@@ -57,36 +90,58 @@ const Navbar = () => {
             <div className="col-9 text-end position-relative">
               <div className="btn-nav">
              {isLoggedIn ? (
-  <div className="position-relative d-inline-flex align-items-center gap-3" ref={menuRef}>
-    {/* <FaEnvelope
-      size={22}
-      className="message-icon"
-      style={{ cursor: "pointer" }}
-      onClick={() => navigate("/messages")}
-    /> */}
-    <FiMessageSquare
-  size={28}
-  className="message-icon"
-  style={{ cursor: "pointer" }}
-  onClick={() => navigate("/messages")}
-/>
+<div className="position-relative d-inline-flex align-items-center gap-3" ref={menuRef}>
+  <FiMessageSquare
+    size={28}
+    className="message-icon"
+    style={{ cursor: "pointer" }}
+    onClick={() => navigate("/messages")}
+  />
 
-    <FaUserCircle
-      size={28}
-      className="user-icon"
+  <div className="position-relative">
+    <FaBell
+      size={24}
+      className="notification-icon"
       style={{ cursor: "pointer" }}
-      onClick={() => setShowMenu((prev) => !prev)}
+      onClick={() => {
+        setShowNotifications((prev) => !prev);
+        if (!showNotifications) fetchNotifications(); // Only fetch when opening
+      }}
     />
-    {showMenu && (
-      <div className="user-menu-popup text-center">
-        <ul>
-          <li onClick={() => navigate("/applies")}>Applied Jobs</li>
-          <li onClick={() => navigate("/profile")}>Profile</li>
-          <li onClick={handleLogout}>Logout</li>
-        </ul>
-      </div>
+    {notifications.length > 0 && !showNotifications && (
+      <span
+        className="notification-badge"
+      >
+        {notifications.length}
+      </span>
     )}
   </div>
+
+  {showNotifications && (
+    <NotificationPopup
+      notifications={notifications}
+      onClose={() => setShowNotifications(false)}
+    />
+  )}
+
+  <FaUserCircle
+    size={28}
+    className="user-icon"
+    style={{ cursor: "pointer" }}
+    onClick={() => setShowMenu((prev) => !prev)}
+  />
+
+  {showMenu && (
+    <div className="user-menu-popup text-center">
+      <ul>
+        <li onClick={() => navigate("/applies")}>Applied Jobs</li>
+        <li onClick={() => navigate("/profile")}>Profile</li>
+        <li onClick={handleLogout}>Logout</li>
+      </ul>
+    </div>
+  )}
+</div>
+
 ) : (
   <>
     <button

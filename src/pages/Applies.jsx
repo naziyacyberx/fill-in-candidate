@@ -96,7 +96,7 @@ SuccessToaster(response?.data?.message)
     <>
       <Navbar />
       <div className="applies-container">
-        <h3>Applies</h3>
+        <h3>Applied Jobs</h3>
 
         <div className="search-bar d-flex flex-row  align-items-center">
           <div>

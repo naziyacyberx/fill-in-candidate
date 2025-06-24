@@ -19,6 +19,7 @@ import MyProfile from "../pages/MyProfile";
 import ScheduleInterview from "../pages/ScheduleInterview";
 import AboutUs from "../pages/AboutUs";
 import MyRatingsReviews from "../pages/MyRatingsReviews";
+import Jobs from "../pages/Jobs";
 
 
 
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
    {
     path: "my-ratings-reviews",
     element: <MyRatingsReviews />,
+  },
+   {
+    path: "jobs",
+    element: <Jobs />,
   },
 ]);
 

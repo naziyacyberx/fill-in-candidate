@@ -1,0 +1,35 @@
+.notification-popup {
+  position: absolute;
+  top: 45px;
+  right: 50px;
+  width: 280px;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.popup-body {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #f1f1f1;
+}

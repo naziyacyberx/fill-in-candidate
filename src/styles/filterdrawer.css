@@ -1,0 +1,55 @@
+
+
+
+
+.drawer-body {
+  margin-top: 20px;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.filter-drawer {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+} */
+
+
+.filter-drawer {
+     /* background: #f9f9f9; */
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px; */
+    border: 1px solid #ccc;
+}
+ 
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer-body label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}

@@ -13,8 +13,8 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const redirectTo = location.state?.from || "/";
-  
+  const redirectTo = location.state?.from || "/";
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const redirectTo = location.state?.from || "/";
 
     try {
       const loginResponse = await loginUserApi(data, navigate);
-      console.log(loginResponse , "loginResponse")
+      console.log(loginResponse, "loginResponse")
       if (
         loginResponse?.data?.message ==
         "Account not verified. Please verify your email."
@@ -40,8 +40,8 @@ const redirectTo = location.state?.from || "/";
       }
       else {
 
-      navigate(redirectTo);
-    }
+        navigate(redirectTo);
+      }
     } catch (error) {
       console.error("Login Error:", error);
     } finally {
@@ -58,8 +58,9 @@ const redirectTo = location.state?.from || "/";
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6">
-              <div className="login-left-main">
+            <div className="col-md-6  login-left-side">
+              <div >
+                {/* <div className="login-left-main"> */}
                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
               </div>
             </div>
@@ -73,8 +74,15 @@ const redirectTo = location.state?.from || "/";
                   />
                 </div>
                 <h2>Login</h2>
-                <p>Enter your email and password to login</p>
                 <form onSubmit={handleLogin}>
+
+                  <p>If you already <span style={{ color: "#0165FC" }}>
+
+                    have an account, <br />
+                  </span>
+                    please sign in using your email address.</p>
+                 
+
                   <div className="form-group">
                     <label htmlFor="email">Email Address *</label>
                     <input
@@ -112,7 +120,7 @@ const redirectTo = location.state?.from || "/";
                         className="form-check-input"
                         id="rememberMe"
                       />
-                      <label className="form-check-label remember-me-text"  htmlFor="rememberMe">
+                      <label className="form-check-label remember-me-text" htmlFor="rememberMe">
                         Remember Me
                       </label>
                     </div>
@@ -131,15 +139,16 @@ const redirectTo = location.state?.from || "/";
                   >
                     {loading ? "Logging in..." : "Log In"}
                   </button>
-                  <button
+                  {/* <button
                     onClick={handleGoogleLogin}
                     type="button"
                     className="google-btn mt-4"
                   >
                     <img src="images/google_img.png" alt="google-img" />
                     Sign in with Google
-                  </button>
+                    </button> */}
                 </form>
+              
               </div>
             </div>
           </div>

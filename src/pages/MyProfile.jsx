@@ -6,6 +6,10 @@ import Navbar from '../sections/common/Navbar';
 import Footer from '../sections/common/Footer';
 import { toast } from 'react-toastify';
 import { SuccessToaster } from '../utils/Toaster';
+import ProfessionalProfile from '../components/ProfessionalProfile';
+import AvailabilityPreferences from '../components/AvailabilityPreferences';
+import ComplianceVaccination from '../components/ComplianceVaccination';
+import PersonalityAdditionalInfo from '../components/PersonalityAdditionalInfo';
 
 const MyProfile = () => {
   const [loading, setLoading] = useState(true);
@@ -15,14 +19,11 @@ const MyProfile = () => {
     name: '',
     email: '',
     phone: '',
-    location: '',
-    type_of_experiance: '',
+    types_of_experiance: '',
     year_of_experiance: '',
     other_qualification: '',
     other_software: '',
     other_vaccination: '',
-    hourly_rate: '',
-    availability_time: '',
     short_notice: '',
     permanent_opportunities: '',
     childrens_check: '',
@@ -38,6 +39,14 @@ const MyProfile = () => {
     vaccination: [],
     language: [1],
     profile: '', // For image base64
+    qualifications:[],
+    software_experience:[],
+
+    availability_time: '',
+    location: '',
+    travel_radius:"",
+    hourly_rate: '',
+    flexible_pay:""
   });
 
   const token = localStorage.getItem("fillInToken");
@@ -57,22 +66,24 @@ const MyProfile = () => {
         );
 
         const data = response.data?.data || {};
-        setFormData((prev) => ({
-          ...prev,
-          name: data.name || '',
-          email: data.email || '',
-          phone: data.phone || '',
-          location: data.location || '',
-          year_of_experiance: data.year_of_experiance || '',
-          hourly_rate: data.hourly_rate || '',
-          availability_time: data.availability_time || '',
-          profession: data.profession || '',
-          language: data.language || [1],
-          software_experiance: data.software_experiance || [],
-          qualification: data.qualification || [],
-          vaccination: data.vaccination || [],
-          // Add other fields if they exist in backend response
-        }));
+        setFormData(response?.data?.data)
+        // setFormData((prev) => ({
+        //   ...prev,
+        //   profile: data.profile || '',
+        //   name: data.name || '',
+        //   email: data.email || '',
+        //   phone: data.phone || '',
+        //   location: data.location || '',
+        //   year_of_experiance: data.year_of_experiance || '',
+        //   hourly_rate: data.hourly_rate || '',
+        //   availability_time: data.availability_time || '',
+        //   profession: data.profession || '',
+        //   language: data.language || [1],
+        //   software_experiance: data.software_experiance || [],
+        //   qualification: data.qualification || [],
+        //   vaccination: data.vaccination || [],
+        //   // Add other fields if they exist in backend response
+        // }));
       } catch (error) {
         console.error('Error fetching profile:', error);
       } finally {
@@ -131,6 +142,17 @@ const MyProfile = () => {
   };
   reader.readAsDataURL(file);
 };
+const handleCheckboxChange = (field, value) => {
+  setFormData((prev) => {
+    const current = prev[field];
+    const updated = current?.includes(value)
+      ? current.filter((item) => item !== value)
+      : [...current, value];
+    return { ...prev, [field]: updated };
+  });
+};
+
+
 
 
   return (
@@ -158,8 +180,8 @@ const MyProfile = () => {
   </Form.Group>
 </div>
 
-
-        <Card className="p-4">
+    {/* make seperate component */}
+        {/* <Card className="p-4">
           <h5><strong>Professional Profile</strong></h5>
           <p className="text-muted">Complete your dental professional details</p>
 
@@ -210,47 +232,155 @@ const MyProfile = () => {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Years of Experience*</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.year_of_experiance}
-                onChange={(e) => handleChange('year_of_experiance', e.target.value)}
-              />
-            </Form.Group>
+         <Form.Group className="mb-3">
+  <Form.Label>Years of Experience*</Form.Label>
+  <Form.Select
+    value={formData.year_of_experiance}
+    onChange={(e) => handleChange('year_of_experiance', e.target.value)}
+  >
+    <option value="">Select Experience</option>
+    <option value="Fresher">Fresher</option>
+    <option value="0-1 Years">0-1 Years</option>
+    <option value="1-3 Years">1-3 Years</option>
+    <option value="3-5 Years">3-5 Years</option>
+    <option value="5-10 Years">5-10 Years</option>
+    <option value="10+ Years">10+ Years</option>
+  </Form.Select>
+</Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label>Type of Experience*</Form.Label>
+  <div>
+    <Form.Check
+      type="radio"
+      label="Private"
+      name="type_of_experience"
+      value="Private"
+      checked={formData.type_of_experience === "Private"}
+      onChange={(e) => handleChange("type_of_experience", e.target.value)}
+      inline
+    />
+    <Form.Check
+      type="radio"
+      label="Public"
+      name="type_of_experience"
+      value="Public"
+      checked={formData.type_of_experience === "Public"}
+      onChange={(e) => handleChange("type_of_experience", e.target.value)}
+      inline
+    />
+    <Form.Check
+      type="radio"
+      label="Both"
+      name="type_of_experience"
+      value="Both"
+      checked={formData.type_of_experience === "Both"}
+      onChange={(e) => handleChange("type_of_experience", e.target.value)}
+      inline
+    />
+  </div>
+</Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.location}
-                onChange={(e) => handleChange('location', e.target.value)}
-              />
-            </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Hourly Rate</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.hourly_rate}
-                onChange={(e) => handleChange('hourly_rate', e.target.value)}
-              />
-            </Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label><strong>Qualification & Certifications</strong></Form.Label>
+  <div className="row">
+    {[
+      "Bachelor of Dental Science or similar",
+      "Bachelor of Hygiene or similar",
+      "Cert III in Dental Assisting",
+      "Other",
+      "Master of Clinical Dentistry or similar",
+      "Bachelor of Dental therapy or similar",
+      "Cert II in Dental Assisting",
+    ].map((item, index) => (
+      <div className="col-md-6" key={index}>
+        <Form.Check
+          type="checkbox"
+          label={item}
+          value={item}
+          checked={formData.qualifications.includes(item)}
+          onChange={(e) => handleCheckboxChange("qualifications", item)}
+        />
+      </div>
+    ))}
+  </div>
+</Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Availability Time</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.availability_time}
-                onChange={(e) => handleChange('availability_time', e.target.value)}
-              />
-            </Form.Group>
 
+<Form.Group className="mb-3">
+  <Form.Label><strong>Software Experience</strong></Form.Label>
+  <div className="row">
+    {[
+      "Dental4Windows",
+      "Oasis",
+      "Other",
+    ].map((item, index) => (
+      <div className="col-md-6" key={index}>
+        <Form.Check
+          type="checkbox"
+          label={item}
+          value={item}
+          checked={formData.software_experience.includes(item)}
+          onChange={(e) => handleCheckboxChange("software_experience", item)}
+        />
+      </div>
+    ))}
+  </div>
+</Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label><strong>Language</strong></Form.Label>
+  <div className="row">
+    {[
+      "English",
+      "Hindi",
+      "Other",
+    ].map((item, index) => (
+      <div className="col-md-6" key={index}>
+        <Form.Check
+          type="checkbox"
+          label={item}
+          value={item}
+          checked={formData.language.includes(item)}
+          onChange={(e) => handleCheckboxChange("language", item)}
+        />
+      </div>
+    ))}
+  </div>
+</Form.Group>
+
+         
             <Button onClick={updateProfile} variant="primary">
               Update Profile
             </Button>
           </Form>
-        </Card>
+        </Card> */}
+
+<Card className="p-4">
+  <ProfessionalProfile
+    formData={formData}
+    handleChange={handleChange}
+    handleCheckboxChange={handleCheckboxChange}
+  />
+<AvailabilityPreferences
+  formData={formData}
+  handleChange={handleChange}
+/>
+<ComplianceVaccination
+  formData={formData}
+  handleChange={handleChange}
+  handleCheckboxChange={handleCheckboxChange}
+/>
+<PersonalityAdditionalInfo
+  formData={formData}
+  handleChange={handleChange}
+  handleCheckboxChange={handleCheckboxChange}
+/>
+
+  <Button onClick={updateProfile} variant="primary">
+    Update Profile
+  </Button>
+</Card>
+
       </Container>
       <Footer />
     </>

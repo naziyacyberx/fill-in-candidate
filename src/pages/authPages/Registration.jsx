@@ -88,8 +88,8 @@ const Registration = () => {
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6">
-              <div className="login-left-main">
+            <div className="col-md-6 login-left-side">
+              <div className="">
                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
               </div>
             </div>
@@ -205,15 +205,19 @@ const Registration = () => {
                   >
                     {loading ? "Registering..." : "Register"}
                   </button>
-                  <button
+                  {/* <button
                     onClick={handleGoogleLogin}
                     type="button"
                     className="google-btn mt-4"
                   >
                     <img src="images/google_img.png" alt="google-img" />
                     Sign in with Google
-                  </button>
+                  </button> */}
                 </form>
+                <p className="mt-3">Already Have an Account? <span style={{ color: "#0165FC" }} className="cursor-pointer" onClick={() => navigate("/login")}>Login
+
+                </span>
+                </p>
               </div>
             </div>
           </div>
