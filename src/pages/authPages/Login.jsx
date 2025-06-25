@@ -3,9 +3,11 @@ import "../../styles/auth.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUserApi, sendOtpApi } from "../../apis/AuthApi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 
 const Login = () => {
+    const fcmToken = useSelector((state) => state.fcm.token);
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ const Login = () => {
     const data = {
       email,
       password,
-      fcm_token: "fcm",
+      fcm_token: fcmToken,
       device_id: "device",
     };
 

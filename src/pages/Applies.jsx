@@ -100,7 +100,6 @@ SuccessToaster(response?.data?.message)
 
         <div className="search-bar d-flex flex-row  align-items-center">
           <div>
-
           <FaSearch />
           </div>
           <div>
