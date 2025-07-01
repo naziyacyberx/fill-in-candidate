@@ -20,6 +20,7 @@ import ScheduleInterview from "../pages/ScheduleInterview";
 import AboutUs from "../pages/AboutUs";
 import MyRatingsReviews from "../pages/MyRatingsReviews";
 import Jobs from "../pages/Jobs";
+import ChatDetail from "../pages/ChatDetail";
 
 
 
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
    {
     path: "jobs",
     element: <Jobs />,
+  },
+   {
+    path: "chat-detail",
+    element: <ChatDetail />,
   },
 ]);
 
