@@ -14,8 +14,18 @@ export const connectSocket = ({
   console.log('🟡 connectSocket called',   myProfileId,
   );
 
-  if (!myProfileId || !token) {
-    console.warn('🔴 Missing profileId or token. Cannot connect to socket.');
+  // if (!myProfileId || !token) {
+  //   console.warn('🔴 Missing profileId or token. Cannot connect to socket.');
+  //   return;
+  // }
+
+  if (!myProfileId) {
+    console.warn('🔴 Missing profileId. Cannot connect to socket.');
+    return;
+  }
+
+  if ( !token) {
+    console.warn('🔴 Missing token. Cannot connect to socket.');
     return;
   }
 
