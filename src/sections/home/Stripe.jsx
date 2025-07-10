@@ -14,7 +14,7 @@ const Stripe = () => {
     </p>
     <div className="d-flex flex-wrap justify-content-center">
       {/* <button className="btn btn-white">Search Jobs</button> */}
-      <button className="btn btn-blue" onClick={()=> navigate("/jobs")}>Apply Job Now</button>
+      <button className="btn btn-blue" onClick={()=> navigate("/candidate/jobs")}>Apply Job Now</button>
     </div>
   </div>
 </section>

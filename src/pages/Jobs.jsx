@@ -38,7 +38,7 @@ const Jobs = () => {
 
   const fetchInitialJobs = async () => {
     try {
-      const response = await axios.get("https://fill-in.cyberxinfosolution.com/api/dashboard");
+      const response = await axios.get("https://fillin-admin.cyberxinfosolution.com/api/dashboard");
       const jobsFromAPI = response?.data?.data?.jobs || [];
       setJobData(jobsFromAPI);
       console.log("test", jobsFromAPI);
@@ -152,8 +152,8 @@ const handleApplyFilters = async () => {
   };
 
   try {
-    const response = await axios.post(
-      "https://fill-in.cyberxinfosolution.com/api/dashboard",
+    const response = await axios.get(
+      "https://fillin-admin.cyberxinfosolution.com/api/dashboard",
       payload,
       {
         headers: {
@@ -199,7 +199,7 @@ useEffect(() => {
 
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
 <section className="job-section container py-5">
   <div className="row">
     {/* Left Filter Column */}
@@ -259,7 +259,7 @@ useEffect(() => {
     </div>
     <div 
     
- onClick={()=>navigate(`/job-details/${job.id}`)}
+ onClick={()=>navigate(`/candidate/job-details/${job.id}`)}
     >
 
 
@@ -345,7 +345,7 @@ useEffect(() => {
 
 </section>
 
-<Footer/>
+{/* <Footer/> */}
 
 
 

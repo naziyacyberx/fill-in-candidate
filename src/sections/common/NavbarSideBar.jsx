@@ -43,7 +43,7 @@ function NavbarSideBar({ show, setShow }) {
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
-                  navigate("/about-us");
+                  navigate("/candidate/about-us");
                   setShow(false);
                 }}
               >
@@ -60,7 +60,7 @@ function NavbarSideBar({ show, setShow }) {
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
-                  navigate("/property-listing");
+                  navigate("/candidate/property-listing");
                   setShow(false);
                 }}
               >
@@ -77,7 +77,7 @@ function NavbarSideBar({ show, setShow }) {
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
-                  navigate("/blogs");
+                  navigate("/candidate/blogs");
                   setShow(false);
                 }}
               >
@@ -94,7 +94,7 @@ function NavbarSideBar({ show, setShow }) {
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
-                  navigate("/contact-us");
+                  navigate("/candidate/contact-us");
                   setShow(false);
                 }}
               >

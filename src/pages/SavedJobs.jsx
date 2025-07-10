@@ -77,7 +77,7 @@ const SavedJobs = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="save-job-section">
         <div className="container">
           <h2 className="review-main-heading">Saved Jobs</h2>
@@ -185,7 +185,7 @@ const SavedJobs = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

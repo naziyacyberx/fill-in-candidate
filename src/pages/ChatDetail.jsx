@@ -234,7 +234,7 @@ const formatTime = (date) =>
       <div className="chat-input-area">
         <input
           type="text"
-          placeholder="Start Typing"
+          placeholder="+ Start Typing"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}

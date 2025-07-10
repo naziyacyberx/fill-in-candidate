@@ -87,7 +87,7 @@ const MyRatingsReviews = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Container className="py-5">
         <h4 className="fw-bold mb-4">My Ratings & Reviews</h4>
 
@@ -153,7 +153,7 @@ const MyRatingsReviews = () => {
           </Row>
         )}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

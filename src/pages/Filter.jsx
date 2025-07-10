@@ -50,7 +50,7 @@ const Filter = () => {
   const extraSkills = ["Dental Care", "Dental Hygiene", "Full Skills"];
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="filter-section">
         <div className="container">
           <div className="top-heading-main">

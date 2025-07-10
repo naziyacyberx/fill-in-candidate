@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Banner />
       <Card cardData={cardData || []} />
 
@@ -38,7 +38,7 @@ const Home = () => {
 
       <Stripe />
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

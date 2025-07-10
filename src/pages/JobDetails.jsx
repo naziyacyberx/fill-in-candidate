@@ -30,7 +30,7 @@ const JobDetails = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="job-detail-main-section">
         <section className="job-details-top-section">
           <div className="container my-4">
@@ -45,9 +45,9 @@ const JobDetails = () => {
                 </div>
                 <div className="col-8 col-md-8 job-detail-box-main">
                   <div className="job-shift-main">
-                    {jobDetail?.shift.map((items, i) => (
+                    {/* {jobDetail?.shift?.map((items, i) => (
                       <h6 key={i}>{items}</h6>
-                    ))}
+                    ))} */}
                   </div>
 
                   <h3>{jobDetail?.title}</h3>
@@ -142,12 +142,12 @@ const JobDetails = () => {
               <h4>Benefits and Perks</h4>
               <div className="row">
                 <div className="benefits-box">
-                  {jobDetail?.benefits.map((item, i) => (
+                  {jobDetail?.benefits?.map((item, i) => (
                     <div key={i} className="role-main">
                       <img
                         className="img-fluid"
                         src="/images/check.png"
-                        alt="check-icon"
+                        alt="check-icon" 
                       />
 
                       <p>{item}</p>
@@ -247,7 +247,7 @@ const JobDetails = () => {
           </div>
         </section>
       </section>
-      <Footer />
+      {/* <Footer /> */}
       {showReportPopup && (
         <ReportPopup onClose={() => setShowReportPopup(false)}  job_id={id}/>
       )}

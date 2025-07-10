@@ -48,7 +48,7 @@ const ChangePassword = () => {
       const changePasswordResponse = await changePasswordApi(data);
       if (changePasswordResponse?.data?.status == "success") {
         console.log("changePasswordResponse response:", changePasswordResponse);
-        navigate("/login");
+        navigate("/candidate/login");
       }
     } catch (error) {
       console.error("Change Password  Error:", error);

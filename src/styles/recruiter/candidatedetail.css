@@ -1,0 +1,4 @@
+ul li::marker {
+  content: "✔ ";
+  color: #198754;
+}

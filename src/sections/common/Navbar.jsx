@@ -81,7 +81,7 @@ const fetchNotifications = async () => {
           <div className="row align-items-center">
             <div className="col-3">
               <img
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/candidate")}
                 className="img-fluid logo"
                 src="/images/logo.png"
                 alt="Logo"
@@ -95,7 +95,7 @@ const fetchNotifications = async () => {
     size={28}
     className="message-icon"
     style={{ cursor: "pointer" }}
-    onClick={() => navigate("/messages")}
+    onClick={() => navigate("/candidate/messages")}
   />
 
   <div className="position-relative">
@@ -134,8 +134,8 @@ const fetchNotifications = async () => {
   {showMenu && (
     <div className="user-menu-popup text-center">
       <ul>
-        <li onClick={() => navigate("/applies")}>Applied Jobs</li>
-        <li onClick={() => navigate("/profile")}>Profile</li>
+        <li onClick={() => navigate("/candidate/applies")}>Applied Jobs</li>
+        <li onClick={() => navigate("/candidate/profile")}>Profile</li>
         <li onClick={handleLogout}>Logout</li>
       </ul>
     </div>
@@ -146,14 +146,14 @@ const fetchNotifications = async () => {
   <>
     <button
       onClick={() =>
-        navigate("/login", { state: { from: currentPath } })
+        navigate("/candidate/login", { state: { from: currentPath } })
       }
       className="btn-login"
     >
       Log In
     </button>
     <button
-      onClick={() => navigate("/register")}
+      onClick={() => navigate("/candidate/register")}
       className="btn-register"
     >
       Register
@@ -173,7 +173,7 @@ const fetchNotifications = async () => {
           <div className="row">
             <div className="col-5">
               <img
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/candidate/")}
                 className="img-fluid"
                 src="/images/logo.png"
                 alt="Logo"

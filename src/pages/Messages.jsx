@@ -87,13 +87,13 @@ localStorage.setItem("profileId",response.data.data.id)
 const handleMessageClick = (msg) => {
   console.log("msg", msg);
   
-  navigate("/chat-detail", { state: { message:msg, } });
+  navigate("/candidate/chat-detail", { state: { message:msg, } });
 };
 
 
   return (
     <>
-            <Navbar />
+            {/* <Navbar /> */}
     
     <div className="messages-container">
       <h3>Messages</h3>
@@ -147,7 +147,7 @@ const handleMessageClick = (msg) => {
     
 
     {/* <ChatComponent token={`eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGwtaW4uY3liZXJ4aW5mb3NvbHV0aW9uLmNvbS9hcGkvY2FuZGlkYXRlL2xvZ2luIiwiaWF0IjoxNzUwNzcyODE4LCJleHAiOjE3NTMzNjQ4MTgsIm5iZiI6MTc1MDc3MjgxOCwianRpIjoiVThxRHdRQlFIamlETFRWZCIsInN1YiI6IjY0IiwicHJ2IjoiODYxYjA1NjMxMDkxMzU3ZWM4ZTU1ZjJhZjE3ZTExMThmNzJmNzBkYyJ9.gKFDWJ2-6SI9Mm56G2bh1F3JcL4xKSkMx72TbuPKrzY`} myProfileId={64}/> */}
-    <Footer/>
+    {/* <Footer/> */}
     </>
   );
 };

@@ -129,7 +129,7 @@ const Login = () => {
                     <button
                       type="button"
                       className="forgot-password-link"
-                      onClick={() => navigate("/forgot-password")}
+                      onClick={() => navigate("/candidate/forgot-password")}
                     >
                       Forgot Password?
                     </button>
@@ -150,6 +150,7 @@ const Login = () => {
                     Sign in with Google
                     </button> */}
                 </form>
+                  <p className="mt-3">Don't Have an Account? <span style={{ color: "#0165FC" }} className="cursor-pointer" onClick={() => navigate("/candidate/register")}>Sign Up</span></p>
               
               </div>
             </div>

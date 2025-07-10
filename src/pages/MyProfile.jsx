@@ -157,7 +157,7 @@ const handleCheckboxChange = (field, value) => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Container className="mt-4">
         <h5><strong>My Profile</strong></h5>
 
@@ -382,7 +382,7 @@ const handleCheckboxChange = (field, value) => {
 </Card>
 
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

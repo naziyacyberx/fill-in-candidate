@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="privacy-banner">
         <h1>Privacy Policy</h1>
       </section>
@@ -33,7 +33,7 @@ const PrivacyPolicy = () => {
           <div dangerouslySetInnerHTML={{ __html: privacyData }} />
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

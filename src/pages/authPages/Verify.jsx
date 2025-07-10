@@ -23,7 +23,7 @@ const Verify = () => {
         if (location.state?.fromForgotPassword) {
           navigate("/change-password", { state: { email } });
         } else {
-          navigate("/login");
+          navigate("/candidate/login");
         }
       }
     } catch (error) {

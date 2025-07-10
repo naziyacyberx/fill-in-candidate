@@ -94,7 +94,7 @@ SuccessToaster(response?.data?.message)
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="applies-container">
         <h3>Applied Jobs</h3>
 
@@ -171,7 +171,7 @@ SuccessToaster(response?.data?.message)
         </div>
       </div>
 
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 };

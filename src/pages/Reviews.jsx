@@ -146,7 +146,7 @@ const handleSubmitReview = async () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="reviews-section">
         <div className="container">
           <h2 className="review-main-heading">Ratings & Reviews</h2>
@@ -305,7 +305,7 @@ const handleSubmitReview = async () => {
         </div>
       </section>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

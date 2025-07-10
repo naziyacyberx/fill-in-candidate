@@ -51,7 +51,7 @@ const ViewClinic = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="view-clinic-section">
         <div className="container view-clinic">
           <div className="row">
@@ -207,7 +207,7 @@ const ViewClinic = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

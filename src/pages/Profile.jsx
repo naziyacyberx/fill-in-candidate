@@ -63,12 +63,12 @@ const Profile = () => {
     localStorage.removeItem("fillInToken");
     setShowLogoutModal(false);
     SuccessToaster("Logout Successfully");
-    navigate("/login");
+    navigate("/candidate/login");
   };
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Container className="mt-5 mb-5 text-center">
         <Row className="justify-content-center">
           <Col md={9}>
@@ -142,7 +142,7 @@ const Profile = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
 
       {/* Logout Confirmation Modal */}
       <Modal

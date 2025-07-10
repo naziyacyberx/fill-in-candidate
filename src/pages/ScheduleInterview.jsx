@@ -88,10 +88,10 @@ const ScheduleInterview = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Container className="py-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h3 className="fw-bold">Schedule Interview</h3>
+          <h3 className="fw-bold">Schedule Interview  </h3>
         </div>
 
     <div className="filter-buttons">
@@ -126,7 +126,7 @@ const ScheduleInterview = () => {
           </>
         )}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

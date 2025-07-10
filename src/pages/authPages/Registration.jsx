@@ -214,7 +214,7 @@ const Registration = () => {
                     Sign in with Google
                   </button> */}
                 </form>
-                <p className="mt-3">Already Have an Account? <span style={{ color: "#0165FC" }} className="cursor-pointer" onClick={() => navigate("/login")}>Login
+                <p className="mt-3">Already Have an Account? <span style={{ color: "#0165FC" }} className="cursor-pointer" onClick={() => navigate("/candidate/login")}>Login
 
                 </span>
                 </p>

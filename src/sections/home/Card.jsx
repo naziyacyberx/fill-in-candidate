@@ -22,8 +22,8 @@ const Card = ({ cardData }) => {
     }
 
     try {
-      const response = await axios.post(
-        `https://fill-in.cyberxinfosolution.com/api/dashboard?search=${professionName}`,
+      const response = await axios.get(
+        `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${professionName}`,
         {
           profession: [professionId],
         },
@@ -37,7 +37,7 @@ const Card = ({ cardData }) => {
 
       const jobs = response?.data?.data?.jobs || [];
 
-      navigate("/jobs", {
+      navigate("/candidate/jobs", {
         state: {
           jobs,
         },
@@ -71,7 +71,10 @@ const Card = ({ cardData }) => {
                   </div>
                   <div className="job-card-content">
                     <h6 className="applican-name">{card.name}</h6>
-                    <p className="text-primary mb-0">{card.job_count} Jobs</p>
+                    <p className="text-primary mb-0">{card.job_count} Jobs
+
+                      {card.job_count} {card.job_count > 0 ? "Jobs" : "Job"}
+                    </p>
                   </div>
                 </div>
               </div>

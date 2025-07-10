@@ -11,6 +11,16 @@ const Banner = () => {
   const [jobs, setJobs] = useState([]);
   const [popularTerms, setPopularTerms] = useState([]);
   const token = localStorage.getItem("fillInToken")
+  const [showModal, setShowModal] = useState(false);
+
+useEffect(() => {
+  const portal = sessionStorage.getItem("selectedPortal");
+  if (portal != "candidate") {
+    // navigate("/recruiter");
+    setShowModal(true)
+  }
+}, []);
+
 
   // 🔽 Fetch popular search terms
   useEffect(() => {
@@ -36,12 +46,14 @@ const Banner = () => {
     };
 
     fetchPopularSearches();
+
+
   }, []);
 
   const handleSearch = async () => {
     try {
       const response = await axios.post(
-        `https://fill-in.cyberxinfosolution.com/api/dashboard?search=${search}`,
+        `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${search}`,
         {
           experiance_level: experience ? [experience] : [],
         },
@@ -55,7 +67,7 @@ const Banner = () => {
 
       if (response?.data?.status === "success") {
         setJobs(response.data.data); // Optional usage
-        navigate("/jobs", { state: { jobs: response.data.data.jobs } });
+        navigate("/candidate/jobs", { state: { jobs: response.data.data.jobs } });
       }
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -65,6 +77,64 @@ const Banner = () => {
   return (
     <section className="hero-section">
       <div className="container">
+        {showModal && (
+
+<div className="custom-popup-overlay">
+  <div className="custom-popup-box d-flex">
+    {/* Left: Text + Logo + Buttons */}
+      <div className="popup-right">
+      <img src="/images/popup-image.png" alt="Dental Illustration" className="popup-illustration" />
+    </div>
+
+    {/* Right: Illustration */}
+
+    <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
+      <img src="/images/logo.png" alt="Fill-In Logo" className="popup-logo mb-3" />
+
+      <h4 className="fw-bold mb-2">
+        Looking for Your Next Dental <span className="text-primary">Opportunity?</span>
+      </h4>
+      <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
+        Join top dental clinics hiring now. Find the best-fit job that values your skills and passion.
+      </p>
+
+      <div className="d-flex gap-3">
+        {/* <button className="btn btn-primary px-4" onClick={() => setShowModal(false)}>
+          Stay on candidate
+        </button>
+        <button className="btn btn-outline-primary px-4" onClick={() => {navigate("/recruiter"); setShowModal(false)}}>
+          Go to Recruiter
+        </button> */}
+        <button
+  className="btn btn-primary px-4"
+  onClick={() => {
+    sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
+    setShowModal(false);
+  }}
+>
+  Stay on Candidate
+</button>
+
+<button
+  className="btn btn-outline-primary px-4"
+  onClick={() => {
+    sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
+    navigate("/recruiter");
+    setShowModal(false);
+  }}
+>
+  Go to Recruiter
+</button>
+
+      </div>
+    </div>
+
+  
+  </div>
+</div>
+
+)}
+
         <h1>
           Get The Right Job
           <br />

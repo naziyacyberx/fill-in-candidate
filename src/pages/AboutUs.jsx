@@ -40,7 +40,7 @@ const AboutUs = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
           <section className="privacy-banner">
         {/* <h2 className="mb-4 fw-bold">About Us</h2> */}
         <h1>About Us</h1>
@@ -57,7 +57,7 @@ const AboutUs = () => {
           />
         )}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
