@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
-      <footer className="footer">
-        <div className="footer-container container">
-          {/* Logo + Description */}
-          <div className="footer-box">
+      <footer className="footer">  
+        <div className="footer-container container">  
+          {/* Logo + Description */}  
+          <div className="footer-box">  
             <img className="img-fluid footer-logo" src="/images/logo.png" alt="Logo" />
             <p className="footer-desc">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy.
-            </p>
-
+              industry. Lorem Ipsum has been the industry's standard dummy.  
+            </p>  
+  
             {/* Social icons */}
             <div className="footer-social-icons">
               <a href="https://facebook.com" target="_blank" rel="noreferrer">
@@ -38,10 +38,10 @@ const Footer = () => {
             <h4>Resources</h4>
             <ul>
               {/* <li><a href="/">Home</a></li> */}
-              <li><Link to="/candidate">Home</Link></li>
-              <li><Link to="/candidate/jobs">Jobs</Link></li>
-              <li><Link to="/candidate/messages">Messages</Link></li>
-              <li><Link to="/candidate/applies">Applied</Link></li>
+              <li><Link to="/recruiter">Home</Link></li>
+              <li><Link to=" ">Jobs</Link></li>
+              <li><Link to="/recruiter/messages">Messages</Link></li>
+              <li><Link to="/recruiter/applies">Applied</Link></li>
               
               {/* <li><a href="#">Jobs</a></li>
               <li><a href="#">Candidates</a></li>

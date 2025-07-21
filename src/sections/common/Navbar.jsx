@@ -68,7 +68,7 @@ const fetchNotifications = async () => {
     localStorage.removeItem("fillInToken");
     setIsLoggedIn(false);
     setShowMenu(false);
-    navigate("/");
+    navigate("/candidate/login");
   };
 
   return (

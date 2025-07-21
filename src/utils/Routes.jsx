@@ -46,6 +46,11 @@ import MyRatings from "../pages/recruiter/MyRatings";
 import RecruiterAboutUs from "../pages/recruiter/AboutUs"
 import RecruiterPrivacyPolicy from "../pages/recruiter/PrivacyPolicy";
 import RecruiterMessages from "../pages/recruiter/Messages"
+import JobApplicants from "../pages/recruiter/JobApplicants";
+import RecruiterMyProfile from "../pages/recruiter/MyProfile"
+import RecruiterJobDetails from "../pages/recruiter/JobDetails"
+import OtpVerify from "../pages/recruiter/OtpVerify"
+import LandingPage from "../pages/common/LandingPage";
 
 
 const router = createBrowserRouter([
@@ -97,7 +102,10 @@ const router = createBrowserRouter([
       {path:"my-ratings", element:<MyRatings/>},
       {path:"about-us", element:<RecruiterAboutUs/>},
       {path:"privacy-policy", element:<RecruiterPrivacyPolicy/>},
-      {path:"messages", element:<RecruiterMessages/>}
+      {path:"messages", element:<RecruiterMessages/>},
+      {path:"job-applicants/:id", element:<JobApplicants/>},
+      {path:"my-profile", element: <RecruiterMyProfile/>},
+      {path:"job-details/:id", element: <RecruiterJobDetails/>}
       // {path:"login", element:<RecruiterLogin/>}
       // Add more recruiter routes here
     ],
@@ -106,11 +114,16 @@ const router = createBrowserRouter([
     {path:"/recruiter/register", element:<Register/>},
     {path:"/recruiter/forgot-password", element:<RecruiterForgotPassword/>},
     {path:"/recruiter/reset-password", element:<ResetPassword/>},
+    {path:"/recruiter/otp-verify", element:<OtpVerify/>},
 
   // Optional fallback route
   {
     path: "*",
     element: <div>404 Page Not Found</div>,
+  },
+  {
+    path: "/",
+    element: <LandingPage/>  ,
   },
 ]);
 

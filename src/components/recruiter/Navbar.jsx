@@ -8,6 +8,7 @@ import { FaBell } from "react-icons/fa";
 import NotificationPopup from "../../components/Notificationpopup";
 import axios from "axios";
 import NavbarSideBar from "../../sections/common/NavbarSideBar";
+import { baseUrl } from "../../utils/BaseUrl";
 
 
 const Navbar = () => {
@@ -23,9 +24,9 @@ const [showNotifications, setShowNotifications] = useState(false);
 const [notifications, setNotifications] = useState([]);
 const fetchNotifications = async () => {
   try {
-    const token = localStorage.getItem("fillInToken"); // token from localStorage
+    const token = localStorage.getItem("recruiterToken"); // token from localStorage
     const response = await axios.get(
-      "https://fillin-admin.cyberxinfosolution.com/api/candidate/notification-list",
+      `${baseUrl}recruiter/notification-list`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const fetchNotifications = async () => {
 
   // Check if token exists
   useEffect(() => {
-    const token = localStorage.getItem("fillInToken");
+    const token = localStorage.getItem("recruiterToken");
     setIsLoggedIn(!!token);
     fetchNotifications()
   }, [location]);
@@ -66,10 +67,10 @@ const fetchNotifications = async () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("fillInToken");
+    localStorage.removeItem("recruiterToken");
     setIsLoggedIn(false);
     setShowMenu(false);
-    navigate("/");
+    navigate("/recruiter/login");
   };
 
   return (
@@ -101,7 +102,7 @@ const fetchNotifications = async () => {
 
   <div className="position-relative">
     <FaBell
-      size={24}
+      size={20}
       className="notification-icon"
       style={{ cursor: "pointer" }}
       onClick={() => {

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { loginUserApi, sendOtpApi } from "../../apis/AuthApi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { getDeviceId } from "../../utils/deviceId";
 
 
 const Login = () => {
@@ -15,7 +16,9 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const redirectTo = location.state?.from || "/";
+  const redirectTo = location.state?.from || "/candidate/login";
+  const deviceId = getDeviceId();
+console.log("Device ID:", deviceId);
 
 
   const handleLogin = async (e) => {
@@ -25,7 +28,7 @@ const Login = () => {
       email,
       password,
       fcm_token: fcmToken,
-      device_id: "device",
+      device_id: deviceId,
     };
 
     try {
@@ -37,13 +40,13 @@ const Login = () => {
       ) {
         const otpResponse = await sendOtpApi(email);
         console.log(otpResponse, "otpResponse");
-        navigate("/verify-otp", { state: { email } });
+        navigate("/candidate/verify-otp", { state: { email } });
 
       }
-      else {
+      // else {
 
-        navigate(redirectTo);
-      }
+      //   navigate(redirectTo);
+      // }
     } catch (error) {
       console.error("Login Error:", error);
     } finally {

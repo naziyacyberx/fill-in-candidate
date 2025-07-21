@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/auth.css";
 import { useNavigate } from "react-router-dom";
-import { registerUserApi, sendOtpApi } from "../../apis/AuthApi";
+import { recruiterRegisterUserApi, RecruiterSendOtpApi, registerUserApi, sendOtpApi } from "../../apis/AuthApi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
@@ -61,16 +61,16 @@ const Register = () => {
       confirmPassword,
       name,
       phone,
-      device_token: "dummy Token",
+      // device_token: "dummy Token",
     };
 
     try {
-      const registerResponse = await registerUserApi(data);
+      const registerResponse = await recruiterRegisterUserApi(data);
 
       if (registerResponse?.data?.status == "success") {        
-        const otpResponse = await sendOtpApi(email);
+        const otpResponse = await RecruiterSendOtpApi(email);
         console.log("OTP sent response:", otpResponse);
-        navigate("/verify-otp", { state: { email } });
+        navigate("/recruiter/otp-verify", { state: { email } });
       }
     } catch (error) {
       console.error("Login Error:", error);

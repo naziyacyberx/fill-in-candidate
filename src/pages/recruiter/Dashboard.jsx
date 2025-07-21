@@ -3,6 +3,7 @@ import Banner from '../../components/recruiter/Banner'
 import CandidatesCategories from '../../components/recruiter/CandidatesCategories'
 import SuggestedCandidates from '../../components/recruiter/SuggestedCandidates'
 import axios from 'axios'
+import { baseUrl } from '../../utils/BaseUrl'
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState()
@@ -11,9 +12,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchCandidates = async () => {
+      console.log("baseUrl",baseUrl);
+      
       try {
         const response = await axios.get(
-          'https://fillin-admin.cyberxinfosolution.com/api/dashboard',
+          `${baseUrl}dashboard`,
           {
             params: { search: 'Dental Assistant' },
             headers: {

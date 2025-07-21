@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../styles/banner.css";
 import { useNavigate } from "react-router-dom";
 
-const Banner = () => {
+const LandingPage = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [experience, setExperience] = useState("");
@@ -12,13 +12,14 @@ const Banner = () => {
   const [popularTerms, setPopularTerms] = useState([]);
   const token = localStorage.getItem("fillInToken")
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    const portal = sessionStorage.getItem("selectedPortal");
-    if (portal != "recruiter") {
-      // navigate("/recruiter");
-      setShowModal(true)
-    }
-  }, []);
+
+useEffect(() => {
+  const portal = sessionStorage.getItem("selectedPortal");
+  if (portal != "candidate") {
+    // navigate("/recruiter");
+    setShowModal(true)
+  }
+}, []);
 
 
   // 🔽 Fetch popular search terms
@@ -51,7 +52,7 @@ const Banner = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${search}`,
         {
           experiance_level: experience ? [experience] : [],
@@ -77,16 +78,6 @@ const Banner = () => {
     <section className="hero-section">
       <div className="container">
         {showModal && (
-  // <div className="custom-popup-overlay">
-  //   <div className="custom-popup">
-  //     <h5>Choose Portal</h5>
-  //     <p>Do you want to stay on the Recruiter portal or visit Candidate?</p>
-  //     <div className="d-flex justify-content-around mt-3">
-  //       <button className="btn btn-primary" onClick={() => setShowModal(false)}>Stay on Recruiter</button>
-  //       <button className="btn btn-outline-secondary" onClick={() => navigate("/candidate")}>Go to Candidate</button>
-  //     </div>
-  //   </div>
-  // </div>
 
 <div className="custom-popup-overlay">
   <div className="custom-popup-box d-flex">
@@ -109,30 +100,30 @@ const Banner = () => {
 
       <div className="d-flex gap-3">
         {/* <button className="btn btn-primary px-4" onClick={() => setShowModal(false)}>
-          Stay on Recruiter
+          Stay on candidate
         </button>
-        <button className="btn btn-outline-primary px-4" onClick={() => navigate("/candidate")}>
-          Go to Candidate
+        <button className="btn btn-outline-primary px-4" onClick={() => {navigate("/recruiter"); setShowModal(false)}}>
+          Go to Recruiter
         </button> */}
         <button
   className="btn btn-primary px-4"
   onClick={() => {
-    sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
+    sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
     setShowModal(false);
   }}
 >
-    Stay on Recruiter
+  Stay on Candidate
 </button>
 
 <button
   className="btn btn-outline-primary px-4"
   onClick={() => {
-    sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
-    navigate("/candidate");
+    sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
+    navigate("/recruiter");
     setShowModal(false);
   }}
 >
-  Go to Candidate
+  Go to Recruiter
 </button>
 
       </div>
@@ -142,22 +133,17 @@ const Banner = () => {
   </div>
 </div>
 
-
 )}
 
         <h1>
-         Need a Recruiter Fast? We’ve 
+          Get The Right Job
           <br />
-       Got You Covered
+          You Deserve
         </h1>
-        <p className="mt-3">We specialize in providing experienced recruiters on short notice to fill urgent hiring needs. Whether it's a sudden vacancy or a project ramp-up, our experts are ready to step in and deliver results.</p>
+        <p className="mt-3">1,30,420 jobs listed here! Your dream job is waiting.</p>
 
-
- <button className="btn btn-primary" onClick={handleSearch}>
-            Search Jobs
-          </button>
         {/* Search Bar */}
-        {/* <div className="search-bar">
+        <div className="search-bar">
           <div className="search-group search-border">
             <div className="icon-box">
               <img src="/images/skill 1.png" alt="Skill Icon" className="img-fluid" />
@@ -202,10 +188,10 @@ const Banner = () => {
           <button className="btn btn-primary" onClick={handleSearch}>
             Search Jobs
           </button>
-        </div> */}
+        </div>
 
         {/* Popular Tags */}
-        {/* <div className="popular-tags">
+        <div className="popular-tags">
           <strong>Popular Searches:</strong>
           {popularTerms.length > 0 ? (
             popularTerms.map((term, index) => (
@@ -216,10 +202,10 @@ const Banner = () => {
           ) : (
             <span>Loading...</span>
           )}
-        </div> */}
+        </div>
       </div>
     </section>
   );
 };
 
-export default Banner;
+export default LandingPage;

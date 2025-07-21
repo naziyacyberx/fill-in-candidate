@@ -160,7 +160,7 @@ const handleSubmitReview = async () => {
                 />
                 <div className="view-clinic__profile-info">
                   <h5>{clinicDetails.name}</h5>
-                  <p>{clinicDetails.practice_name}</p>
+                  <p>{clinicDetails?.practice_name}</p>
                   <div className="view-clinic__stars">
                     {renderStars(clinicDetails.rating.toFixed(1))}
                   </div>
@@ -171,7 +171,7 @@ const handleSubmitReview = async () => {
                     </span>
                   </h2>
                   <div className="view-clinic__badge">
-                    From {clinicDetails.established_year}
+                    From {clinicDetails?.established_year}
                   </div>
                 </div>
               </div>

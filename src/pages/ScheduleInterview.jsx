@@ -120,7 +120,7 @@ const ScheduleInterview = () => {
                   </Col>
                 ))
               ) : (
-                <p className="text-muted text-center">No interviews found for "{filter}".</p>
+                <p className="text-muted text-center">No  interviews found for "{filter}".</p>
               )}
             </Row>
           </>
