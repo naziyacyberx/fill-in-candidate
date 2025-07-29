@@ -43,7 +43,7 @@ const Login = () => {
         navigate("/recruiter/otp-verify", { state: { email } });
 
       }
-      else {
+      else if(  loginResponse?.data?.status == "success") {
 
         navigate(redirectTo);
       }

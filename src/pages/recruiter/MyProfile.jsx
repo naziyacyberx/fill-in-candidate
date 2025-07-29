@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import { baseUrl } from '../../utils/BaseUrl';
 import { convertFileUrlToBase64,  fileToBase64 } from '../../utils/function';
+import { SuccessToaster } from '../../utils/Toaster';
 
 const MyProfile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -116,8 +117,9 @@ const handleProfileUpdate = async () => {
         },
       }
     );
+          SuccessToaster(response?.data?.message);
 
-    alert('Profile updated successfully!');
+    // alert('Profile updated successfully!');
   } catch (err) {
     console.error('Profile update failed:', err);
     alert('Failed to update profile.');

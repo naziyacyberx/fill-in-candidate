@@ -81,7 +81,7 @@ const fetchNotifications = async () => {
           <div className="row align-items-center">
             <div className="col-3">
               <img
-                onClick={() => navigate("/candidate")}
+                onClick={() => navigate("/")}
                 className="img-fluid logo"
                 src="/images/logo.png"
                 alt="Logo"

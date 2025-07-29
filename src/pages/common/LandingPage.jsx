@@ -1,210 +1,199 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { FaBars, FaEnvelope, FaUserCircle, FaBell } from "react-icons/fa";
+import { FiMessageSquare } from "react-icons/fi";
 import axios from "axios";
 import "../../styles/banner.css";
-import { useNavigate } from "react-router-dom";
+import "../../styles/navbar.css";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [experience, setExperience] = useState("");
-  const [location, setLocation] = useState("");
-  const [jobs, setJobs] = useState([]);
-  const [popularTerms, setPopularTerms] = useState([]);
-  const token = localStorage.getItem("fillInToken")
-  const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
 
-useEffect(() => {
-  const portal = sessionStorage.getItem("selectedPortal");
-  if (portal != "candidate") {
-    // navigate("/recruiter");
-    setShowModal(true)
-  }
-}, []);
+  // Navbar logic
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const menuRef = useRef(null);
 
 
-  // 🔽 Fetch popular search terms
+
   useEffect(() => {
-    const fetchPopularSearches = async () => {
-      try {
-        const response = await axios.get(
-          "https://fillin-admin.cyberxinfosolution.com/api/candidate/search-terms",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${token}`
-            },
-          }
-        );
+    const token = localStorage.getItem("fillInToken");
+ 
+  }, [location]);
 
-        if (response?.data?.statusCode === 200) {
-          setPopularTerms(response.data.data.popular || []);
-        }
-      } catch (error) {
-        console.error("Failed to fetch popular terms:", error);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowMenu(false);
       }
     };
-
-    fetchPopularSearches();
-
-
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.post(
-        `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${search}`,
-        {
-          experiance_level: experience ? [experience] : [],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
 
-      if (response?.data?.status === "success") {
-        setJobs(response.data.data); // Optional usage
-        navigate("/candidate/jobs", { state: { jobs: response.data.data.jobs } });
-      }
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
+
+  // Modal for portal switch
+  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    const portal = sessionStorage.getItem("selectedPortal");
+    if (portal !== "candidate") {
+      setShowModal(true);
     }
-  };
+  }, []);
 
   return (
-    <section className="hero-section">
-      <div className="container">
-        {showModal && (
-
-<div className="custom-popup-overlay">
-  <div className="custom-popup-box d-flex">
-    {/* Left: Text + Logo + Buttons */}
-      <div className="popup-right">
-      <img src="/images/popup-image.png" alt="Dental Illustration" className="popup-illustration" />
-    </div>
-
-    {/* Right: Illustration */}
-
-    <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
-      <img src="/images/logo.png" alt="Fill-In Logo" className="popup-logo mb-3" />
-
-      <h4 className="fw-bold mb-2">
-        Looking for Your Next Dental <span className="text-primary">Opportunity?</span>
-      </h4>
-      <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
-        Join top dental clinics hiring now. Find the best-fit job that values your skills and passion.
-      </p>
-
-      <div className="d-flex gap-3">
-        {/* <button className="btn btn-primary px-4" onClick={() => setShowModal(false)}>
-          Stay on candidate
-        </button>
-        <button className="btn btn-outline-primary px-4" onClick={() => {navigate("/recruiter"); setShowModal(false)}}>
-          Go to Recruiter
-        </button> */}
-        <button
-  className="btn btn-primary px-4"
-  onClick={() => {
-    sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
-    setShowModal(false);
-  }}
->
-  Stay on Candidate
-</button>
-
-<button
-  className="btn btn-outline-primary px-4"
-  onClick={() => {
-    sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
-    navigate("/recruiter");
-    setShowModal(false);
-  }}
->
-  Go to Recruiter
-</button>
-
-      </div>
-    </div>
-
-  
-  </div>
-</div>
-
-)}
-
-        <h1>
-          Get The Right Job
-          <br />
-          You Deserve
-        </h1>
-        <p className="mt-3">1,30,420 jobs listed here! Your dream job is waiting.</p>
-
-        {/* Search Bar */}
-        <div className="search-bar">
-          <div className="search-group search-border">
-            <div className="icon-box">
-              <img src="/images/skill 1.png" alt="Skill Icon" className="img-fluid" />
-            </div>
-            <input
-              type="text"
-              placeholder="Enter Skills"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <div className="search-group search-border">
-            <div className="icon-box">
+    <>
+      {/* ======= Navbar (No import) ======= */}
+      {/* Desktop Navbar */}
+      <section className="nav-main py-4 d-lg-block d-none">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-3">
               <img
-                className="img-fluid"
-                src="/images/best-customer-experience 1.png"
-                alt="Experience Icon"
+                onClick={() => navigate("/")}
+                className="img-fluid logo"
+                src="/images/logo.png"
+                alt="Logo"
               />
             </div>
-            <select value={experience} onChange={(e) => setExperience(e.target.value)}>
-              <option value="">Select Experience</option>
-              <option value="fresher">Fresher</option>
-              <option value="1-2 Years">1-2 Years</option>
-              <option value="3+ Years">3+ Years</option>
-              <option value="4 Years">4 Years</option>
-            </select>
-          </div>
-
-          <div className="search-group">
-            <div className="icon-box">
-              <img className="img-fluid" src="/images/placeholder 1.png" alt="Location" />
+            <div className="col-9 text-end position-relative">
+              <div className="btn-nav">
+                {isLoggedIn ? (
+              <>
+              </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() =>
+                        navigate("/candidate/", {
+                        })
+                      }
+                      className="btn-login"
+                    >
+                      Candidate
+                    </button>
+                    <button
+                      onClick={() => navigate("/recruiter")}
+                      className="btn-register"
+                    >
+                      Recruiter
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
           </div>
-
-          <button className="btn btn-primary" onClick={handleSearch}>
-            Search Jobs
-          </button>
         </div>
+      </section>
 
-        {/* Popular Tags */}
-        <div className="popular-tags">
-          <strong>Popular Searches:</strong>
-          {popularTerms.length > 0 ? (
-            popularTerms.map((term, index) => (
-              <span key={index} onClick={() => setSearch(term.term)}>
-                {term.term}
-              </span>
-            ))
-          ) : (
-            <span>Loading...</span>
+      {/* Mobile Navbar */}
+      <section className="nav-main py-2 d-lg-none d-block">
+        <div className="container">
+          <div className="row">
+            <div className="col-5">
+              <img
+                onClick={() => navigate("/candidate/")}
+                className="img-fluid"
+                src="/images/logo.png"
+                alt="Logo"
+              />
+            </div>
+            <div className="col-7 nav-col">
+              <FaBars onClick={() => setShow(true)} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+  
+
+      {/* ======= Hero Section ======= */}
+      <section className="hero-section landing-page" >
+        <div className="container">
+          {showModal && (
+            <div className="custom-popup-overlay">
+              <div className="custom-popup-box d-flex">
+                <div className="popup-right">
+                  <img
+                    src="/images/popup-image.png"
+                    alt="Dental Illustration"
+                    className="popup-illustration"
+                  />
+                </div>
+                <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
+                  <img
+                    src="/images/logo.png"
+                    alt="Fill-In Logo"
+                    className="popup-logo mb-3"
+                  />
+                  <h4 className="fw-bold mb-2">
+                    Looking for Your Next Dental{" "}
+                    <span className="text-primary">Opportunity?</span>
+                  </h4>
+                  <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
+                    Join top dental clinics hiring now. Find the best-fit job
+                    that values your skills and passion.
+                  </p>
+                  
+                  <div className="d-flex gap-3">
+                    <button
+                      className="btn btn-primary px-4"
+                      onClick={() => {
+                        sessionStorage.setItem("selectedPortal", "candidate");
+                          navigate("/candidate");
+                        setShowModal(false);
+                      }}
+                    >
+                      Go to Candidate
+                    </button>
+                    <button
+                      className="btn btn-outline-primary px-4"
+                      onClick={() => {
+                        sessionStorage.setItem("selectedPortal", "recruiter");
+                        navigate("/recruiter");
+                        setShowModal(false);
+                      }}
+                    >
+                      Go to Recruiter
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
+
+          <h1>
+            Get The Right Job
+            <br />
+            You Deserve
+          </h1>
+          <p className="mt-3">
+            1,30,420 jobs listed here! Your dream job is waiting.
+          </p>
+
+
+            <h3>
+Find the right dental professionals to help your clinic grow and thrive. Whether you're looking for experienced dentists, skilled assistants, or reliable support staff, our platform connects you with qualified candidates who are ready to join your team.
+</h3>
+
         </div>
-      </div>
-    </section>
+      </section>
+
+  {/* ======= stripe ======= */}
+      <section className="dream-job-section">
+  <div className="container">
+    <p className="card-title-section mb-4">Your Dream Jobs Are Waiting</p>
+    <p className="text-muted mb-3">
+      Over 1 million interactions, 1200 success stories. Make yours now.
+    </p>
+    <div className="d-flex flex-wrap justify-content-center">
+      {/* <button className="btn btn-white">Search Jobs</button> */}
+      {/* <button className="btn btn-blue" >Apply Job Now</button> */}
+    </div>
+  </div>
+</section>
+    </>
   );
 };
 

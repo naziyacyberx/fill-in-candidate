@@ -91,6 +91,8 @@ const PracticeInfoForm = ({ profile, setProfile }) => {
       <p>Complete your practice details</p>
 
       {/* Practice Name */}
+ 
+
       <Form.Group className="mb-3">
         <Form.Label>
           Practice Name<span className="text-danger">*</span>
@@ -221,6 +223,7 @@ const PracticeInfoForm = ({ profile, setProfile }) => {
           onChange={handleChange}
         />
       </Form.Group>
+      
     </div>
   );
 };

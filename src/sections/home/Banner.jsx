@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../../styles/banner.css";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useNavigate } from "react-router-dom";
+import "../../styles/banner.css";
 
 const Banner = () => {
+  const google_api_key = import.meta.env.VITE_GOOGLE_API_KEY;
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [experience, setExperience] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(null);
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
   const [jobs, setJobs] = useState([]);
   const [popularTerms, setPopularTerms] = useState([]);
-  const token = localStorage.getItem("fillInToken")
   const [showModal, setShowModal] = useState(false);
+  const token = localStorage.getItem("fillInToken");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
-useEffect(() => {
-  const portal = sessionStorage.getItem("selectedPortal");
-  if (portal != "candidate") {
-    // navigate("/recruiter");
-    setShowModal(true)
-  }
-}, []);
+  useEffect(() => {
+    const portal = sessionStorage.getItem("selectedPortal");
+    if (portal !== "candidate") {
+      setShowModal(true);
+    }
+  }, []);
 
-
-  // 🔽 Fetch popular search terms
   useEffect(() => {
     const fetchPopularSearches = async () => {
       try {
@@ -32,11 +35,10 @@ useEffect(() => {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-
         if (response?.data?.statusCode === 200) {
           setPopularTerms(response.data.data.popular || []);
         }
@@ -44,20 +46,40 @@ useEffect(() => {
         console.error("Failed to fetch popular terms:", error);
       }
     };
-
     fetchPopularSearches();
-
-
   }, []);
+
+  // ✅ Fix: Correct API key param in details API
+  // useEffect(() => {
+  //   if (location?.value?.place_id) {
+  //     const fetchLatLng = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `https://maps.googleapis.com/maps/api/place/details/json?placeid=${location.value.place_id}&key=${google_api_key}`
+  //         );
+  //         const locationData = response.data?.result?.geometry?.location;
+  //         if (locationData) {
+  //           setCoordinates({ lat: locationData.lat, lng: locationData.lng });
+  //         }
+  //       } catch (error) {
+  //         console.error("Failed to fetch coordinates:", error);
+  //       }
+  //     };
+  //     fetchLatLng();
+  //   }
+  // }, [location]);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.post(
-        `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${search}`,
+      const response = await axios.get(
+        `https://fillin-admin.cyberxinfosolution.com/api/dashboard`,
         {
-          experiance_level: experience ? [experience] : [],
-        },
-        {
+          params: {
+            search: search,
+            // experiance_level: experience,
+            latitude: lat,
+            longitude: lng,
+          },
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -66,18 +88,40 @@ useEffect(() => {
       );
 
       if (response?.data?.status === "success") {
-        setJobs(response.data.data); // Optional usage
         navigate("/candidate/jobs", { state: { jobs: response.data.data.jobs } });
       }
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
   };
+    const handleSelect = (val) => {
+    setLocation(val);
+    setIsFocused(false);
+
+    const placeId = val.value.place_id;
+
+    if (!placeId || !window.google) return;
+
+    const service = new window.google.maps.places.PlacesService(document.createElement("div"));
+
+    service.getDetails({ placeId }, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        const latitude = place.geometry.location.lat();
+        const longitude = place.geometry.location.lng();
+        setLat(latitude.toString());
+        setLng(longitude.toString());
+
+      } else {
+        console.error("Place details fetch failed:", status);
+      }
+    });
+  };
 
   return (
     <section className="hero-section">
       <div className="container">
         {showModal && (
+
 
 <div className="custom-popup-overlay">
   <div className="custom-popup-box d-flex">
@@ -133,7 +177,8 @@ useEffect(() => {
   </div>
 </div>
 
-)}
+
+        )}
 
         <h1>
           Get The Right Job
@@ -142,8 +187,10 @@ useEffect(() => {
         </h1>
         <p className="mt-3">1,30,420 jobs listed here! Your dream job is waiting.</p>
 
-        {/* Search Bar */}
-        <div className="search-bar">
+        {/* 🔽 Search Bar */}
+        <div className="search-bar flex-wrap d-flex gap-3 align-items-center justify-content-start">
+
+          {/* Skills */}
           <div className="search-group search-border">
             <div className="icon-box">
               <img src="/images/skill 1.png" alt="Skill Icon" className="img-fluid" />
@@ -156,13 +203,10 @@ useEffect(() => {
             />
           </div>
 
+          {/* Experience */}
           <div className="search-group search-border">
             <div className="icon-box">
-              <img
-                className="img-fluid"
-                src="/images/best-customer-experience 1.png"
-                alt="Experience Icon"
-              />
+              <img className="img-fluid" src="/images/best-customer-experience 1.png" alt="Experience Icon" />
             </div>
             <select value={experience} onChange={(e) => setExperience(e.target.value)}>
               <option value="">Select Experience</option>
@@ -173,25 +217,86 @@ useEffect(() => {
             </select>
           </div>
 
-          <div className="search-group">
+          {/* 🔽 Location */}
+          <div
+            className="d-flex align-items-center gap-2 flex-grow-1"
+            style={{ minWidth: "250px", maxWidth: "400px" }}
+          >
             <div className="icon-box">
-              <img className="img-fluid" src="/images/placeholder 1.png" alt="Location" />
+              <img
+                className="img-fluid"
+                src="/images/placeholder 1.png"
+                alt="Location"
+                style={{ width: "24px", height: "24px" }}
+              />
             </div>
-            <input
-              type="text"
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
+            <div style={{ minWidth: 300, width: "100%" }}>
+      <GooglePlacesAutocomplete
+        apiKey={import.meta.env.VITE_GOOGLE_API_KEY} // Or process.env.REACT_APP_GOOGLE_API_KEY if using CRA
+        selectProps={{
+          value: location,
+          onChange: handleSelect,
+          onFocus: () => setIsFocused(true),
+          placeholder: "Enter Location",
+          styles: {
+            control: (base) => ({
+              ...base,
+              // border: "1px solid #ccc",
+              borderRadius: "6px",
+              minHeight: "45px",
+              boxShadow: "none",
+            }),
+            placeholder: (base) => ({
+              ...base,
+              color: "#888",
+            }),
+          },
+        }}
+           autocompletionRequest={{
+          types: ["(cities)"], // 👈 Restrict to cities
+       
+        }}
+      />
+
+    
+    </div>
+            {/* <div style={{ flex: 1 }}>
+              {google_api_key && (
+                <GooglePlacesAutocomplete
+                
+                  apiKey={google_api_key}
+                  selectProps={{
+                  
+                    value: location,
+                    onChange: setLocation,
+                    placeholder: "Location",
+                    styles: {
+                      container: (provided) => ({
+                        ...provided,
+                        width: "100%",
+                      }),
+                      control: (provided) => ({
+                        ...provided,
+                        minHeight: "45px",
+                        borderRadius: "5px",
+                        borderColor: "#ced4da",
+                        boxShadow: "none",
+                      }),
+                    },
+                  }}
+                />
+              )}
+            </div> */}
           </div>
 
-          <button className="btn btn-primary" onClick={handleSearch}>
+          {/* Search Button */}
+          <button className="btn btn-primary mt-2 mt-md-0" onClick={handleSearch}>
             Search Jobs
           </button>
         </div>
 
-        {/* Popular Tags */}
-        <div className="popular-tags">
+        {/* 🔽 Popular Tags */}
+        <div className="popular-tags mt-3">
           <strong>Popular Searches:</strong>
           {popularTerms.length > 0 ? (
             popularTerms.map((term, index) => (

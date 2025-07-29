@@ -4,42 +4,20 @@ import { Form } from 'react-bootstrap';
 const StaffingRequirementsForm = ({ profile, setprofile, dropdownData }) => {
   const [selectedStaff, setSelectedStaff] = useState([]);
   const [hireType, setHireType] = useState('');
-  const [workingHours, setWorkingHours] = useState([
-  {
-    key: 'Weekdays',
-    value: 1,
-  },
-  {
-    key: 'Weekends',
-    value: 2,
-  },
-  {
-    key: 'Morning',
-    value: 3,
-  },
-  {
-    key: 'Afternoon',
-    value: 4,
-  },
-  {
-    key: 'Evening',
-    value: 5,
-  },
-  {
-    key: 'Flexible',
-    value: 6,
-  },
-
-  ]);
+  const [workingHourOptions] = useState([
+  { key: 'Weekdays', value: 1 },
+  { key: 'Weekends', value: 2 },
+  { key: 'Morning', value: 3 },
+  { key: 'Afternoon', value: 4 },
+  { key: 'Evening', value: 5 },
+  { key: 'Flexible', value: 6 },
+]);
+  const [workingHours, setWorkingHours] = useState([]);
   const [softwareUsed, setSoftwareUsed] = useState([]);
 
   const staffOptions = [
     'Dentist', 'Dental Assistant', 'Receptionist', 'Hygienist', 'Therapist', 'Specialist'
   ];
-
-  // const workingHourOptions = [
-  //   'Weekdays', 'Weekends', 'Morning', 'Afternoon', 'Evening', 'Flexible'
-  // ];
 
   const softwareOptions = [
     'Dental 4 Windows', 'Oasis', 'Exact', 'Pratika', 'D4W (Centaur)', 'Medirecords', 'Core Practice', 'Other'
@@ -59,32 +37,6 @@ const StaffingRequirementsForm = ({ profile, setprofile, dropdownData }) => {
     value: 3,
   },
 ];
-// const workingHours = [
-//   {
-//     key: 'Weekdays',
-//     value: 1,
-//   },
-//   {
-//     key: 'Weekends',
-//     value: 2,
-//   },
-//   {
-//     key: 'Morning',
-//     value: 3,
-//   },
-//   {
-//     key: 'Afternoon',
-//     value: 4,
-//   },
-//   {
-//     key: 'Evening',
-//     value: 5,
-//   },
-//   {
-//     key: 'Flexible',
-//     value: 6,
-//   },
-// ];
 
   const toggleSelection = (option, state, setState) => {
     if (state.includes(option)) {
@@ -142,45 +94,34 @@ const StaffingRequirementsForm = ({ profile, setprofile, dropdownData }) => {
       </Form.Group>
 
       {/* Hire Type */}
-      <Form.Group className="mb-3">
-        <Form.Label><strong>Are you primarily looking for</strong></Form.Label>
-        <div className="d-flex flex-wrap gap-4 mt-2">
-          <Form.Check
-            type="radio"
-            name="hireType"
-            label="Temporary Fill-Ins"
-            checked={hireType === 'Temporary'}
-            onChange={() => setHireType('Temporary')}
-          />
-          <Form.Check
-            type="radio"
-            name="hireType"
-            label="Permanent Hires"
-            checked={hireType === 'Permanent'}
-            onChange={() => setHireType('Permanent')}
-          />
-          <Form.Check
-            type="radio"
-            name="hireType"
-            label="Both"
-            checked={hireType === 'Both'}
-            onChange={() => setHireType('Both')}
-          />
-        </div>
-      </Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label><strong>Are you primarily looking for</strong></Form.Label>
+  <div className="d-flex flex-wrap gap-4 mt-2">
+    {lookingForData.map((option) => (
+      <Form.Check
+        key={option.value}
+        type="radio"
+        name="hireType"
+        label={option.key}
+        checked={hireType === option.value}
+        onChange={() => setHireType(option.value)}
+      />
+    ))}
+  </div>
+</Form.Group>
 
       {/* Working Hours */}
       <Form.Group className="mb-3">
         <Form.Label><strong>Typical Working Hours</strong></Form.Label>
         <div className="d-flex flex-wrap gap-3 mt-2">
-          {workingHours.map((hour) => (
+          {workingHourOptions?.map((hour) => (
             <Form.Check
               key={hour.value}
               inline
               type="checkbox"
               label={hour.key}
               checked={workingHours.includes(hour.key)}
-              onChange={() => toggleSelection(hour, workingHours, setWorkingHours)}
+              onChange={() => toggleSelection(hour.key, workingHours, setWorkingHours)}
             />    
           ))}
         </div>
@@ -190,14 +131,14 @@ const StaffingRequirementsForm = ({ profile, setprofile, dropdownData }) => {
       <Form.Group className="mb-3">
         <Form.Label><strong>What Software does your practice use?</strong></Form.Label>
         <div className="d-flex flex-wrap gap-3 mt-2">
-          {softwareOptions.map((soft) => (
+          {dropdownData?.software?.map((soft) => (
             <Form.Check
-              key={soft}
+              key={soft.value}
               inline
               type="checkbox"
-              label={soft}
-              checked={softwareUsed.includes(soft)}
-              onChange={() => toggleSelection(soft, softwareUsed, setSoftwareUsed)}
+              label={soft.key}
+              checked={softwareUsed.includes(soft.key)}
+              onChange={() => toggleSelection(soft.key, softwareUsed, setSoftwareUsed)}
             />
           ))}
         </div>
