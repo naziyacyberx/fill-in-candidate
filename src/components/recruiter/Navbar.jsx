@@ -137,6 +137,7 @@ const fetchNotifications = async () => {
     <div className="user-menu-popup text-center">
       <ul>
         <li onClick={() => navigate("/recruiter/scheduled-interviews")}>Scheduled Interviews</li>
+        <li onClick={() => navigate("/recruiter/create-job")}>Create Job</li>
         <li onClick={() => navigate("/recruiter/profile")}>Profile</li>
         <li onClick={handleLogout}>Logout</li>
       </ul>

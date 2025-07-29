@@ -60,7 +60,7 @@ const ScheduleInterview = () => {
     const fetchInterviews = async () => {
       try {
         const response = await axios.get(
-          'https://fill-in.cyberxinfosolution.com/api/candidate/interview-list',
+          `${baseUrl}candidate/interview-list`,
           {
             headers: {
               'Content-Type': 'application/json',

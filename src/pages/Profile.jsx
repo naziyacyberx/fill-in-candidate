@@ -24,6 +24,7 @@ import Navbar from "../sections/common/Navbar";
 import Footer from "../sections/common/Footer";
 import { SuccessToaster } from "../utils/Toaster";
 import "../styles/profile.css";
+import { baseUrl } from "../utils/BaseUrl";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Profile = () => {
     const fetchProfileImage = async () => {
       try {
         const res = await axios.get(
-          "https://fill-in.cyberxinfosolution.com/api/candidate/candidate-profile",
+        `${baseUrl}candidate/candidate-profile`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -47,7 +48,7 @@ const Profile = () => {
         );
 
         if (res.data.status === "success") {
-          setProfileImage(res.data.data);
+          setProfileImage(res.data.data.profile);
         }
       } catch (err) {
         console.error("Failed to load profile image:", err);
@@ -87,31 +88,31 @@ const Profile = () => {
 
             <ListGroup className="custom-list-group">
               {[
-                { icon: <FaUser />, label: "My Profile", route: "/my-profile" },
+                { icon: <FaUser />, label: "My Profile", route: "/candidate/my-profile" },
                 {
                   icon: <FaStar />,
                   label: "My Rating & Reviews",
-                  route: "/my-ratings-reviews",
+                  route: "/candidate/my-ratings-reviews",
                 },
                 {
                   icon: <FaBookmark />,
                   label: "Saved Jobs",
-                  route: "/saved-jobs",
+                  route: "/candidate/saved-jobs",
                 },
                 {
                   icon: <FaCalendarAlt />,
                   label: "Scheduled Interviews",
-                  route: "/schedule-interview",
+                  route: "/candidate/schedule-interview",
                 },
                 {
                   icon: <FaInfoCircle />,
                   label: "About Us",
-                  route: "/about-us",
+                  route: "/candidate/about-us",
                 },
                 {
                   icon: <FaShieldAlt />,
                   label: "Privacy Policy",
-                  route: "/privacy-policy",
+                  route: "/candidate/privacy-policy",
                 },
                 {
                   icon: <FaSignOutAlt />,

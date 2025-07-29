@@ -15,7 +15,7 @@ const ForgotPassword = () => {
       try {
         const Response = await sendOtpApi(email);
        if(Response?.data?.status=="success"){
-        navigate("/verify-otp", { state: { email, fromForgotPassword: true } });
+        navigate("/candidate/verify-otp", { state: { email, fromForgotPassword: true } });
        }
       } catch (error) {
         console.error("Otp Send Error:", error);
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
             </div>
             <div className="col-md-6">
               <div className="register-container">
-                <div className="auth-logo">
+                <div className="auth-logo cursor-pointer" onClick={()=>{navigate("/candidate")}}>
                   <img
                     className="imf-fluid"
                     src="/images/logo.png"

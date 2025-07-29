@@ -70,7 +70,7 @@ const Registration = () => {
       if (registerResponse?.data?.status == "success") {        
         const otpResponse = await sendOtpApi(email);
         console.log("OTP sent response:", otpResponse);
-        navigate("/verify-otp", { state: { email } });
+        navigate("/candidate/verify-otp", { state: { email } });
       }
     } catch (error) {
       console.error("Login Error:", error);
@@ -95,7 +95,7 @@ const Registration = () => {
             </div>
             <div className="col-md-6">
               <div className="register-container">
-                <div className="auth-logo">
+                <div className="auth-logo cursor-pointer" onClick={()=>{navigate("/candidate")}}>
                   <img
                     className="img-fluid"
                     src="/images/logo.png"

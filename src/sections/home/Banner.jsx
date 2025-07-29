@@ -3,6 +3,7 @@ import axios from "axios";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useNavigate } from "react-router-dom";
 import "../../styles/banner.css";
+import { baseUrl } from "../../utils/BaseUrl";
 
 const Banner = () => {
   const google_api_key = import.meta.env.VITE_GOOGLE_API_KEY;
@@ -72,7 +73,7 @@ const Banner = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://fillin-admin.cyberxinfosolution.com/api/dashboard`,
+        `${baseUrl}dashboard`,
         {
           params: {
             search: search,
@@ -88,13 +89,15 @@ const Banner = () => {
       );
 
       if (response?.data?.status === "success") {
-        navigate("/candidate/jobs", { state: { jobs: response.data.data.jobs } });
+        navigate("/candidate/jobs", {
+          state: { jobs: response.data.data.jobs },
+        });
       }
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
   };
-    const handleSelect = (val) => {
+  const handleSelect = (val) => {
     setLocation(val);
     setIsFocused(false);
 
@@ -102,7 +105,9 @@ const Banner = () => {
 
     if (!placeId || !window.google) return;
 
-    const service = new window.google.maps.places.PlacesService(document.createElement("div"));
+    const service = new window.google.maps.places.PlacesService(
+      document.createElement("div")
+    );
 
     service.getDetails({ placeId }, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
@@ -110,7 +115,6 @@ const Banner = () => {
         const longitude = place.geometry.location.lng();
         setLat(latitude.toString());
         setLng(longitude.toString());
-
       } else {
         console.error("Place details fetch failed:", status);
       }
@@ -121,63 +125,66 @@ const Banner = () => {
     <section className="hero-section">
       <div className="container">
         {showModal && (
+          <div className="custom-popup-overlay">
+            <div className="custom-popup-box d-flex">
+              {/* Left: Text + Logo + Buttons */}
+              <div className="popup-right">
+                <img
+                  src="/images/popup-image.png"
+                  alt="Dental Illustration"
+                  className="popup-illustration"
+                />
+              </div>
 
+              {/* Right: Illustration */}
 
-<div className="custom-popup-overlay">
-  <div className="custom-popup-box d-flex">
-    {/* Left: Text + Logo + Buttons */}
-      <div className="popup-right">
-      <img src="/images/popup-image.png" alt="Dental Illustration" className="popup-illustration" />
-    </div>
+              <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
+                <img
+                  src="/images/logo.png"
+                  alt="Fill-In Logo"
+                  className="popup-logo mb-3"
+                />
 
-    {/* Right: Illustration */}
+                <h4 className="fw-bold mb-2">
+                  Looking for Your Next Dental{" "}
+                  <span className="text-primary">Opportunity?</span>
+                </h4>
+                <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
+                  Join top dental clinics hiring now. Find the best-fit job that
+                  values your skills and passion.
+                </p>
 
-    <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
-      <img src="/images/logo.png" alt="Fill-In Logo" className="popup-logo mb-3" />
-
-      <h4 className="fw-bold mb-2">
-        Looking for Your Next Dental <span className="text-primary">Opportunity?</span>
-      </h4>
-      <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
-        Join top dental clinics hiring now. Find the best-fit job that values your skills and passion.
-      </p>
-
-      <div className="d-flex gap-3">
-        {/* <button className="btn btn-primary px-4" onClick={() => setShowModal(false)}>
+                <div className="d-flex gap-3">
+                  {/* <button className="btn btn-primary px-4" onClick={() => setShowModal(false)}>
           Stay on candidate
         </button>
         <button className="btn btn-outline-primary px-4" onClick={() => {navigate("/recruiter"); setShowModal(false)}}>
           Go to Recruiter
         </button> */}
-        <button
-  className="btn btn-primary px-4"
-  onClick={() => {
-    sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
-    setShowModal(false);
-  }}
->
-  Stay on Candidate
-</button>
+                  <button
+                    className="btn-register"
+                    onClick={() => {
+                      sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
+                      setShowModal(false);
+                    }}
+                  >
+                    Stay on Candidate
+                  </button>
 
-<button
-  className="btn btn-outline-primary px-4"
-  onClick={() => {
-    sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
-    navigate("/recruiter");
-    setShowModal(false);
-  }}
->
-  Go to Recruiter
-</button>
-
-      </div>
-    </div>
-
-  
-  </div>
-</div>
-
-
+                  <button
+                    className="btn btn-outline-primary px-4 btn-color-less"
+                    onClick={() => {
+                      sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
+                      navigate("/recruiter");
+                      setShowModal(false);
+                    }}
+                  >
+                    Go to Recruiter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         <h1>
@@ -185,15 +192,20 @@ const Banner = () => {
           <br />
           You Deserve
         </h1>
-        <p className="mt-3">1,30,420 jobs listed here! Your dream job is waiting.</p>
+        <p className="mt-3">
+          1,30,420 jobs listed here! Your dream job is waiting.
+        </p>
 
         {/* 🔽 Search Bar */}
         <div className="search-bar flex-wrap d-flex gap-3 align-items-center justify-content-start">
-
           {/* Skills */}
           <div className="search-group search-border">
             <div className="icon-box">
-              <img src="/images/skill 1.png" alt="Skill Icon" className="img-fluid" />
+              <img
+                src="/images/skill 1.png"
+                alt="Skill Icon"
+                className="img-fluid"
+              />
             </div>
             <input
               type="text"
@@ -206,9 +218,16 @@ const Banner = () => {
           {/* Experience */}
           <div className="search-group search-border">
             <div className="icon-box">
-              <img className="img-fluid" src="/images/best-customer-experience 1.png" alt="Experience Icon" />
+              <img
+                className="img-fluid"
+                src="/images/best-customer-experience 1.png"
+                alt="Experience Icon"
+              />
             </div>
-            <select value={experience} onChange={(e) => setExperience(e.target.value)}>
+            <select
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+            >
               <option value="">Select Experience</option>
               <option value="fresher">Fresher</option>
               <option value="1-2 Years">1-2 Years</option>
@@ -231,66 +250,38 @@ const Banner = () => {
               />
             </div>
             <div style={{ minWidth: 300, width: "100%" }}>
-      <GooglePlacesAutocomplete
-        apiKey={import.meta.env.VITE_GOOGLE_API_KEY} // Or process.env.REACT_APP_GOOGLE_API_KEY if using CRA
-        selectProps={{
-          value: location,
-          onChange: handleSelect,
-          onFocus: () => setIsFocused(true),
-          placeholder: "Enter Location",
-          styles: {
-            control: (base) => ({
-              ...base,
-              // border: "1px solid #ccc",
-              borderRadius: "6px",
-              minHeight: "45px",
-              boxShadow: "none",
-            }),
-            placeholder: (base) => ({
-              ...base,
-              color: "#888",
-            }),
-          },
-        }}
-           autocompletionRequest={{
-          types: ["(cities)"], // 👈 Restrict to cities
-       
-        }}
-      />
-
-    
-    </div>
-            {/* <div style={{ flex: 1 }}>
-              {google_api_key && (
-                <GooglePlacesAutocomplete
-                
-                  apiKey={google_api_key}
-                  selectProps={{
-                  
-                    value: location,
-                    onChange: setLocation,
-                    placeholder: "Location",
-                    styles: {
-                      container: (provided) => ({
-                        ...provided,
-                        width: "100%",
-                      }),
-                      control: (provided) => ({
-                        ...provided,
-                        minHeight: "45px",
-                        borderRadius: "5px",
-                        borderColor: "#ced4da",
-                        boxShadow: "none",
-                      }),
-                    },
-                  }}
-                />
-              )}
-            </div> */}
+              <GooglePlacesAutocomplete
+                apiKey={import.meta.env.VITE_GOOGLE_API_KEY} // Or process.env.REACT_APP_GOOGLE_API_KEY if using CRA
+                selectProps={{
+                  value: location,
+                  onChange: handleSelect,
+                  onFocus: () => setIsFocused(true),
+                  placeholder: "Enter Location",
+                  styles: {
+                    control: (base) => ({
+                      ...base,
+                      // border: "1px solid #ccc",
+                      borderRadius: "6px",
+                      minHeight: "45px",
+                      boxShadow: "none",
+                    }),
+                    placeholder: (base) => ({
+                      ...base,
+                      color: "#888",
+                    }),
+                  },
+                }}
+                autocompletionRequest={{
+                  types: ["(cities)"], // 👈 Restrict to cities
+                }}
+              />
+            </div>
+      
           </div>
 
           {/* Search Button */}
-          <button className="btn btn-primary mt-2 mt-md-0" onClick={handleSearch}>
+
+          <button onClick={handleSearch} className="btn-register">
             Search Jobs
           </button>
         </div>

@@ -10,6 +10,7 @@ import ProfessionalProfile from '../components/ProfessionalProfile';
 import AvailabilityPreferences from '../components/AvailabilityPreferences';
 import ComplianceVaccination from '../components/ComplianceVaccination';
 import PersonalityAdditionalInfo from '../components/PersonalityAdditionalInfo';
+import { baseUrl } from '../utils/BaseUrl';
 
 const MyProfile = () => {
   const [loading, setLoading] = useState(true);
@@ -57,7 +58,7 @@ const MyProfile = () => {
 
       try {
         const response = await axios.get(
-          'https://fill-in.cyberxinfosolution.com/api/candidate/view-profile',
+          `${baseUrl}candidate/view-profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -105,7 +106,7 @@ const MyProfile = () => {
 
     try {
       await axios.post(
-        'https://fill-in.cyberxinfosolution.com/api/candidate/update-profile',
+        `${baseUrl}candidate/update-profile`,
         formData,
         {
           headers: {

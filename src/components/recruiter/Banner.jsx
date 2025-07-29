@@ -115,7 +115,7 @@ const Banner = () => {
           Go to Candidate
         </button> */}
         <button
-  className="btn btn-primary px-4"
+  className="btn-register"
   onClick={() => {
     sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
     setShowModal(false);
@@ -125,7 +125,7 @@ const Banner = () => {
 </button>
 
 <button
-  className="btn btn-outline-primary px-4"
+  className="btn btn-outline-primary px-4 btn-color-less"
   onClick={() => {
     sessionStorage.setItem("selectedPortal", "candidate"); // 🔹 Save to session
     navigate("/candidate");
@@ -153,8 +153,9 @@ const Banner = () => {
         <p className="mt-3">We specialize in providing experienced recruiters on short notice to fill urgent hiring needs. Whether it's a sudden vacancy or a project ramp-up, our experts are ready to step in and deliver results.</p>
 
 
- <button className="btn btn-primary" onClick={handleSearch}>
-            Search Jobs
+
+          <button onClick={handleSearch} className="btn-register">
+       Find Candidates Here
           </button>
         {/* Search Bar */}
         {/* <div className="search-bar">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/filterdrawer.css";
+import { baseUrl } from "../utils/BaseUrl";
 
 const FilterDrawer = ({
   isOpen,
@@ -25,14 +26,14 @@ const FilterDrawer = ({
     const fetchDropdownData = async () => {
       try {
         const response = await axios.post(
-          "https://fill-in.cyberxinfosolution.com/api/recruiter/get-dropdown-data",
+          `${baseUrl}recruiter/get-dropdown-data`,
           {},
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
               Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGwtaW4uY3liZXJ4aW5mb3NvbHV0aW9uLmNvbS9hcGkvY2FuZGlkYXRlL2xvZ2luIiwiaWF0IjoxNzUwNDIzNTMwLCJleHAiOjE3NTMwMTU1MzAsIm5iZiI6MTc1MDQyMzUzMCwianRpIjoiYkJybDRSeTdEaGVDOTBqSiIsInN1YiI6IjM1IiwicHJ2IjoiODYxYjA1NjMxMDkxMzU3ZWM4ZTU1ZjJhZjE3ZTExMThmNzJmNzBkYyJ9.8kSM2LwawEWaEi0a3qbnMUOD1YZDZUwnLoesFf_1IPk",
+                `Bearer  ${localStorage.getItem("recruiterToken")}`,
             },
           }
         );

@@ -71,9 +71,9 @@ const Card = ({ cardData }) => {
                   </div>
                   <div className="job-card-content">
                     <h6 className="applican-name">{card.name}</h6>
-                    <p className="text-primary mb-0">{card.job_count} Jobs
+                    <p className="text-primary mb-0">{card.job_count}
 
-                      {card.job_count} {card.job_count > 0 ? "Jobs" : "Job"}
+                     {card.job_count > 1 ? " Jobs" : " Job"}
                     </p>
                   </div>
                 </div>

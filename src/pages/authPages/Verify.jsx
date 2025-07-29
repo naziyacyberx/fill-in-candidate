@@ -59,7 +59,7 @@ const Verify = () => {
             </div>
             <div className="col-md-6">
               <div className="register-container">
-                <div className="auth-logo">
+                <div className="auth-logo cursor-pointer" onClick={()=>{navigate("/candidate")}}>
                   <img
                     className="imf-fluid"
                     src="/images/logo.png"

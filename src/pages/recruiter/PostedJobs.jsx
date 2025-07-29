@@ -4,6 +4,7 @@ import { FaStar, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
 import axios from "axios";
 import PaginationComponent from "../../components/recruiter/PaginationComponent";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../utils/BaseUrl";
 
 const filters = ["All", "Weekdays", "Weekends", "Morning", "Afternoon", "Evening", "Flexible"];
 const itemsPerPage = 6;
@@ -19,13 +20,13 @@ const PostedJobs = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://fillin-admin.cyberxinfosolution.com/api/recruiter/job-list",
+        `${baseUrl}recruiter/job-list`,
         {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGxpbi1hZG1pbi5jeWJlcnhpbmZvc29sdXRpb24uY29tL2FwaS9yZWNydWl0ZXIvbG9naW4iLCJpYXQiOjE3NTIyMjc0MjcsImV4cCI6MTc1NDgxOTQyNywibmJmIjoxNzUyMjI3NDI3LCJqdGkiOiJZMjY5b3pxSXY1RjdtcTRwIiwic3ViIjoiNjMiLCJwcnYiOiIxOWU0M2I5N2YyMDI5ZTUzMDcyMzIwYzRjNzdjOTBkMTViMmMzM2ZkIn0.43eywrXj1GX9zhAhOLU1zQtytCnhuDM5Z9zg7EMHous`,
-            // Authorization: `Bearer ${localStorage.getItem("fillInToken")}`,
+            // Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGxpbi1hZG1pbi5jeWJlcnhpbmZvc29sdXRpb24uY29tL2FwaS9yZWNydWl0ZXIvbG9naW4iLCJpYXQiOjE3NTIyMjc0MjcsImV4cCI6MTc1NDgxOTQyNywibmJmIjoxNzUyMjI3NDI3LCJqdGkiOiJZMjY5b3pxSXY1RjdtcTRwIiwic3ViIjoiNjMiLCJwcnYiOiIxOWU0M2I5N2YyMDI5ZTUzMDcyMzIwYzRjNzdjOTBkMTViMmMzM2ZkIn0.43eywrXj1GX9zhAhOLU1zQtytCnhuDM5Z9zg7EMHous`,
+            Authorization: `Bearer ${localStorage.getItem("recruiterToken")}`,
           },
         }
       );
@@ -67,10 +68,10 @@ const PostedJobs = () => {
 
   return (
     <div className="container py-4">
-      <h5><strong>Posted Jobs</strong></h5>
+      <h5><strong>Posted Jobs</strong></h5>  
 
-      {/* Filter Buttons */}
-      <div className="d-flex flex-wrap gap-2 my-3">
+      {/* Filter Buttons */}   
+      <div className="d-flex flex-wrap gap-2 my-3">  
         {filters.map((filter, idx) => (
           <Button
             key={idx}

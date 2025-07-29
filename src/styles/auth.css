@@ -41,9 +41,11 @@
 
 
 .login-left-side {
-
+  height: 100vh;
   background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #D3EBFF 100%);
-  padding: 100px;
+  padding: 150px;
+  display: flex;
+  align-items: center;
 }
 
 

@@ -29,6 +29,7 @@ export const loginUserApi = async (data ) => {
     return error?.response;
   }
 };
+
 export const RecruiterLoginUserApi = async (data ) => {
   try {
     const response = await axios.post(`${baseUrl}recruiter/login`, data );
@@ -52,9 +53,6 @@ export const RecruiterLoginUserApi = async (data ) => {
     return error?.response;
   }
 };
-
-
-
 
 export const registerUserApi = async (data) => {
   try {
@@ -95,7 +93,6 @@ export const recruiterRegisterUserApi = async (data) => {
 };
 
 
-
 export const sendOtpApi = async (email) => {
     
   try {
@@ -115,6 +112,7 @@ export const sendOtpApi = async (email) => {
     return error?.response;
   }
 };
+
 export const RecruiterSendOtpApi = async (email) => {
     
   try {
@@ -156,6 +154,7 @@ export const verifyOtpApi = async (data) => {
     return error?.response;
   }
 };
+
 export const RecruiterVerifyOtpApi = async (data) => {
   try {
     const response = await axios.post(`${baseUrl}recruiter/verify-otp`, data);

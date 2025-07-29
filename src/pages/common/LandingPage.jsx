@@ -64,7 +64,7 @@ const LandingPage = () => {
               </>
                 ) : (
                   <>
-                    <button
+                    {/* <button
                       onClick={() =>
                         navigate("/candidate/", {
                         })
@@ -78,7 +78,7 @@ const LandingPage = () => {
                       className="btn-register"
                     >
                       Recruiter
-                    </button>
+                    </button> */}
                   </>
                 )}
               </div>
@@ -111,57 +111,7 @@ const LandingPage = () => {
       {/* ======= Hero Section ======= */}
       <section className="hero-section landing-page" >
         <div className="container">
-          {showModal && (
-            <div className="custom-popup-overlay">
-              <div className="custom-popup-box d-flex">
-                <div className="popup-right">
-                  <img
-                    src="/images/popup-image.png"
-                    alt="Dental Illustration"
-                    className="popup-illustration"
-                  />
-                </div>
-                <div className="popup-left d-flex flex-column justify-content-center align-items-start p-4">
-                  <img
-                    src="/images/logo.png"
-                    alt="Fill-In Logo"
-                    className="popup-logo mb-3"
-                  />
-                  <h4 className="fw-bold mb-2">
-                    Looking for Your Next Dental{" "}
-                    <span className="text-primary">Opportunity?</span>
-                  </h4>
-                  <p className="mb-4 text-muted" style={{ maxWidth: "350px" }}>
-                    Join top dental clinics hiring now. Find the best-fit job
-                    that values your skills and passion.
-                  </p>
-                  
-                  <div className="d-flex gap-3">
-                    <button
-                      className="btn btn-primary px-4"
-                      onClick={() => {
-                        sessionStorage.setItem("selectedPortal", "candidate");
-                          navigate("/candidate");
-                        setShowModal(false);
-                      }}
-                    >
-                      Go to Candidate
-                    </button>
-                    <button
-                      className="btn btn-outline-primary px-4"
-                      onClick={() => {
-                        sessionStorage.setItem("selectedPortal", "recruiter");
-                        navigate("/recruiter");
-                        setShowModal(false);
-                      }}
-                    >
-                      Go to Recruiter
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+    
 
           <h1>
             Get The Right Job
@@ -176,13 +126,30 @@ const LandingPage = () => {
             <h3>
 Find the right dental professionals to help your clinic grow and thrive. Whether you're looking for experienced dentists, skilled assistants, or reliable support staff, our platform connects you with qualified candidates who are ready to join your team.
 </h3>
+ <>
+                    <button
+                      onClick={() =>
+                        navigate("/candidate/", {
+                        })
+                      }
+                      className="btn-login"
+                    >
+             Dental Staff
+                    </button>
+                    <button
+                      onClick={() => navigate("/recruiter")}
+                      className="btn-register"
+                    >
+     Practice Owner
+                    </button>
+                  </>
 
         </div>
       </section>
 
   {/* ======= stripe ======= */}
       <section className="dream-job-section">
-  <div className="container">
+       <div className="container">
     <p className="card-title-section mb-4">Your Dream Jobs Are Waiting</p>
     <p className="text-muted mb-3">
       Over 1 million interactions, 1200 success stories. Make yours now.
@@ -191,8 +158,8 @@ Find the right dental professionals to help your clinic grow and thrive. Whether
       {/* <button className="btn btn-white">Search Jobs</button> */}
       {/* <button className="btn btn-blue" >Apply Job Now</button> */}
     </div>
-  </div>
-</section>
+       </div>
+      </section>
     </>
   );
 };

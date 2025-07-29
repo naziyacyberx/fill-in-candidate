@@ -12,6 +12,7 @@ import "../styles/applies.css";
 import Navbar from "../sections/common/Navbar";
 import { SuccessToaster } from "../utils/Toaster";
 import Footer from "../sections/common/Footer";
+import { baseUrl } from "../utils/BaseUrl";
 
 const Applies = () => {
   const [filter, setFilter] = useState("all");
@@ -24,7 +25,7 @@ const Applies = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          "https://fill-in.cyberxinfosolution.com/api/candidate/applied-jobs",
+          `${baseUrl}candidate/applied-jobs`,
           {
             headers: {
               Accept: "application/json",
@@ -44,8 +45,8 @@ const Applies = () => {
 
   const handleBookmarkToggle = async (jobId, isSaved) => {
     const url = isSaved
-      ? `https://fill-in.cyberxinfosolution.com/api/candidate/remove-bookmarked/${jobId}`
-      : `https://fill-in.cyberxinfosolution.com/api/candidate/bookmarked/${jobId}`;
+      ? `${baseUrl}candidate/remove-bookmarked/${jobId}`
+      : `${baseUrl}candidate/bookmarked/${jobId}`;
 
     try {
     const response=  await axios.post(

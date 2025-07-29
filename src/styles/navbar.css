@@ -84,6 +84,22 @@
     color: white;
         font-weight: 600;
   }
+  .btn-color-less{
+    background: white;
+   border: 2px solid #ddd;
+    border-radius: 22px;
+    padding: 8px 30px !important;
+    color: black;
+        font-weight: 600;
+  }
+  .btn-find-candidate{
+    background: linear-gradient(to right, #0367fc, #68d4e8);
+    border: none;
+    border-radius: 22px;
+    padding: 8px 30px !important;
+    color: white;
+        font-weight: 600;
+  }
 
   .btn-login{
     border: 2px solid #00000033;

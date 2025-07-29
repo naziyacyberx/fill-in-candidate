@@ -6,6 +6,7 @@ import Footer from "../sections/common/Footer";
 import ChatComponent from "../components/Chat";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../utils/BaseUrl";
 
  
 
@@ -22,7 +23,7 @@ const Messages = () => {
 const fetchMessages = async () => {
   try {
     const response = await axios.get(
-      'https://fillin-admin.cyberxinfosolution.com/api/candidate/chat-users',
+      `${baseUrl}candidate/chat-users`,
       { headers: {
     timeout: 10000,
       "Content-Type": "application/json",
@@ -54,7 +55,7 @@ const fetchMessages = async () => {
 
 const profileId = async()=>{
   try{
-const response = await axios.get("https://fillin-admin.cyberxinfosolution.com/api/candidate/candidate-profile",{
+const response = await axios.get(`${baseUrl}candidate/candidate-profile`,{
   headers:{
     "Content-Type" :"application/json",
     "Authorization": `Bearer ${authToken}`,
@@ -97,7 +98,7 @@ const handleMessageClick = (msg) => {
     
     <div className="messages-container">
       <h3>Messages</h3>
-      <div className="search-bar d-flex flex-row ">
+      {/* <div className="search-bar d-flex flex-row ">
         <div>
 
         <FaSearch />
@@ -107,7 +108,7 @@ const handleMessageClick = (msg) => {
         <input type="text" placeholder="Search Message" />
 
         </div>
-      </div>
+      </div> */}
       <div className="filter-buttons">
         <button onClick={() => setFilter("all")} className={filter === "all" ? "active" : ""}>
           All

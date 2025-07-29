@@ -15,6 +15,15 @@ const Job = ({ jobData, refreshJobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 9;
 
+    const [timezone, setTimezone] = useState("");
+
+  useEffect(() => {
+    const detectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    setTimezone(detectedTimezone);
+    console.log("timezone", detectedTimezone);
+    
+  }, []);
+
   const jobTypes = [
     "All",
     "Weekdays",
@@ -77,7 +86,7 @@ const Job = ({ jobData, refreshJobs }) => {
         const response = await saveJobApi(jobId);
         if (!response?.data?.status) {
           setSavedJobs((prev) => prev.filter((id) => id !== jobId));
-          ErrorToaster(response?.data?.message || "Failed to save job");
+          ErrorToaster("Please login to Bookmark this job.");
         } else {
           SuccessToaster(response?.data?.message || "Job saved successfully");
         }
@@ -204,7 +213,7 @@ const Job = ({ jobData, refreshJobs }) => {
                         <TbUsers /> {job.candidates_count || 0} Applicants
                       </small>
                       <Link
-                        to={`/job-details/${job.id}`}
+                        to={`/candidate/job-details/${job.id}`}
                         className="btn btn-primary view-job-btn"
                       >
                         View Details

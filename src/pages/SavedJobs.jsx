@@ -170,7 +170,7 @@ const SavedJobs = () => {
                         <TbUsers /> {job.candidates_count || 0} Applicants
                       </small>
                       <Link
-                        to={`/job-details/${job.id}`}
+                        to={`/candidate/job-details/${job.id}`}
                         className="btn btn-primary view-job-btn"
                       >
                         View Details

@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/reportpopup.css";
 import { SuccessToaster } from "../utils/Toaster";
+import { baseUrl } from "../utils/BaseUrl";
 
 const ReportPopup = ({ onClose, job_id }) => {
   const [title, setTitle] = useState("");
@@ -33,7 +34,7 @@ const ReportPopup = ({ onClose, job_id }) => {
       }
 
       const response = await axios.post(
-        "https://fill-in.cyberxinfosolution.com/api/candidate/report",
+        `${baseUrl}candidate/report`,
         payload,
         {
           headers: {

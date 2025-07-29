@@ -43,10 +43,10 @@ console.log("Device ID:", deviceId);
         navigate("/candidate/verify-otp", { state: { email } });
 
       }
-      // else {
+      else {
 
-      //   navigate(redirectTo);
-      // }
+        navigate("/candidate");
+      }
     } catch (error) {
       console.error("Login Error:", error);
     } finally {
@@ -63,15 +63,15 @@ console.log("Device ID:", deviceId);
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6  login-left-side">
+            <div className="col-md-6  login-left-side ">
               <div >
                 {/* <div className="login-left-main"> */}
-                <img className="img-fluid" src="/images/login-bg.png" alt="" />
+                <img className="img-fluid " src="/images/login-bg.png" alt="" />
               </div>
             </div>
             <div className="col-md-6">
               <div className="register-container">
-                <div className="auth-logo">
+                <div className="auth-logo cursor-pointer" onClick={()=>navigate("/candidate")}>
                   <img
                     className="imf-fluid"
                     src="/images/logo.png"
