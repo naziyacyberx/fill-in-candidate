@@ -168,18 +168,20 @@ const Banner = () => {
                       setShowModal(false);
                     }}
                   >
-                    Stay on Candidate
+                    {/* Stay on  */}
+                    Dental Staff
                   </button>
 
                   <button
-                    className="btn btn-outline-primary px-4 btn-color-less"
+                    className="btn btn-outline-primary px-2 btn-color-less"
                     onClick={() => {
                       sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
                       navigate("/recruiter");
                       setShowModal(false);
                     }}
                   >
-                    Go to Recruiter
+                    {/* Go to */}
+                     Practice Owner
                   </button>
                 </div>
               </div>

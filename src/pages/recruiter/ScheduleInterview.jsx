@@ -5,12 +5,14 @@ import "../../styles/recruiter/scheduleinterview.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../utils/BaseUrl";
 
 const ScheduleInterview = () => {
   const location = useLocation();
   const navigate = useNavigate()
     const candidateId = location.state?.user?.id; // fallback
-  const jobId = location.state?.job_id; // fallback
+  // const jobId = location.state?.job_id;
+  const jobId = location.state?.job_id ?? null;
   console.log("state",location.state);
   const user = location?.state?.user
 //   const candidateId = location.state?.candidate_id; // fallback
@@ -20,34 +22,36 @@ const ScheduleInterview = () => {
   const [time, setTime] = useState("");
   const [meetingLink, setMeetingLink] = useState("");
   const [notes, setNotes] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
       candidate_id: candidateId,
-      job_id: jobId,
+      job_id: jobId || 1,
       date,
       time,
+      end_time: endTime,
       link: meetingLink,
       notes,
     };
 
     try {
       const res = await axios.post(
-        "https://fillin-admin.cyberxinfosolution.com/api/recruiter/schedule-interview",
+        `${baseUrl}recruiter/schedule-interview`,
         payload,
         {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGwtaW4uY3liZXJ4aW5mb3NvbHV0aW9uLmNvbS9hcGkvcmVjcnVpdGVyL2xvZ2luIiwiaWF0IjoxNzUwNjk2MTExLCJleHAiOjE3NTMyODgxMTEsIm5iZiI6MTc1MDY5NjExMSwianRpIjoiRlRySzk0WFAzSlRmRXpFbSIsInN1YiI6IjQzIiwicHJ2IjoiMTllNDNiOTdmMjAyOWU1MzA3MjMyMGM0Yzc3YzkwZDE1YjJjMzNmZCJ9.KXOd-uvQHkroBZEYYW2OQfIvKDRMIQ2N-ws-9kX4YWQ`,
+            Authorization: `Bearer ${localStorage.getItem("recruiterToken")}`,
           },
         }
       );
 
       toast.success("Interview scheduled successfully!");
-      console.log("Response:", res.data);
+    navigate("/recruiter/scheduled-interviews")
     } catch (error) {
       console.error("API Error:", error);
       toast.error(error.response.data.message);
@@ -84,7 +88,7 @@ const ScheduleInterview = () => {
         </Form.Group>
 
         <Form.Group className="mt-3">
-          <Form.Label>Select Time</Form.Label>
+          <Form.Label>Select start Time</Form.Label>
           <Form.Control
             type="time"
             value={time}
@@ -92,6 +96,15 @@ const ScheduleInterview = () => {
           />
         </Form.Group>
       </div>
+      <Form.Group className="mt-3">
+  <Form.Label>Select End Time</Form.Label>
+  <Form.Control
+    type="time"
+    value={endTime}
+    onChange={(e) => setEndTime(e.target.value)}
+  />
+</Form.Group>
+
 
       {/* Additional Details */}
       <div className="mt-4">

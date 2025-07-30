@@ -37,7 +37,7 @@ const ScheduledInterviews = () => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGxpbi1hZG1pbi5jeWJlcnhpbmZvc29sdXRpb24uY29tL2FwaS9yZWNydWl0ZXIvbG9naW4iLCJpYXQiOjE3NTIyMjc0MjcsImV4cCI6MTc1NDgxOTQyNywibmJmIjoxNzUyMjI3NDI3LCJqdGkiOiJZMjY5b3pxSXY1RjdtcTRwIiwic3ViIjoiNjMiLCJwcnYiOiIxOWU0M2I5N2YyMDI5ZTUzMDcyMzIwYzRjNzdjOTBkMTViMmMzM2ZkIn0.43eywrXj1GX9zhAhOLU1zQtytCnhuDM5Z9zg7EMHous`,
+            Authorization: `Bearer ${localStorage.getItem("recruiterToken")}`,
           },
         }
       );
@@ -61,7 +61,7 @@ const ScheduledInterviews = () => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGxpbi1hZG1pbi5jeWJlcnhpbmZvc29sdXRpb24uY29tL2FwaS9yZWNydWl0ZXIvbG9naW4iLCJpYXQiOjE3NTIyMjc0MjcsImV4cCI6MTc1NDgxOTQyNywibmJmIjoxNzUyMjI3NDI3LCJqdGkiOiJZMjY5b3pxSXY1RjdtcTRwIiwic3ViIjoiNjMiLCJwcnYiOiIxOWU0M2I5N2YyMDI5ZTUzMDcyMzIwYzRjNzdjOTBkMTViMmMzM2ZkIn0.43eywrXj1GX9zhAhOLU1zQtytCnhuDM5Z9zg7EMHous`,
+            Authorization: `Bearer  ${localStorage.getItem("recruiterToken")}`,
           },
         }
       );
@@ -130,7 +130,7 @@ const ScheduledInterviews = () => {
                   </div>
 
                   <div className="d-flex flex-wrap gap-2 mt-3">
-                    {item.type !== "Completed" && (
+                    {/* {item.type !== "Completed" && (
                       <span
                         className="border px-2 py-1 rounded small text-muted"
                         style={{ cursor: "pointer" }}
@@ -138,7 +138,7 @@ const ScheduledInterviews = () => {
                       >
                         {markingId === item.id ? "Marking..." : "Mark Completed"}
                       </span>
-                    )}
+                    )} */}
                     <span className="border px-2 py-1 rounded small text-muted">
                       <FaUserMd className="me-1" /> {item.candidate_profession}
                     </span>

@@ -1,109 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import { Card, Button } from 'react-bootstrap';
-// import { FaClock, FaMapMarkerAlt, FaStar, FaUserMd, FaEnvelope, FaPhone } from 'react-icons/fa';
-// import axios from 'axios';
-
-// const CandidateDetail = () => {
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const candidateId = location.state?.id;
-//   console.log("cid", candidateId);
-  
-//   const [candidate, setCandidate] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchCandidate = async () => {
-//       try {
-//         const response = await axios.get(
-//           `https://fillin-admin.cyberxinfosolution.com/api/recruiter/view-applicants/${candidateId}`,
-//           {
-//             headers: {
-//               'Content-Type': 'application/json',
-//               Accept: 'application/json',
-//               Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGwtaW4uY3liZXJ4aW5mb3NvbHV0aW9uLmNvbS9hcGkvcmVjcnVpdGVyL2xvZ2luIiwiaWF0IjoxNzUwNjk2MTExLCJleHAiOjE3NTMyODgxMTEsIm5iZiI6MTc1MDY5NjExMSwianRpIjoiRlRySzk0WFAzSlRmRXpFbSIsInN1YiI6IjQzIiwicHJ2IjoiMTllNDNiOTdmMjAyOWU1MzA3MjMyMGM0Yzc3YzkwZDE1YjJjMzNmZCJ9.KXOd-uvQHkroBZEYYW2OQfIvKDRMIQ2N-ws-9kX4YWQ`
-//             }
-//           }
-//         );
-//         setCandidate(response.data?.data || {});
-//       } catch (error) {
-//         console.error('Failed to fetch candidate details:', error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     if (candidateId) {
-//       fetchCandidate();
-//     }
-//   }, [candidateId]);
-
-//   if (loading) return <div className="container mt-5">Loading...</div>;
-//   if (!candidate) return <div className="container mt-5">No candidate data found.</div>;
-
-//   return (
-//     <div className="container mt-4">
-//       <Button variant="outline-secondary" className="mb-3" onClick={() => navigate(-1)}>
-//         ← Back
-//       </Button>
-//       <Card className="shadow-sm p-4">
-//         <div className="d-flex align-items-start mb-4">
-//           <img
-//             src={candidate.profile || '/images/tooth.png'}
-//             alt="Candidate"
-//             style={{ width: 120, height: 100, objectFit: 'cover', borderRadius: 10, marginRight: 20 }}
-//           />
-//           <div>
-//             <h4 className="mb-1">{candidate.name}</h4>
-//             <p className="text-muted mb-1">
-//               <FaUserMd className="me-2" /> {candidate.profession}
-//             </p>
-//             <p className="text-muted mb-1">
-//               <FaMapMarkerAlt className="me-2" /> {candidate.location || 'Location N/A'}
-//             </p>
-//             <p className="text-muted">
-//               <FaClock className="me-2" /> {candidate.year_of_experiance}
-//             </p>
-//             <div className="mb-2">
-//               {[...Array(5)].map((_, i) => (
-//                 <FaStar
-//                   key={i}
-//                   color={i < candidate?.rating ? '#ffc107' : '#ddd'}
-//                   size={16}
-//                 />
-//               ))}
-//             </div>
-//             <h5 className="text-primary fw-bold">
-//               {candidate?.hourly_rate ? `₹${candidate.hourly_rate}/hour` : 'Flexible on Pay'}
-//             </h5>
-//           </div>
-//         </div>
-
-//         {candidate?.email && (
-//           <p className="text-muted">
-//             <FaEnvelope className="me-2" /> {candidate.email}
-//           </p>
-//         )}
-
-//         {candidate?.phone && (
-//           <p className="text-muted">
-//             <FaPhone className="me-2" /> {candidate.phone}
-//           </p>
-//         )}
-
-//         {candidate?.description && (
-//           <div className="mt-4">
-//             <h6>Description</h6>
-//             <p>{candidate.description}</p>
-//           </div>
-//         )}
-//       </Card>
-//     </div>
-//   );
-// };
-
-// export default CandidateDetail;
 
 
 import React,{useState, useEffect} from "react";
@@ -121,6 +15,7 @@ import {
 import "../../styles/recruiter/candidatedetail.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import JobApplicationsModal from "../../components/recruiter/JobApplicationsModal";
 
 const CandidateDetail = () => {
   const navigate = useNavigate()
@@ -129,6 +24,9 @@ const CandidateDetail = () => {
 
   const [candidate, setCandidate] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+const [selectedJob, setSelectedJob] = useState(null);
+
 
   useEffect(() => {
     const fetchCandidate = async () => {
@@ -322,9 +220,25 @@ const CandidateDetail = () => {
       <div className="bg-light p-3 rounded mb-4">
         {fun_fact || "N/A"}
       </div>
+      <JobApplicationsModal
+  show={showModal}
+  onHide={() => setShowModal(false)}
+  candidateId={1}
+  onSelectJob={(job) => {
+    setSelectedJob(job);
+    navigate(`/recruiter/schedule-interview/${id}`, {
+      state: { user: { name, title, id }, job_id: job.id },
+    });
+  }}
+/>
+
 
       <div className="d-flex flex-wrap gap-2">
-        <Button variant="primary" onClick={()=>{navigate(`/recruiter/schedule-interview/${id}`, {state:{user: {name,title,id}}})}}>Schedule Interview</Button>
+<Button variant="primary" onClick={() => setShowModal(true)}>
+  Schedule Interview
+</Button>
+
+        {/* <Button variant="primary" onClick={()=>{navigate(`/recruiter/schedule-interview/${id}`, {state:{user: {name,title,id}}})}}>Schedule Interview</Button> */}
         <Button variant="outline-secondary"><FaPhone className="me-1" />Call</Button>
         <Button variant="outline-secondary"><FaComments className="me-1" />Start Chat</Button>
       </div>

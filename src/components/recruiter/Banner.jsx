@@ -121,7 +121,8 @@ const Banner = () => {
     setShowModal(false);
   }}
 >
-    Stay on Recruiter
+    {/* Stay on  */}
+    Practice Owner
 </button>
 
 <button
@@ -132,7 +133,8 @@ const Banner = () => {
     setShowModal(false);
   }}
 >
-  Go to Candidate
+  {/* Go to  */}
+  Dental Staff
 </button>
 
       </div>
