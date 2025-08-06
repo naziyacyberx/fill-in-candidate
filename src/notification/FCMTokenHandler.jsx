@@ -31,6 +31,7 @@ const FCMTokenHandler = () => {
 
         if (token) {
           console.log("FCM Token:", token);
+          localStorage.setItem("fcm-token", token)
           dispatch(setFcmToken(token)); // ✅ Store in Redux
         }
       } catch (error) {

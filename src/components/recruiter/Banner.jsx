@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/banner.css";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../utils/BaseUrl";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Banner = () => {
     const fetchPopularSearches = async () => {
       try {
         const response = await axios.get(
-          "https://fillin-admin.cyberxinfosolution.com/api/candidate/search-terms",
+          `${baseUrl}candidate/search-terms`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -52,7 +53,7 @@ const Banner = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${search}`,
+        `${baseUrl}dashboard?search=${search}`,
         {
           experiance_level: experience ? [experience] : [],
         },
@@ -120,7 +121,7 @@ const Banner = () => {
     sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
     setShowModal(false);
   }}
->
+>  
     {/* Stay on  */}
     Practice Owner
 </button>

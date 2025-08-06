@@ -8,6 +8,7 @@ import { TbWallet, TbUsers } from "react-icons/tb";
 import { saveJobApi } from "../../apis/BookmarkedApi";
 import { SuccessToaster, ErrorToaster } from "../../utils/Toaster";
 import { removeBookmarkedApi } from "../../apis/RemoveBookmarkedApi";
+import Pagination from "../../components/common/Pagination";
 
 const Job = ({ jobData, refreshJobs }) => {
   const [activeTab, setActiveTab] = useState("All");
@@ -226,7 +227,7 @@ const Job = ({ jobData, refreshJobs }) => {
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {/* {totalPages > 1 && (
           <div className="d-flex justify-content-center mt-4">
             <nav>
               <ul className="pagination">
@@ -270,7 +271,14 @@ const Job = ({ jobData, refreshJobs }) => {
               </ul>
             </nav>
           </div>
-        )}
+
+        )} */}
+        <Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={handlePageChange}
+/>
+
       </div>
     </section>
   );

@@ -27,7 +27,7 @@ const Login = () => {
     const data = {
       email,
       password,
-      fcm_token: fcmToken,
+      fcm_token: localStorage.getItem("fcm-token"),
       device_id: deviceId,
     };
 

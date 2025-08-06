@@ -8,7 +8,7 @@ import { getDeviceId } from "../../utils/deviceId";
 
 
 const Login = () => {
-    const fcmToken = useSelector((state) => state.fcm.token);
+  const fcmToken = useSelector((state) => state.fcm.token);
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
