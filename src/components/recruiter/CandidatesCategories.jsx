@@ -30,9 +30,7 @@ const CandidatesCategories = ({ cardData }) => {
         },
       }
     );
-
     const candidates = response?.data?.data?.candidate || [];
-
     navigate("/recruiter/job-category", {
       state: {
         candidates,
@@ -41,9 +39,7 @@ const CandidatesCategories = ({ cardData }) => {
   } catch (error) {
     console.error("Failed to fetch jobs for profession:", professionId, error);
   }
-};
-
-
+      };      
   return (
     <section className="card-box ">
       <div className="container">

@@ -14,7 +14,7 @@ const JobDetails = () => {
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   const [showReportPopup, setShowReportPopup] = useState(false);
-  console.log(jobDetail, "jobDetail");
+
 
   const fetchJobDetails = async () => {
     const response = await RecruiterjobDetailsApi(id);
@@ -37,8 +37,8 @@ const JobDetails = () => {
         Job is not available
       </div>
 
-      :<div>
-  <section className="job-detail-main-section">
+      :<div> 
+       <section className="job-detail-main-section">
         <section className="job-details-top-section">
           <div className="container my-4">
             <div className="job-detail-top-box">
@@ -155,6 +155,7 @@ const JobDetails = () => {
                         className="img-fluid"
                         src="/images/check.png"
                         alt="check-icon" 
+                        width={50}
                       />
 
                       <p>{item}</p>

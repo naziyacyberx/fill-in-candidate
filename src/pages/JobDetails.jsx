@@ -5,12 +5,13 @@ import Navbar from "../sections/common/Navbar";
 import Footer from "../sections/common/Footer";
 import { FaMoneyBills } from "react-icons/fa6";
 import { jobDetailsApi } from "../apis/JobDetailApi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ReportPopup from "../components/ReportPopup";
 import { FaAngleRight } from "react-icons/fa";
 import { applyJobApi } from "../apis/ApplyJobApi";
 
 const JobDetails = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   const [showReportPopup, setShowReportPopup] = useState(false);
@@ -228,7 +229,10 @@ const JobDetails = () => {
         await fetchJobDetails(); // ensure updated state
         toast.success("Job applied successfully!");
     } catch (err) {
-      toast.error("Failed to apply for the job.");
+      if(err.status == 401){
+        navigate("/candidate/register")
+      }
+      console.error("err",err);
     }
   }}
 >

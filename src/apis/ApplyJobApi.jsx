@@ -1,8 +1,10 @@
 import axios from "axios";
 import { baseUrl } from "../utils/BaseUrl";
-import { SuccessToaster } from "../utils/Toaster";
+import { ErrorToaster, SuccessToaster } from "../utils/Toaster";
+import { useNavigate } from "react-router-dom";
 
 export const applyJobApi = async (jobId) => {
+  // const navigate = useNavigate()
   const token = localStorage.getItem("fillInToken");
 
   try {
@@ -19,9 +21,11 @@ export const applyJobApi = async (jobId) => {
     );
 SuccessToaster(response.data.message)
 
-    return response.data;
-  } catch (error) {
-    console.error("Error applying to job:", error.response?.data || error.message);
+return response.data;
+} catch (error) {
+    ErrorToaster(error.response.data.message)
+    // navigate("/signin")
+    console.error("Error applying to job:", error);
     throw error;
   }
 };

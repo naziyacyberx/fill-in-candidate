@@ -14,32 +14,17 @@ function NavbarSideBar({ show, setShow }) {
           <Offcanvas.Title>
             {" "}
             <img
+            width="100px"
               className="img-fluid"
-              src="images\real-state-logo.png"
+              src="/images/logo.png"
               alt="Logo"
             />
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div className="px-3 sidebar-navbar">
+          </Offcanvas.Title>   
+        </Offcanvas.Header>       
+        <Offcanvas.Body>   
+          <div className="px-3 sidebar-navbar">   
             <ul className="sidebar-navbar-nav flex-column">
-              <li
-                className="sidebar-nav-item"
-                onClick={() => {
-                  navigate("/");
-                  setShow(false);
-                }}
-              >
-                <p
-                  className="sidebar-nav-link d-flex align-items-center"
-                  style={{
-                    marginRight: "7px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Home
-                </p>
-              </li>
+                                                                                      
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
@@ -57,7 +42,7 @@ function NavbarSideBar({ show, setShow }) {
                   About Us
                 </p>
               </li>
-              <li
+              {/* <li
                 className="sidebar-nav-item"
                 onClick={() => {
                   navigate("/candidate/property-listing");
@@ -73,8 +58,8 @@ function NavbarSideBar({ show, setShow }) {
                 >
                   Property
                 </p>
-              </li>
-              <li
+              </li> */}     
+              {/* <li
                 className="sidebar-nav-item"
                 onClick={() => {
                   navigate("/candidate/blogs");
@@ -90,7 +75,7 @@ function NavbarSideBar({ show, setShow }) {
                 >
                   Blogs
                 </p>
-              </li>
+              </li> */}
               <li
                 className="sidebar-nav-item"
                 onClick={() => {
@@ -101,7 +86,7 @@ function NavbarSideBar({ show, setShow }) {
                 <p
                   className="sidebar-nav-link d-flex align-items-center"
                   style={{
-                    marginRight: "7px",
+                    marginRight: "7px", 
                     cursor: "pointer",
                   }}
                 >

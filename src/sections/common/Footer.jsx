@@ -12,8 +12,8 @@ const Footer = () => {
           <div className="footer-box">
             <img className="img-fluid footer-logo" src="/images/logo.png" alt="Logo" />
             <p className="footer-desc">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy.
+            Fillin’ connects the dental community by making it easy to find and fill temporary or permanent roles from assistants to dentists.
+Whether you’re hiring or job hunting, Fillin’ keeps your practice or career moving.
             </p>
 
             {/* Social icons */}
@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
 
           {/* Download App */}
-          <div className="footer-box">
+          {/* <div className="footer-box">
             <h4>Download App</h4>
             <p>
               Download our Apps and get extra
@@ -76,7 +76,7 @@ const Footer = () => {
               <img className='img-fluid' src="/images/app-store 1.png" alt="App Store" />
               <img className='img-fluid' src="/images/google-play 1.png" alt="Google Play" />
             </div>
-          </div>
+          </div> */}
         </div>
       </footer>
     </>

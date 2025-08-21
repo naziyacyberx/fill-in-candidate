@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
 
           {/* Download App */}
-          <div className="footer-box">
+          {/* <div className="footer-box">
             <h4>Download App</h4>
             <p>
               Download our Apps and get extra
@@ -76,7 +76,7 @@ const Footer = () => {
               <img className='img-fluid' src="/images/app-store 1.png" alt="App Store" />
               <img className='img-fluid' src="/images/google-play 1.png" alt="Google Play" />
             </div>
-          </div>
+          </div> */}
         </div>
       </footer>
     </>

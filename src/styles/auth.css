@@ -1,5 +1,5 @@
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .remember-me-text {
@@ -37,11 +37,11 @@
 
 .login-section {
   background-color: white;
+  height: 100vh;
 }
 
 
 .login-left-side {
-  height: 100vh;
   background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #D3EBFF 100%);
   padding: 150px;
   display: flex;
@@ -73,17 +73,16 @@
 
 .auth-logo {
   text-align: left;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 
 .auth-logo img {
-  width: 40%;
+  width: 30%;
   margin-bottom: 15px;
 }
 
 .register-container h2 {
   font-size: 30px;
-  margin-bottom: 15px;
   color: #000;
   text-align: left;
 
@@ -94,7 +93,6 @@
   font-size: 16px;
   color: #313131;
   text-align: left;
-  margin-bottom: 30px;
 
   font-weight: 500;
 }
@@ -104,7 +102,7 @@
 .form-group label {
   display: block;
   font-size: 16px;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   color: #000000;
 
   font-weight: 500;

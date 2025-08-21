@@ -5,6 +5,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import axios from "axios";
 import "../../styles/banner.css";
 import "../../styles/navbar.css";
+import "../../styles/landingpage.css"
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const LandingPage = () => {
   useEffect(() => {
     const portal = sessionStorage.getItem("selectedPortal");
     if (portal !== "candidate") {
-      setShowModal(true);
+      // setShowModal(true);
     }
   }, []);
 
@@ -99,9 +100,7 @@ const LandingPage = () => {
                 alt="Logo"
               />
             </div>
-            <div className="col-7 nav-col">
-              <FaBars onClick={() => setShow(true)} />
-            </div>
+        
           </div>
         </div>
       </section>
@@ -109,7 +108,7 @@ const LandingPage = () => {
   
 
       {/* ======= Hero Section ======= */}
-      <section className="hero-section landing-page" >
+      {/* <section className="hero-section landing-page" >
         <div className="container">
     
 
@@ -123,7 +122,7 @@ const LandingPage = () => {
           </p>
 
 
-            <h3>
+            <h3 className="responsive-text">
 Find the right dental professionals to help your clinic grow and thrive. Whether you're looking for experienced dentists, skilled assistants, or reliable support staff, our platform connects you with qualified candidates who are ready to join your team.
 </h3>
  <>
@@ -145,7 +144,38 @@ Find the right dental professionals to help your clinic grow and thrive. Whether
                   </>
 
         </div>
-      </section>
+      </section> */}
+
+      <section className="hero-section landing-page">
+  <div className="container">
+    <h1>
+      Get The Right Job
+      <br />
+      You Deserve
+    </h1>
+
+    <p className="mt-3">
+      1,30,420 jobs listed here! Your dream job is waiting.
+    </p>
+
+    <h3 className="responsive-text">
+      Find the right dental professionals to help your clinic grow and thrive.
+      Whether you're looking for experienced dentists, skilled assistants, or
+      reliable support staff, our platform connects you with qualified
+      candidates who are ready to join your team.
+    </h3>
+
+    <div>
+      <button onClick={() => navigate("/candidate/")} className="btn-login">
+        Dental Staff
+      </button>
+      <button onClick={() => navigate("/recruiter")} className="btn-register">
+        Practice Owner
+      </button>
+    </div>
+  </div>
+</section>
+
 
   {/* ======= stripe ======= */}
       <section className="dream-job-section">

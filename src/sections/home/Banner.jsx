@@ -21,17 +21,17 @@ const Banner = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    const portal = sessionStorage.getItem("selectedPortal");
-    if (portal !== "candidate") {
-      setShowModal(true);
-    }
+    // const portal = sessionStorage.getItem("selectedPortal");
+    // if (portal !== "candidate") {
+    //   setShowModal(true);
+    // }
   }, []);
 
   useEffect(() => {
     const fetchPopularSearches = async () => {
       try {
         const response = await axios.get(
-          "https://fillin-admin.cyberxinfosolution.com/api/candidate/search-terms",
+          `${baseUrl}/candidate/search-terms`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -50,25 +50,6 @@ const Banner = () => {
     fetchPopularSearches();
   }, []);
 
-  // ✅ Fix: Correct API key param in details API
-  // useEffect(() => {
-  //   if (location?.value?.place_id) {
-  //     const fetchLatLng = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `https://maps.googleapis.com/maps/api/place/details/json?placeid=${location.value.place_id}&key=${google_api_key}`
-  //         );
-  //         const locationData = response.data?.result?.geometry?.location;
-  //         if (locationData) {
-  //           setCoordinates({ lat: locationData.lat, lng: locationData.lng });
-  //         }
-  //       } catch (error) {
-  //         console.error("Failed to fetch coordinates:", error);
-  //       }
-  //     };
-  //     fetchLatLng();
-  //   }
-  // }, [location]);
 
   const handleSearch = async () => {
     try {
@@ -97,6 +78,7 @@ const Banner = () => {
       console.error("Error fetching jobs:", error);
     }
   };
+  
   const handleSelect = (val) => {
     setLocation(val);
     setIsFocused(false);
@@ -201,7 +183,7 @@ const Banner = () => {
         {/* 🔽 Search Bar */}
         <div className="search-bar flex-wrap d-flex gap-3 align-items-center justify-content-start">
           {/* Skills */}
-          <div className="search-group search-border">
+          {/* <div className="search-group search-border">
             <div className="icon-box">
               <img
                 src="/images/skill 1.png"
@@ -215,7 +197,30 @@ const Banner = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-          </div>
+          </div> */}
+          {/* Skills Dropdown */}
+<div className="search-group search-border">
+  <div className="icon-box">
+    <img
+      src="/images/skill 1.png"
+      alt="Skill Icon"
+      className="img-fluid"
+    />
+  </div>
+  <select
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  >
+    <option value="">Select Skill</option>
+    <option value="Dentist">Dentist</option>
+    <option value="Dental Assistant/Nurse">Dental Assistant/Nurse</option>
+    <option value="Dental Receptionist">Dental Receptionist</option>
+    <option value="Oral Health Therapist">Oral Health Therapist</option>
+    <option value="Oral Hygienist">Oral Hygienist</option>
+    <option value="Specialist">Specialist</option>
+  </select>
+</div>
+
 
           {/* Experience */}
           <div className="search-group search-border">

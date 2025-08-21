@@ -1,10 +1,12 @@
 import axios from "axios";
 import { baseUrl } from "../utils/BaseUrl";
 import { ErrorToaster } from "../utils/Toaster";
+import { useNavigate } from "react-router-dom";
 
 
 
 export const saveJobApi = async (id) => {
+
   try {
     const token = localStorage.getItem("fillInToken");
     const response = await axios.post(`${baseUrl}candidate/bookmarked/${id}`,  {} , {
@@ -16,8 +18,9 @@ export const saveJobApi = async (id) => {
 
     return response;
   } catch (error) {
-       ErrorToaster(error?.message || "Something went wrong!");
 
-
+    console.log("Error", error);
+    return error
+ 
   }
 };

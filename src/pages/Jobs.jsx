@@ -17,6 +17,7 @@ import FilterDrawer from '../components/FilterDrawer';
 import axios from 'axios';
 import Navbar from '../sections/common/Navbar';
 import Footer from '../sections/common/Footer';
+import Pagination from '../components/common/Pagination';
 
 
 const Jobs = () => {
@@ -97,15 +98,23 @@ const Jobs = () => {
   
         try {
           const response = await saveJobApi(jobId);
+          console.log("response",response);
+            if( response ?.status == 401){
+
+      ErrorToaster("Please login to save this job.");
+      navigate("/candidate/login")
+    }
           if (!response?.data?.status) {
             // Undo UI update if API fails
             setSavedJobs((prev) => prev.filter((id) => id !== jobId));
-            ErrorToaster(response?.data?.message || "Failed to save job");
+            // ErrorToaster(response?.data?.message || "Failed to save job...");
           } else {
+
             SuccessToaster(response?.data?.message || "Job saved successfully");
              
           }
         } catch (error) {
+           
           console.log("Save job error:", error);
           setSavedJobs((prev) => prev.filter((id) => id !== jobId));
           ErrorToaster(error?.message || error || "Something went wrong!");
@@ -215,7 +224,7 @@ useEffect(() => {
         setSelectedShifts={setSelectedShifts}
         selectedExperienceLevels={selectedExperienceLevels}
         setSelectedExperienceLevels={setSelectedExperienceLevels}
-        onApply={handleApplyFilters}
+        onApply={handleApplyFilters}    
       />
     </div>
 
@@ -310,15 +319,13 @@ useEffect(() => {
 
 
 
-        // )
-    // )
       )
       }
     </div>
   </div>
   <div className="d-flex justify-content-center mt-4">
   <nav>
-    <ul className="pagination">
+    {/* <ul className="pagination">
       <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
         <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
           &larr;
@@ -339,13 +346,19 @@ useEffect(() => {
           &rarr;
         </button>
       </li>
-    </ul>
+    </ul> */}
+
+        {/* ✅ Use Pagination Component */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
   </nav>
 </div>
 
 </section>
 
-{/* <Footer/> */}
 
 
 

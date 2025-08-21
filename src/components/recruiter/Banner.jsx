@@ -13,11 +13,11 @@ const Banner = () => {
   const [popularTerms, setPopularTerms] = useState([]);
   const token = localStorage.getItem("fillInToken")
   const [showModal, setShowModal] = useState(false);
+ 
   useEffect(() => {
     const portal = sessionStorage.getItem("selectedPortal");
     if (portal != "recruiter") {
-      // navigate("/recruiter");
-      setShowModal(true)
+      // setShowModal(true)
     }
   }, []);
 
@@ -48,7 +48,7 @@ const Banner = () => {
     fetchPopularSearches();
 
 
-  }, []);
+  }, []);  
 
   const handleSearch = async () => {
     try {
@@ -115,7 +115,7 @@ const Banner = () => {
         <button className="btn btn-outline-primary px-4" onClick={() => navigate("/candidate")}>
           Go to Candidate
         </button> */}
-        <button
+   <button
   className="btn-register"
   onClick={() => {
     sessionStorage.setItem("selectedPortal", "recruiter"); // 🔹 Save to session
@@ -124,6 +124,7 @@ const Banner = () => {
 >  
     {/* Stay on  */}
     Practice Owner
+
 </button>
 
 <button
@@ -136,22 +137,22 @@ const Banner = () => {
 >
   {/* Go to  */}
   Dental Staff
-</button>
+    </button>
 
-      </div>
+    </div>
     </div>
 
   
   </div>
-</div>
+  </div>
 
 
-)}
+   )}
 
-        <h1>
+         <h1>
          Need a Recruiter Fast? We’ve 
-          <br />
-       Got You Covered
+         <br />
+         Got You Covered
         </h1>
         <p className="mt-3">We specialize in providing experienced recruiters on short notice to fill urgent hiring needs. Whether it's a sudden vacancy or a project ramp-up, our experts are ready to step in and deliver results.</p>
 

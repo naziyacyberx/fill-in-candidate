@@ -13,7 +13,9 @@ const AboutUs = () => {
     const fetchAboutUs = async () => {
       try {
         const response = await axios.get(
-          'https://fill-in.cyberxinfosolution.com/api/recruiter/setting',
+          // 'https://fill-in.cyberxinfosolution.com/api/recruiter/setting',
+          'https://fillin-admin.cyberxinfosolution.com/api/recruiter/setting',
+          
           {
             headers: {
               'Content-Type': 'application/json',
