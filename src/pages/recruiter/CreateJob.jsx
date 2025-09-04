@@ -4,12 +4,13 @@ import Compensation from '../../components/recruiter/CreateJobCompensation';
 import JobDetails from '../../components/recruiter/CreateJobDetails';
 import AdditionalInfo from '../../components/recruiter/CreateJobAdditionalInfo';
 import { baseUrl } from '../../utils/BaseUrl';
-import { SuccessToaster } from '../../utils/Toaster';
+import { ErrorToaster, SuccessToaster } from '../../utils/Toaster';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const CreateJob = () => {
   const navigate = useNavigate()
+  const token = localStorage.getItem("recruiterToken")
   const [dropdownData,setDropdownData] = useState();
   const [formData, setFormData] = useState({
     title: '',
@@ -30,7 +31,7 @@ const CreateJob = () => {
 
   });
 
-    useEffect(() => {
+  useEffect(() => {
       const fetchDropdownData = async () => {
         try {
           const response = await axios.post(
@@ -46,7 +47,7 @@ const CreateJob = () => {
             }
           );
   
-           console.log("response", response);
+       
            
           if (response.data?.statusCode === 200) {
             setDropdownData(response.data.data);
@@ -88,25 +89,23 @@ const jobDetailsRef = useRef(); // ✅ Add this line
       profession: Number(formData.profession),
     };
 
-    try {
-      const response = await fetch(`${baseUrl}recruiter/create-job`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem("recruiterToken")}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-      console.log('Job created:', data);
-      SuccessToaster('Job created successfully!');
-      navigate("/recruiter/posted-jobs")
-      
-    } catch (error) {
-      console.error('Error creating job:', error);
-      alert('Failed to create job.');
+  
+    try{
+      const url = `${baseUrl}recruiter/create-job`
+     const data = {...payload, urgent:false}
+     const response = await axios.post(url,data,{
+      headers:{
+        'Content-Type':'application/json',
+        Accept: "application/json",
+        Authorization:  `Bearer ${token}`
+      }
+     })
+  
+     SuccessToaster(response?.data?.message);
+     navigate("/recruiter/posted-jobs")
+    }catch(error){
+      ErrorToaster(error?.response?.data?.message)
+      console.log("Error",error)
     }
   };
 

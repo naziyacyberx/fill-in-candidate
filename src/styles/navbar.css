@@ -61,7 +61,7 @@
 
 @media (max-width:425px) and (min-width:319px) {
     .img-fluid{
-        width: 100%;
+        width: 50%;
         cursor: pointer;
     }
     .nav-col svg{

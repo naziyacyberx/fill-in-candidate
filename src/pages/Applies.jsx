@@ -13,11 +13,15 @@ import Navbar from "../sections/common/Navbar";
 import { SuccessToaster } from "../utils/Toaster";
 import Footer from "../sections/common/Footer";
 import { baseUrl } from "../utils/BaseUrl";
+import Pagination from "../components/common/Pagination";
+
 
 const Applies = () => {
   const [filter, setFilter] = useState("all");
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 8; // Number of jobs per page
 
   const token = localStorage.getItem("fillInToken");
 
@@ -49,7 +53,7 @@ const Applies = () => {
       : `${baseUrl}candidate/bookmarked/${jobId}`;
 
     try {
-    const response=  await axios.post(
+      const response = await axios.post(
         url,
         {},
         {
@@ -60,7 +64,7 @@ const Applies = () => {
           },
         }
       );
-SuccessToaster(response?.data?.message)
+      SuccessToaster(response?.data?.message);
 
       // Optimistically update the saved state
       setJobs((prevJobs) =>
@@ -93,25 +97,38 @@ SuccessToaster(response?.data?.message)
       return 0;
     });
 
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  // Change page handler
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+
   return (
     <>
       {/* <Navbar /> */}
       <div className="applies-container">
-        <h3>Applied Jobs</h3>
+        <h3>Applications</h3>
 
         <div className="search-bar d-flex flex-row  align-items-center">
           <div>
-          <FaSearch />
+            <FaSearch />
           </div>
           <div>
-
-          <input
-            type="text"
-            placeholder="Try to find here"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            <input
+              type="text"
+              placeholder="Try to find here"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
-            </div>
+          </div>
         </div>
 
         <div className="filter-buttons">
@@ -119,7 +136,10 @@ SuccessToaster(response?.data?.message)
             <button
               key={f}
               className={filter === f ? "active" : ""}
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                setCurrentPage(1); // Reset to first page when filter changes
+              }}
             >
               {f.charAt(0).toUpperCase() + f.slice(1)}
             </button>
@@ -127,7 +147,7 @@ SuccessToaster(response?.data?.message)
         </div>
 
         <div className="job-grid">
-          {filteredJobs.map((job) => (
+          {currentJobs.map((job) => (
             <div className="job-card" key={job.id}>
               <div className="job-card-body">
                 <img
@@ -150,26 +170,41 @@ SuccessToaster(response?.data?.message)
                     />
                   </div>
                   <p className="job-doctor">{job.clinic || "Clinic Name"}</p>
-                  <div className="job-card-tags">
-                    <span>
-                      <FaMapMarkerAlt /> {job.address || "Location"}
-                    </span>
-                    <span>
-                      <FaBriefcase /> {job.practice_size || "Full Time"}
-                    </span>
-                    <span>
-                      <FaClock /> {job.time || "2 hours ago"}
-                    </span>
-                    <span>
-                      <FaRupeeSign /> ₹{job.salary_range_from} - ₹
-                      {job.salary_range_to}
-                    </span>
-                  </div>
+                </div>
+              </div>
+              <div className="job-card-tags">
+                <div>
+                  <span>
+                    <FaMapMarkerAlt /> {job.address || "Location"}
+                  </span>
+                  <span>
+                    <FaBriefcase /> {job.practice_size || "Full Time"}
+                  </span>
+                </div>
+
+                <div>
+                  <span>
+                    <FaClock /> {job.time || "2 hours ago"}
+                  </span>
+                  <span>
+                    <FaRupeeSign /> ₹{job.salary_range_from} - ₹
+                    {job.salary_range_to}
+                  </span>
                 </div>
               </div>
             </div>
+            
           ))}
+      
         </div>
+
+        {/* Add Pagination here */}
+            <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+   
       </div>
 
       {/* <Footer/> */}

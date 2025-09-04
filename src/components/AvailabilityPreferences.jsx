@@ -24,6 +24,24 @@ const AvailabilityPreferences = ({ formData, handleChange }) => {
         </div>
       </Form.Group>
 
+      {/* My Availability */}
+      <Form.Group className="mb-3">
+        <Form.Label>My Availability</Form.Label>
+        <div className="d-flex gap-3 flex-wrap">
+          {["Available All Day", "Available Morning Only", "Available Evening Only"].map((label) => (
+            <Form.Check
+              inline
+              key={label}
+              type="radio"
+              label={label}
+              name="my_availability"
+              value={label}
+              checked={formData.my_availability === label}
+              onChange={(e) => handleChange("my_availability", e.target.value)}
+            />
+          ))}
+        </div>
+      </Form.Group>
       {/* Location */}
       <Form.Group className="mb-3">
         <Form.Control
@@ -32,7 +50,7 @@ const AvailabilityPreferences = ({ formData, handleChange }) => {
           value={formData.location}
           onChange={(e) => handleChange("location", e.target.value)}
         />
-      </Form.Group>
+      </Form.Group>   
 
       {/* Travel Radius */}
       <Form.Group className="mb-3">

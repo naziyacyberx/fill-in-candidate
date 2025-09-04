@@ -88,7 +88,7 @@ const ViewClinic = () => {
                 <h6>Contact Information</h6>
                 <div className="row">
                   <div className="col-6 view-clinic__contact-item">
-                    <img
+                    <img 
                       className="img-fluid add-icon"
                       src="/images/users.png"
                       alt="icon"
@@ -139,7 +139,7 @@ const ViewClinic = () => {
           <div className="view-clinic__section">
             <h6>Types of Dentistry Practiced</h6>
             <div className="view-clinic__tags">
-              {clinicDetails?.dentistry.map((items, i) => (
+              {clinicDetails?.dentistry?.map((items, i) => (
                 <span key={i}>
                   <FaCheck /> {items}
                 </span>
@@ -161,7 +161,7 @@ const ViewClinic = () => {
           <div className="view-clinic__section">
             <h6>Staffing Requirements</h6>
             <div className="view-clinic__tags">
-              {clinicDetails?.looking.map((items, i) => (
+              {clinicDetails?.looking?.map((items, i) => (
                 <span key={i}>
                   {" "}
                   <FaCheck /> {items}
@@ -186,7 +186,7 @@ const ViewClinic = () => {
           <div className="view-clinic__section">
             <h6>Typical Working Hours</h6>
             <div className="view-clinic__tags">
-              {clinicDetails?.working_hours.map((items, i) => (
+              {clinicDetails?.working_hours?.map((items, i) => (
                 <span key={i}>
                   {" "}
                   <FaCheck /> {items}
@@ -198,7 +198,7 @@ const ViewClinic = () => {
           <div className="view-clinic__section">
             <h6>Software Needs</h6>
             <div className="view-clinic__tags">
-              {clinicDetails?.use_software.map((items, i) => (
+              {clinicDetails?.use_software?.map((items, i) => (
                 <span key={i}>
                   <FaCheck /> {items}
                 </span>

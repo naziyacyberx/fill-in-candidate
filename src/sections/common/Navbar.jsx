@@ -73,7 +73,7 @@ const fetchNotifications = async () => {
 
   return (
     <>
-      <NavbarSideBar show={show} setShow={setShow} />
+      <NavbarSideBar show={show} setShow={setShow} setIsLoggedIn={setIsLoggedIn}  isLoggedIn={isLoggedIn} />
 
       {/* Desktop Navbar */}
       <section className="nav-main py-4 d-lg-block d-none">
@@ -134,7 +134,7 @@ const fetchNotifications = async () => {
   {showMenu && (
     <div className="user-menu-popup text-center">
       <ul>
-        <li onClick={() => navigate("/candidate/applies")}>Applied Jobs</li>
+        <li onClick={() => navigate("/candidate/applies")}>Applications</li>
         <li onClick={() => navigate("/candidate/profile")}>Profile</li>
         <li onClick={handleLogout}>Logout</li>
       </ul>
@@ -173,14 +173,46 @@ const fetchNotifications = async () => {
           <div className="row">
             <div className="col-5">
               <img
-                onClick={() => navigate("/candidate/")}
+                onClick={() => navigate("/")}
                 className="img-fluid"
                 src="/images/logo.png"
                 alt="Logo"
               />
             </div>
-            <div className="col-7 nav-col">
-              <FaBars onClick={() => setShow(true)} />
+            <div className="col-7 nav-col d-flex justify-content-end align-items-center">
+                <FiMessageSquare
+    size={28}
+    className="message-icon"
+    style={{ cursor: "pointer" }}
+    onClick={() => navigate("/candidate/messages")}
+  />
+
+  <div className="position-relative">
+    <FaBell
+      size={24}
+      className="notification-icon"
+      style={{ cursor: "pointer" }}
+      onClick={() => {
+        setShowNotifications((prev) => !prev);
+        if (!showNotifications) fetchNotifications(); // Only fetch when opening
+      }}
+    />
+    {notifications.length > 0 && !showNotifications && (
+      <span
+        className="notification-badge"
+      >
+        {notifications.length}
+      </span>
+    )}
+  </div>
+      {showNotifications && (
+    <NotificationPopup
+      notifications={notifications}
+      onClose={() => setShowNotifications(false)}
+    />
+  )}
+
+              <FaBars onClick={() => setShow(true)} style={{marginLeft:"10px"}} />
             </div>
           </div>
         </div>

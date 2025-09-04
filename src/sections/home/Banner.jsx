@@ -181,24 +181,8 @@ const Banner = () => {
         </p>
 
         {/* 🔽 Search Bar */}
-        <div className="search-bar flex-wrap d-flex gap-3 align-items-center justify-content-start">
-          {/* Skills */}
-          {/* <div className="search-group search-border">
-            <div className="icon-box">
-              <img
-                src="/images/skill 1.png"
-                alt="Skill Icon"
-                className="img-fluid"
-              />
-            </div>
-            <input
-              type="text"
-              placeholder="Enter Skills"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div> */}
-          {/* Skills Dropdown */}
+        {/* <div className="search-bar flex-wrap d-flex gap-3 align-items-center justify-content-start">
+        
 <div className="search-group search-border">
   <div className="icon-box">
     <img
@@ -222,7 +206,7 @@ const Banner = () => {
 </div>
 
 
-          {/* Experience */}
+ 
           <div className="search-group search-border">
             <div className="icon-box">
               <img
@@ -241,9 +225,9 @@ const Banner = () => {
               <option value="3+ Years">3+ Years</option>
               <option value="4 Years">4 Years</option>
             </select>
-          </div>
+          </div>   
 
-          {/* 🔽 Location */}
+
           <div
             className="d-flex align-items-center gap-2 flex-grow-1"
             style={{ minWidth: "250px", maxWidth: "400px" }}
@@ -284,14 +268,106 @@ const Banner = () => {
               />
             </div>
       
-          </div>
+          </div>   
 
-          {/* Search Button */}
 
           <button onClick={handleSearch} className="btn-register">
             Search Jobs
           </button>
+        </div> */}
+
+        
+        <div className="container searching-bar ">
+  <div className="row g-3 align-items-center">
+
+    {/* Skill Dropdown */}
+    <div className="col-12 col-md-6 col-lg-3">
+      <div className="search-group search-border d-flex align-items-center">
+        <div className="icon-box me-2">
+          <img src="/images/skill 1.png" alt="Skill Icon" className="img-fluid" />
         </div>
+        <select
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className=" w-100"
+        >
+          <option value="">Select Skill</option>
+          <option value="Dentist">Dentist</option>
+          <option value="Dental Assistant/Nurse">Dental Assistant/Nurse</option>
+          <option value="Dental Receptionist">Dental Receptionist</option>
+          <option value="Oral Health Therapist">Oral Health Therapist</option>
+          <option value="Oral Hygienist">Oral Hygienist</option>
+          <option value="Specialist">Specialist</option>
+        </select>
+      </div>
+    </div>
+
+    {/* Experience Dropdown */}
+    <div className="col-12 col-md-6 col-lg-3">
+      <div className="search-group search-border d-flex align-items-center">
+        <div className="icon-box me-2">
+          <img src="/images/best-customer-experience 1.png" alt="Experience Icon" className="img-fluid" />
+        </div>
+        <select
+          value={experience}
+          onChange={(e) => setExperience(e.target.value)}
+          className=" w-100"
+        >
+          <option value="">Select Experience</option>
+          <option value="fresher">Fresher</option>
+          <option value="1-2 Years">1-2 Years</option>
+          <option value="3+ Years">3+ Years</option>
+          <option value="4 Years">4 Years</option>
+        </select>
+      </div>
+    </div>
+
+    {/* Location Input */}
+    <div className="col-12 col-md-6 col-lg-4">
+      <div className="d-flex align-items-center gap-2 w-100">
+        <div className="icon-box">
+          <img
+            className="img-fluid"
+            src="/images/placeholder 1.png"
+            alt="Location"
+            style={{ width: "24px", height: "24px" }}
+          />
+        </div>
+        <div style={{ flex: 1 }}>
+          <GooglePlacesAutocomplete
+            apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
+            selectProps={{
+              value: location,
+              onChange: handleSelect,
+              onFocus: () => setIsFocused(true),
+              placeholder: "Enter Location",
+              styles: {
+                control: (base) => ({
+                  ...base,
+                  borderRadius: "6px",
+                  minHeight: "45px",
+                  boxShadow: "none",
+                }),
+              },
+            }}
+            autocompletionRequest={{
+              types: ["(cities)"],
+            }}
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Search Button */}
+    <div className="col-12 col-md-6 col-lg-2 d-flex ">
+      <button onClick={handleSearch} className="btn-register  search-btn">
+        Search Jobs
+      </button>
+    </div>
+
+  </div>   
+</div>   
+
 
         {/* 🔽 Popular Tags */}
         <div className="popular-tags mt-3">
@@ -305,7 +381,7 @@ const Banner = () => {
           ) : (
             <span>Loading...</span>
           )}
-        </div>
+        </div>    
       </div>
     </section>
   );

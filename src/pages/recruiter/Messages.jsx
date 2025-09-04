@@ -109,7 +109,7 @@ const Messages = () => {
             <div className="d-flex justify-content-between">
               <div>
                 <span className="fw-bold">{msg.sender}</span>{" "}
-                <Badge bg="primary" className="ms-1">✔</Badge>
+                {/* <Badge bg="primary" className="ms-1">✔</Badge> */}
               </div>
               <small className="text-muted">{msg.time}</small>
             </div>

@@ -11,6 +11,7 @@ const renderStars = (rating) =>
   ));
 
 const MyRatings = () => {
+  const token = localStorage.getItem("recruiterToken")
   const [activeFilter, setActiveFilter] = useState("Most Recent");
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,13 +20,13 @@ const MyRatings = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem("fillInToken");
+        // const token = localStorage.getItem("fillInToken");
         const response = await axios.get(
           "https://fillin-admin.cyberxinfosolution.com/api/recruiter/view-profile",
           {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZpbGxpbi1hZG1pbi5jeWJlcnhpbmZvc29sdXRpb24uY29tL2FwaS9yZWNydWl0ZXIvbG9naW4iLCJpYXQiOjE3NTIyMjc0MjcsImV4cCI6MTc1NDgxOTQyNywibmJmIjoxNzUyMjI3NDI3LCJqdGkiOiJZMjY5b3pxSXY1RjdtcTRwIiwic3ViIjoiNjMiLCJwcnYiOiIxOWU0M2I5N2YyMDI5ZTUzMDcyMzIwYzRjNzdjOTBkMTViMmMzM2ZkIn0.43eywrXj1GX9zhAhOLU1zQtytCnhuDM5Z9zg7EMHous`,
-              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+                     Accept: "application/json",
               "Content-Type": "application/json",
             },
           }

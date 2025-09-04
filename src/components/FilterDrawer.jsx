@@ -130,7 +130,7 @@ const FilterDrawer = ({
           ))}
         </div>
 
-        <button className="btn btn-primary w-100" onClick={onApply}>
+        <button className="btn btn-primary w-100 btn-register" onClick={onApply}>
           Apply Filters
         </button>
       </div>

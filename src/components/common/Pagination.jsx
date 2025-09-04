@@ -29,7 +29,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center mt-4">
+<div className="d-flex mt-4 justify-content-md-center overflow-x-auto">
+
       <nav>
         <ul className="pagination">
           {/* Prev button */}

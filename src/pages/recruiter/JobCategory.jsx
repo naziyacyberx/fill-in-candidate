@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import { FaClock, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-import PaginationComponent from '../../components/recruiter/PaginationComponent';
+import Pagination from '../../components/common/Pagination';
 
 const JobCard = ({ job }) => {
   const navigate = useNavigate()
@@ -155,11 +155,17 @@ case 'Low Pay':
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <PaginationComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        // <PaginationComponent
+        //   currentPage={currentPage}
+        //   totalPages={totalPages}
+        //   onPageChange={setCurrentPage}
+        // />
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={setCurrentPage}
+  />
+
       )}
     </div>
   );

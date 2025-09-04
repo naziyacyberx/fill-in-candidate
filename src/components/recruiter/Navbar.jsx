@@ -7,8 +7,9 @@ import { FiMessageSquare } from "react-icons/fi";
 import { FaBell } from "react-icons/fa";
 import NotificationPopup from "../../components/Notificationpopup";
 import axios from "axios";
-import NavbarSideBar from "../../sections/common/NavbarSideBar";
+// import NavbarSideBar from "../../sections/common/NavbarSideBar";
 import { baseUrl } from "../../utils/BaseUrl";
+import NavbarSideBar from "./NavbarSideBar";
 
 
 const Navbar = () => {
@@ -75,8 +76,8 @@ const fetchNotifications = async () => {
 
   return (
     <>
-      <NavbarSideBar show={show} setShow={setShow} />
-
+      <NavbarSideBar show={show} setShow={setShow} isLoggedIn={isLoggedIn}/>
+      
       {/* Desktop Navbar */}
       <section className="nav-main py-4 d-lg-block d-none">
         <div className="container">
@@ -182,8 +183,41 @@ const fetchNotifications = async () => {
                 alt="Logo"
               />
             </div>
-            <div className="col-7 nav-col">
-              <FaBars onClick={() => setShow(true)} />
+
+            <div className="col-7 nav-col d-flex justify-content-end align-items-center">
+                <FiMessageSquare
+    size={28}
+    className="message-icon"
+    style={{ cursor: "pointer" }}
+    onClick={() => navigate("/recruiter/messages")}
+  />
+  <div className="position-relative">
+    <FaBell
+      size={20}
+      className="notification-icon"
+      style={{ cursor: "pointer",  }}
+      onClick={() => {
+        setShowNotifications((prev) => !prev);
+        if (!showNotifications) fetchNotifications(); // Only fetch when opening
+      }}
+    />
+    {notifications.length > 0 && !showNotifications && (
+      <span
+        className="notification-badge"
+      >
+        {notifications.length}
+      </span>
+    )}
+  </div>
+
+    {showNotifications && (
+    <NotificationPopup
+      notifications={notifications}
+      onClose={() => setShowNotifications(false)}
+    />
+  )}
+              <FaBars onClick={() => setShow(true)} style={{marginLeft:"12px"}} />
+              
             </div>
           </div>
         </div>

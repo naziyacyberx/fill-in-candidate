@@ -91,18 +91,18 @@ const MyRatingsReviews = () => {
       <Container className="py-5">
         <h4 className="fw-bold mb-4">My Ratings & Reviews</h4>
 
-        <ButtonGroup className="mb-4">
-          {["All Reviews", "Most Recent", "Highest Rated"].map((label) => (
-            <Button
-              key={label}
-              variant={filter === label ? "primary" : "outline-primary"}
-              onClick={() => setFilter(label)}
-              className="rounded-pill px-4 mx-2"
-            >
-              {label}
-            </Button>
-          ))}
-        </ButtonGroup>
+   <ButtonGroup className="mb-4">
+  {["All Reviews", "Most Recent", "Highest Rated"].map((label) => (
+    <Button
+      key={label}
+      variant={filter === label ? "primary" : "outline-primary"}
+      onClick={() => setFilter(label)}
+      className="rounded-pill px-2 py-1 fs-6 mx-0 px-lg-4 py-lg-2 fs-lg-5 mx-lg-2"
+    >
+      {label}
+    </Button>
+  ))}
+</ButtonGroup>
 
         {loading ? (
           <div className="text-center py-5">

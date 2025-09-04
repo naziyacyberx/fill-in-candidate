@@ -179,9 +179,9 @@ const JobDetails = () => {
                       {jobDetail?.clinic_description || "no data found"}{" "}
                       <Link
                         className="read-clinic-detail-btn"
-                        to={`/view-clinic/${id}`}
+                        to={`/candidate/view-clinic/${id}`}
                       >
-                        Read More <FaAngleRight />
+                        {/* Read More <FaAngleRight /> */}
                       </Link>
                     </p>
                   </div>

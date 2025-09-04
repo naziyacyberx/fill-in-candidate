@@ -3,6 +3,7 @@ import { Card, Spinner } from 'react-bootstrap';
 import { FaStar } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SuggestedCandidatesSkeleton from '../skeleton/candidate/recruiter/SuggestedCandidateSkeleton';
 
 const CandidateCard = ({ candidate }) => {
   const {
@@ -26,7 +27,7 @@ const CandidateCard = ({ candidate }) => {
           })
         }}
     >
-      <Card.Body className="d-flex justify-content-between align-items-center">
+      <Card.Body className="d-flex flex-md-row flex-column justify-content-between align-items-center">
         <div className="d-flex align-items-center">
           <img
             src={profile || "/images/applicant.png"}
@@ -66,8 +67,8 @@ const CandidateCard = ({ candidate }) => {
             Flexible on Pay
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </Card.Body>  
+    </Card>     
   );
 };
 
@@ -111,7 +112,9 @@ const SuggestedCandidates = () => {
       <div className="row">
         {loading ? (
           <div className="text-center my-4">
-            <Spinner animation="border" variant="primary" />
+            {/* <Spinner animation="border" variant="primary" /> */}
+
+            <SuggestedCandidatesSkeleton/>
           </div>
         ) : candidates.length > 0 ? (
           candidates.map((candidate, idx) => (

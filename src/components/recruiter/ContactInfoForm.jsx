@@ -85,9 +85,9 @@ const ContactInfoForm = ({ profile, setProfile, dropdownData }) => {
               className="bg-light border-0"
               readOnly
             />
-            <InputGroup.Text className="bg-light">
+            {/* <InputGroup.Text className="bg-light">
               <FaEdit />
-            </InputGroup.Text>
+            </InputGroup.Text> */}
           </InputGroup>
         </Form.Group>
 
@@ -105,9 +105,9 @@ const ContactInfoForm = ({ profile, setProfile, dropdownData }) => {
               className="bg-light border-0"
               readOnly
             />
-            <InputGroup.Text className="bg-light">
+            {/* <InputGroup.Text className="bg-light">
               <FaEdit />
-            </InputGroup.Text>
+            </InputGroup.Text> */}
           </InputGroup>
         </Form.Group>
 

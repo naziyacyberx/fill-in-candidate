@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   RecruiterSendOtpApi,
@@ -12,7 +12,18 @@ const OtpVerify = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
+  const [timer, setTimer] = useState(120); // <-- timer state
   const inputs = useRef([]);
+
+  // start countdown timer
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [timer]);
 
   const handleChange = (index, value) => {
     if (/^\d?$/.test(value)) {
@@ -50,12 +61,19 @@ const OtpVerify = () => {
     setResending(true);
     try {
       await RecruiterSendOtpApi(email);
+      setTimer(120); // reset timer on resend
     } catch (err) {
       console.error("Resend OTP error:", err);
     } finally {
       setResending(false);
     }
   };
+// format function bana do
+const formatTime = (seconds) => {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m < 10 ? "0" + m : m}:${s < 10 ? "0" + s : s}`;
+};
 
   return (
     <div className="container-fluid vh-100">
@@ -90,14 +108,23 @@ const OtpVerify = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     ref={(el) => (inputs.current[index] = el)}
                     className="form-control text-center mx-1"
-                    style={{ width: "55px", height: "55px", fontSize: "24px", borderRadius: "8px" }}
+                    style={{
+                      width: "55px",
+                      height: "55px",
+                      fontSize: "24px",
+                      borderRadius: "8px",
+                    }}
                   />
                 ))}
               </div>
+<div className="text-center mb-3">
+  {timer > 0 && (
+    <span className="text-muted">
+      Resend OTP in {formatTime(timer)} min
+    </span>
+  )}
+</div>
 
-              <div className="text-center mb-3">
-                <span className="text-muted">00:30 sec left</span>
-              </div>
 
               <button
                 type="submit"
@@ -113,7 +140,7 @@ const OtpVerify = () => {
                   type="button"
                   className="btn btn-link p-0"
                   onClick={handleResend}
-                  disabled={resending}
+                  disabled={resending || timer > 0} // disable until timer ends
                 >
                   {resending ? "Resending..." : "Resend"}
                 </button>
@@ -127,118 +154,3 @@ const OtpVerify = () => {
 };
 
 export default OtpVerify;
-
-
-
-
-// import React, { useState } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { RecruiterSendOtpApi, RecruiterVerifyOtpApi, verifyOtpApi } from "../../apis/AuthApi";
-// // import { sendOtpApi, verifyOtpApi } from "../../apis/AuthApi";
-
-// const OtpVerify = () => {
-//   const navigate = useNavigate();
-//   const location = useLocation();
-//   const email = location.state?.email || "";
-//   const [loading, setLoading] = useState(false);
-//   const [loadingResend, setLoadingResend] = useState(false);
-//   const [otp, setOtp] = useState("");
-
-//   const handleVerifyOtp = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     const data = {
-//       email,
-//       otp,
-//     };
-//     try {
-//       const response = await RecruiterVerifyOtpApi(data);
-//       if (response?.data?.status === "success") {
-//         if (location.state?.fromForgotPassword) {
-//           navigate("/change-password", { state: { email } });
-//         } else {
-//           navigate("/recruiter/login");
-//         }
-//       }
-//     } catch (error) {
-//       console.error("OTP Verification Error:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const handleResendOtp = async (e) => {
-//     e.preventDefault();
-//     setLoadingResend(true);
-//     console.log("hii");
-    
-
-//     try {
-//       const Response = await RecruiterSendOtpApi(email);
-//       console.log(Response, "Resend OTP response");
-//     } catch (error) {
-//       console.error("Resend OTP Error:", error);
-//     } finally {
-//       setLoadingResend(false);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <section className="login-section">
-//         <div className="container-fluid">
-//           <div className="row">
-//             <div className="col-md-6">
-//               <div className="login-left-main">
-//                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
-//               </div>
-//             </div>
-//             <div className="col-md-6">
-//               <div className="register-container">
-//                 <div className="auth-logo">
-//                   <img
-//                     className="imf-fluid"
-//                     src="/images/logo.png"
-//                     alt="Fill_in Logo"
-//                   />
-//                 </div>
-//                 <h2>Verify Otp</h2>
-//                 <p>Enter your email and password to login</p>
-//                 <form onSubmit={handleVerifyOtp}>
-//                   <div className="form-group">
-//                     <label htmlFor="email">Enter your 6 digits OTP *</label>
-//                     <input
-//                       type="number"
-//                       id="number"
-//                       className="form-control"
-//                       value={otp}
-//                       onChange={(e) => setOtp(e.target.value)}
-//                       required
-//                     />
-//                   </div>
-
-//                   <button
-//                     type="submit"
-//                     className="google-btn login-btn"
-//                     disabled={loading}
-//                   >
-//                     {loading ? "Verify..." : "Submit"}
-//                   </button>
-//                   <button
-//                     onClick={handleResendOtp}
-//                     className="google-btn"
-//                     disabled={loadingResend}
-//                   >
-//                     {loadingResend ? "Resending..." : "Resend Otp"}
-//                   </button>
-//                 </form>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
-
-// export default OtpVerify;

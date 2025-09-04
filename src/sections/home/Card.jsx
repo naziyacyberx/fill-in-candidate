@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/cardbox.css";
 import axios from "axios";
+import CardSkeleton from "../../components/skeleton/candidate/JobsCategorySkeleton";
 
 const professionMap = {
   "Dentist": 1,
@@ -13,6 +14,14 @@ const professionMap = {
 
 const Card = ({ cardData }) => {
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(true)
+
+
+ useEffect(()=>{
+if(cardData && cardData.length>0){
+  setLoading(false)
+}
+  },[cardData])
 
   const handleCardClick = async (professionName) => {
     const professionId = professionMap[professionName];
@@ -20,7 +29,7 @@ const Card = ({ cardData }) => {
       console.warn("Unknown profession:", professionName);
       return;
     }
-
+  
     try {
       const response = await axios.get(
         `https://fillin-admin.cyberxinfosolution.com/api/dashboard?search=${professionName}`,
@@ -53,7 +62,12 @@ const Card = ({ cardData }) => {
         <p className="card-title-section mb-5">Jobs Category</p>
 
         <div className="row">
-          {Array.isArray(cardData) &&
+          {
+          loading ? 
+          <>
+            <CardSkeleton/>
+          </>
+     :(     Array.isArray(cardData) &&
             cardData.map((card, index) => (
               <div
                 key={index}
@@ -78,7 +92,8 @@ const Card = ({ cardData }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))
+            }
         </div>
       </div>
     </section>

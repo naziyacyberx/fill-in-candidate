@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, ListGroup, Image, Spinner, Badge } from "react-bootstrap";
+import { Card, ListGroup, Image, Spinner, Badge, Container, Col, Row } from "react-bootstrap";
 import {
   FaUser,
   FaClipboardList,
@@ -64,7 +64,9 @@ const RecruiterProfile = () => {
   }
 
   return (
-    <div className="container d-flex flex-column align-items-center py-4">
+    <Container className="mt-5 mb-5 text-center">
+      <Row className="justify-content-center">
+
       {/* Profile Photo */}
       <div className="position-relative mb-2">
         <Image
@@ -73,12 +75,12 @@ const RecruiterProfile = () => {
           width={100}
           height={100}
         />
-        <span
+        {/* <span
           className="position-absolute bottom-0 end-0 bg-primary p-1 rounded-circle"
           style={{ transform: "translate(25%, 25%)", cursor: "pointer" }}
         >
           <FaEdit color="white" size={14} />
-        </span>
+        </span> */}
       </div>
 
       {/* Complete Profile Link */}
@@ -86,13 +88,14 @@ const RecruiterProfile = () => {
         <strong>Complete Profile</strong>
       </div>
 
+<Col md={9}>
       {/* Menu Items */}
-      <ListGroup style={{ width: "100%", maxWidth: "400px" }}>
+      <ListGroup className="custom-list-group">
         {menuItems.map((item, idx) => (
           <ListGroup.Item
             onClick={() => navigate(`/recruiter/${item.link}`)}
             key={idx}
-            className="d-flex justify-content-between align-items-center gap-2 border"
+            className="d-flex align-items-center border justify-content-between px-3 py-3 shadow-sm rounded mb-3"
             action
           >
             <div className="d-flex align-items-center gap-2">
@@ -103,7 +106,50 @@ const RecruiterProfile = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
-    </div>
+</Col>
+      </Row>
+
+    </Container>
+    // <div className="container d-flex flex-column align-items-center py-4">
+    //   {/* Profile Photo */}
+    //   <div className="position-relative mb-2">
+    //     <Image
+    //       src={profile?.profile || "https://via.placeholder.com/100"}
+    //       roundedCircle
+    //       width={100}
+    //       height={100}
+    //     />
+    //     <span
+    //       className="position-absolute bottom-0 end-0 bg-primary p-1 rounded-circle"
+    //       style={{ transform: "translate(25%, 25%)", cursor: "pointer" }}
+    //     >
+    //       <FaEdit color="white" size={14} />
+    //     </span>
+    //   </div>
+
+    //   {/* Complete Profile Link */}
+    //   <div className="text-primary mb-4" role="button">
+    //     <strong>Complete Profile</strong>
+    //   </div>
+
+    //   {/* Menu Items */}
+    //   <ListGroup style={{ width: "100%", maxWidth: "400px" }}>
+    //     {menuItems.map((item, idx) => (
+    //       <ListGroup.Item
+    //         onClick={() => navigate(`/recruiter/${item.link}`)}
+    //         key={idx}
+    //         className="d-flex justify-content-between align-items-center gap-2 border"
+    //         action
+    //       >
+    //         <div className="d-flex align-items-center gap-2">
+    //           <span className="text-primary">{item.icon}</span>
+    //           <span>{item.label}</span>
+    //         </div>
+         
+    //       </ListGroup.Item>
+    //     ))}
+    //   </ListGroup>
+    // </div>
   );
 };
 

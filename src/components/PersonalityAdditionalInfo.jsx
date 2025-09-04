@@ -30,29 +30,34 @@ const PersonalityAdditionalInfo = ({ formData, handleChange, handleCheckboxChang
         />
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>What kind of work environment do you thrive in?</Form.Label>
-        <div className="row">
-          {[
-            "Fast-Paced",
-            "Collaborative",
-            "Patient-Focused",
-            "Technology-Driven",
-            "Structured",
-            "Flexible",
-          ].map((item, index) => (
-            <div className="col-md-6" key={index}>
-              <Form.Check
-                type="checkbox"
-                label={item}
-                value={item}
-                checked={formData?.environment_thrive?.includes(item)}
-                onChange={() => handleCheckboxChange("environment_thrive", item)}
-              />
-            </div>
-          ))}
-        </div>
-      </Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label>What kind of work environment do you thrive in?</Form.Label>
+  <div className="row">
+    {[
+      "Fast-Paced",
+      "Collaborative",
+      "Patient-Focused",
+      "Technology-Driven",
+      "Structured",
+      "Flexible",
+    ].map((item, index) => (
+      <div className="col-md-6" key={index}>
+        <Form.Check
+          type="checkbox"
+          label={item}
+          value={item}
+          checked={
+            Array.isArray(formData.environment_thrive)
+              ? formData.environment_thrive.includes(item)
+              : false
+          }
+          onChange={() => handleCheckboxChange("environment_thrive", item)}
+        />
+      </div>
+    ))}
+  </div>
+</Form.Group>
+
 
       {/* Custom Resume Upload */}
       <Form.Group className="mb-3">

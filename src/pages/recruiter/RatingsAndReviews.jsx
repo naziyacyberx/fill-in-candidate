@@ -159,12 +159,13 @@
 
 import React, { useState, useEffect } from "react";
 import { Card, Form, Button, ProgressBar, Image } from "react-bootstrap";
-import { FaStar, FaUpload } from "react-icons/fa";
+import { FaStar, FaUpload, FaUserCircle } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 const RatingsAndReviews = () => {
   const location = useLocation();
   const candidateId = location.state?.id || "63"; // fallback
+  const token = localStorage.getItem("recruiterToken")
 
   const [candidate, setCandidate] = useState(null);
   const [rating, setRating] = useState(5);
@@ -180,7 +181,7 @@ const RatingsAndReviews = () => {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: `Bearer YOUR_ACCESS_TOKEN_HERE`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -256,13 +257,14 @@ const RatingsAndReviews = () => {
       {/* Candidate Info */}
       <Card className="p-3 mt-3 shadow-sm">
         <div className="d-flex align-items-center">
-          <Image
+          {/* <Image
             src={candidate?.profile || "https://via.placeholder.com/60"}
             roundedCircle
             width={60}
             height={60}
             className="me-3"
-          />
+            /> */}
+            <FaUserCircle size={60} className="text-secondary me-3" />
           <div>
             <h6 className="mb-0">{candidate?.name || "N/A"}</h6>
             <div className="text-muted small">{candidate?.title || "No title"}</div>
@@ -346,13 +348,14 @@ const RatingsAndReviews = () => {
         candidate.reviews.map((review, index) => (
           <Card className="p-3 mt-3 shadow-sm" key={index}>
             <div className="d-flex align-items-start">
-              <Image
+              {/* <Image
                 src={review.recruiter?.profile || "https://via.placeholder.com/50"}
                 roundedCircle
                 width={50}
                 height={50}
                 className="me-3"
-              />
+              /> */}
+               <FaUserCircle size={60} className="text-secondary me-3" />
               <div>
                 <h6 className="mb-0">{review?.clinic_name || "Anonymous Recruiter"}</h6>
                 <div className="text-muted small mb-1">

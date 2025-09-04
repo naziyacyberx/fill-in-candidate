@@ -197,6 +197,7 @@ h3 {
   font-size: 13px;
   color: #555;
   margin-top: 8px;
+  justify-content: space-between;
 }
 
 .job-card-tags span {

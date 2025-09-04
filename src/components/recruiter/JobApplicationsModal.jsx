@@ -67,13 +67,13 @@ const JobApplicationsModal = ({ candidateId, show, onHide, onSelectJob }) => {
               <p className="text-muted small mb-0">
                 {job.experience_level || job.year_of_experiance}
               </p>
-            </div>
             <div className="text-end">
               {/* <span className="badge bg-success mb-2">Flexible on Pay</span> */}
               <br />
               <span className="text-warning">
                 ★ {job.rating || "4.8"} ({job.review_count || 3} reviews)
               </span>
+            </div>
             </div>
           </div>
         </div>

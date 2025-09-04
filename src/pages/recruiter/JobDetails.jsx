@@ -12,6 +12,8 @@ import { jobDetailsApi, RecruiterjobDetailsApi } from "../../apis/JobDetailApi";
 
 const JobDetails = () => {
   const { id } = useParams();
+  console.log(id,"idd");
+  
   const [jobDetail, setJobDetail] = useState(null);
   const [showReportPopup, setShowReportPopup] = useState(false);
 
@@ -19,7 +21,7 @@ const JobDetails = () => {
   const fetchJobDetails = async () => {
     const response = await RecruiterjobDetailsApi(id);
     const jobDetails = response?.data?.data;
-    console.log("Job Detail Response", jobDetails);
+    console.log("Job Detail Response", response);
     setJobDetail(jobDetails);
   };
   useEffect(() => {
@@ -188,7 +190,7 @@ const JobDetails = () => {
                         className="read-clinic-detail-btn"
                         to={`/view-clinic/${id}`}
                       >
-                        Read More <FaAngleRight />
+                        {/* Read More <FaAngleRight /> */}
                       </Link>
                     </p>
                   </div>
@@ -224,7 +226,7 @@ const JobDetails = () => {
           </div>
         </section>
 
-        <section className="job-detail-apply-btns-section">
+        {/* <section className="job-detail-apply-btns-section">
           <div className="container">
             <div className="job-detail-apply-btns-main">
             <button
@@ -244,7 +246,6 @@ const JobDetails = () => {
 </button>
 
 
-              {/* <button className="apply-btn-detail">Applied</button> */}
               <button
                 className="report-btn-details"
                 onClick={() => setShowReportPopup(true)}
@@ -253,7 +254,7 @@ const JobDetails = () => {
               </button>
             </div>
           </div>
-        </section>
+        </section> */}
       </section>
       {/* <Footer /> */}
       {showReportPopup && (
@@ -269,3 +270,4 @@ const JobDetails = () => {
 };
 
 export default JobDetails;
+

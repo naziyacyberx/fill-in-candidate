@@ -103,7 +103,7 @@ const CreateJobBasicInfo = forwardRef(
     }));
 
     return (
-      <Card className="m-4 p-4 shadow-sm border border-primary-subtle">
+      <Card className="m-1 p-4 shadow-sm border border-primary-subtle">
         <h6 className="mb-3">
           <strong>Basic Information</strong>
         </h6>

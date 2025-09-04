@@ -180,7 +180,11 @@ Find the right dental professionals to help your clinic grow and thrive. Whether
   {/* ======= stripe ======= */}
       <section className="dream-job-section">
        <div className="container">
-    <p className="card-title-section mb-4">Your Dream Jobs Are Waiting</p>
+     <h3 className="mb-4">
+   <strong>
+      Your Dream Jobs Are Waiting
+   </strong>
+      </h3>
     <p className="text-muted mb-3">
       Over 1 million interactions, 1200 success stories. Make yours now.
     </p>

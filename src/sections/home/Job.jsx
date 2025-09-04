@@ -9,12 +9,14 @@ import { saveJobApi } from "../../apis/BookmarkedApi";
 import { SuccessToaster, ErrorToaster } from "../../utils/Toaster";
 import { removeBookmarkedApi } from "../../apis/RemoveBookmarkedApi";
 import Pagination from "../../components/common/Pagination";
+import JobCardSkeleton from "../../components/skeleton/candidate/JobDayCardSkeleton";
 
 const Job = ({ jobData, refreshJobs }) => {
   const [activeTab, setActiveTab] = useState("All");
   const [savedJobs, setSavedJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 9;
+  const [loading, setLoading] = useState(true)
 
     const [timezone, setTimezone] = useState("");
 
@@ -22,8 +24,12 @@ const Job = ({ jobData, refreshJobs }) => {
     const detectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setTimezone(detectedTimezone);
     console.log("timezone", detectedTimezone);
+
+    if(jobData && jobData?.length >0){
+      setLoading(false)
+    }
     
-  }, []);
+  }, [jobData]);
 
   const jobTypes = [
     "All",
@@ -38,8 +44,8 @@ const Job = ({ jobData, refreshJobs }) => {
 
   useEffect(() => {
     const savedJobIds = jobData
-      .filter((job) => Number(job.is_saved) === 1)
-      .map((job) => Number(job.id));
+      ?.filter((job) => Number(job.is_saved) === 1)
+      ?.map((job) => Number(job.id));
     setSavedJobs(savedJobIds);
   }, [jobData]);
 
@@ -47,14 +53,14 @@ const Job = ({ jobData, refreshJobs }) => {
     setCurrentPage(1); // Reset pagination on tab change
   }, [activeTab]);
 
-  const filteredJobs = jobData.filter((job) => {
+  const filteredJobs = jobData?.filter((job) => {
     if (activeTab === "All") return true;
     return job.shift?.some(
       (shiftType) => shiftType.toLowerCase() === activeTab.toLowerCase()
     );
   });
 
-  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+  const totalPages = Math.ceil(filteredJobs?.length / jobsPerPage);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -113,7 +119,7 @@ const Job = ({ jobData, refreshJobs }) => {
           </p>
 
           <div className="btn-group job-type-filter">
-            {jobTypes.map((type) => (
+            {jobTypes?.map((type) => (
               <button
                 key={type}
                 className={`btn-tab button-filter ${
@@ -127,8 +133,12 @@ const Job = ({ jobData, refreshJobs }) => {
           </div>
         </div>
 
-        <div className="row g-4">
-          {filteredJobs.length === 0 ? (
+       {loading? 
+       <>
+       <JobCardSkeleton/>
+       </>
+       :<div className="row g-4">
+          {filteredJobs?.length === 0 ? (
             <div className="text-center w-100">
               <p
                 className="text-muted"
@@ -139,8 +149,8 @@ const Job = ({ jobData, refreshJobs }) => {
             </div>
           ) : (
             filteredJobs
-              .slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage)
-              .map((job) => (
+              ?.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage)
+              ?.map((job) => (
                 <div className="col-md-6 col-lg-4 col-sm-6" key={job.id}>
                   <div className="job-card">
                     <div className="job-card-content-box">
@@ -183,10 +193,12 @@ const Job = ({ jobData, refreshJobs }) => {
                     </div>
                     <div className="job-card-feature-box">
                       <div className="job-meta">
-                        <span className="map-span">
-                          <FiMapPin />
-                          {job.address || "Location N/A"}
-                        </span>
+                       
+                        <span className="time-span">
+                          <MdOutlineAccessTime />
+                          {job.time || "N/A"}..
+                        </span> 
+
 
                         <span className="calender-span">
                           <SlCalender />
@@ -200,11 +212,11 @@ const Job = ({ jobData, refreshJobs }) => {
                           {job.salary_range_from || "0"} -{" "}
                           {job.salary_range_to || "0"} / hour
                         </span>
-
-                        <span className="time-span">
-                          <MdOutlineAccessTime />
-                          {job.time || "N/A"}
+<span className="map-span">
+                          <FiMapPin />
+                          {job.address || "Location N/A"}
                         </span>
+                       
                       </div>
                     </div>
 
@@ -224,7 +236,7 @@ const Job = ({ jobData, refreshJobs }) => {
                 </div>
               ))
           )}
-        </div>
+        </div>}
 
         {/* Pagination */}
         {/* {totalPages > 1 && (

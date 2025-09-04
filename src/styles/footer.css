@@ -61,6 +61,8 @@
   }
   
   .footer-box p {
+    
+
     font-size: 16px;
     color: #444;
     line-height: 1.6;
@@ -82,17 +84,18 @@
       flex-direction: column;
       gap: 30px;
     }
-  }
-  
-  .hiring-section h6 {
-    letter-spacing: 1px;
-  }
+    .footer-left-box{
+      padding-left: 0px !important;
+    } 
+    
+  }  
   
   .footer-left-box{
-    padding-left: 100px;
+    padding-left: 60px;
   } 
 
 
+ 
   
 
 

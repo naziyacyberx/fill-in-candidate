@@ -34,12 +34,12 @@ const ForgotPassword = () => {
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6 login-left-side">
+            <div className="col-md-6 d-none d-lg-block login-left-side">
               <div className="">
                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-lg-6 col-12">
               <div className="register-container">
                 <div className="auth-logo cursor-pointer" onClick={()=>{navigate("/candidate")}}>
                   <img

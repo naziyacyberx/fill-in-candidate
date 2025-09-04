@@ -187,7 +187,7 @@ const PracticeInfoForm = ({ profile, setProfile }) => {
       </Form.Group>
 
      {/* Practice Logo */}
-      <Form.Group className="mb-3">
+      {/* <Form.Group className="mb-3">
         <Form.Label>Your Practice Logo</Form.Label>
         <div
           className="border p-4 text-center bg-light rounded"
@@ -208,7 +208,7 @@ const PracticeInfoForm = ({ profile, setProfile }) => {
             <strong className="text-muted d-block mt-2">{profile.document_name}</strong>
           )}
         </div>
-      </Form.Group>
+      </Form.Group> */}
 
       {/* About Clinic */}
       <Form.Group className="mb-3">

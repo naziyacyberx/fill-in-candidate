@@ -91,7 +91,7 @@
 
 
 .job-description-section {
-  padding: 80px 0px;
+  padding: 20px 0px;
   padding-bottom: 0;
 }
 
@@ -104,7 +104,7 @@
   font-weight: 900;
   color: black;
   font-size: 24px;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 .job-desc-main p {
@@ -167,7 +167,7 @@ object-fit: cover;
 }
 
 .job-details-card-section{
-    padding: 30px 0px 20px 0px;
+    /* padding: 30px 0px 20px 0px; */
 }
 
 .job-details-card-img{
@@ -295,7 +295,7 @@ color: white;
 font-size: 26px;
 font-weight: 500;
 border-radius: 12px;
-width: 50%;
+width: 30%;
 padding: 13px ;
 }
 
@@ -315,7 +315,7 @@ color: #FC0101;
 font-size: 26px;
 font-weight: 500;
 border-radius: 12px;
-width: 50%;
+width: 30%;
 padding: 13px ;
 }
 

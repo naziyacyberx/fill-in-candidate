@@ -23,7 +23,10 @@ SuccessToaster(response.data.message)
 
 return response.data;
 } catch (error) {
-    ErrorToaster(error.response.data.message)
+  if(error.response.data.message == "Unauthenticated."){
+
+    ErrorToaster("Please login to apply this job")
+  }
     // navigate("/signin")
     console.error("Error applying to job:", error);
     throw error;

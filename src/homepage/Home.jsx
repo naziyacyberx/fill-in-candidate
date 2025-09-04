@@ -33,8 +33,8 @@ const Home = () => {
       {/* <Navbar /> */}
       <Banner />
       <Card cardData={cardData || []} />
-
-      {jobData?.length > 0 && <Job jobData={jobData} refreshJobs={fetchJobData} />}
+ <Job jobData={jobData} refreshJobs={fetchJobData} />
+      {/* {jobData?.length > 0 && <Job jobData={jobData} refreshJobs={fetchJobData} />} */}
 
       <Stripe />
 

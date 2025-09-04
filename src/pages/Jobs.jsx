@@ -18,6 +18,9 @@ import axios from 'axios';
 import Navbar from '../sections/common/Navbar';
 import Footer from '../sections/common/Footer';
 import Pagination from '../components/common/Pagination';
+import { SkeletonJobCard } from '../components/skeleton/candidate/SkeletonJobCard';
+import { Button, Offcanvas } from 'react-bootstrap';
+import { BsFillFunnelFill } from 'react-icons/bs';
 
 
 const Jobs = () => {
@@ -25,7 +28,8 @@ const Jobs = () => {
   const mylocation = useLocation();
   const locationJobs = mylocation?.state?.jobs || null; // Safe access
   const [jobData, setJobData] = useState(locationJobs); // Initially from location if present
-
+  const [isLoading, setIsLoading] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false);
   const [savedJobs, setSavedJobs] = useState([]);
 
   useEffect(() => {
@@ -38,6 +42,8 @@ const Jobs = () => {
   }, []);
 
   const fetchInitialJobs = async () => {
+
+    setIsLoading(true)
     try {
       const response = await axios.get("https://fillin-admin.cyberxinfosolution.com/api/dashboard");
       const jobsFromAPI = response?.data?.data?.jobs || [];
@@ -47,6 +53,8 @@ const Jobs = () => {
       setFilteredJobs(jobsFromAPI);
     } catch (error) {
       console.error("Error fetching jobs:", error);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -212,7 +220,7 @@ useEffect(() => {
 <section className="job-section container py-5">
   <div className="row">
     {/* Left Filter Column */}
-    <div className="col-md-4 col-lg-3">
+    {/* <div className="col-md-4 col-lg-3">
       <FilterDrawer
         isOpen={true}
         onClose={() => {}}
@@ -226,17 +234,84 @@ useEffect(() => {
         setSelectedExperienceLevels={setSelectedExperienceLevels}
         onApply={handleApplyFilters}    
       />
-    </div>
+    </div> */}
+
+
+
+      {/* Desktop Sidebar (always visible) */}
+      <div className="d-none d-lg-block col-lg-3 col-md-4 ">
+      
+        <FilterDrawer
+          isOpen={true}
+          onClose={() => {}}
+          selectedSoftware={selectedSoftware}
+          setSelectedSoftware={setSelectedSoftware}
+          selectedProfessions={selectedProfessions}
+          setSelectedProfessions={setSelectedProfessions}
+          selectedShifts={selectedShifts}
+          setSelectedShifts={setSelectedShifts}
+          selectedExperienceLevels={selectedExperienceLevels}
+          setSelectedExperienceLevels={setSelectedExperienceLevels}
+          onApply={handleApplyFilters}
+        />
+      </div>
+
+      {/* Mobile Offcanvas (React-Bootstrap) */}
+      <Offcanvas className="d-lg-none col-md-5" show={showDrawer} onHide={() => setShowDrawer(false)} responsive="md">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Filters</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <FilterDrawer
+            isOpen={true}
+            onClose={() => setShowDrawer(false)}
+            selectedSoftware={selectedSoftware}
+            setSelectedSoftware={setSelectedSoftware}
+            selectedProfessions={selectedProfessions}
+            setSelectedProfessions={setSelectedProfessions}
+            selectedShifts={selectedShifts}
+            setSelectedShifts={setSelectedShifts}
+            selectedExperienceLevels={selectedExperienceLevels}
+            setSelectedExperienceLevels={setSelectedExperienceLevels}
+            onApply={() => {
+              handleApplyFilters();
+              setShowDrawer(false);
+            }}
+          />
+        </Offcanvas.Body>
+      </Offcanvas>
+
+    {/* ----------------------------- */}
 
     {/* Right Jobs Column */}
-    <div className="col-md-8 col-lg-9">
+    <div className="col-md-6 col-lg-9">
      
-      <p className="mb-4">
-        Showing <strong>{filteredJobs?.length}</strong>  job result
-      </p>
+   <div className="d-flex justify-content-between align-items-center mb-3">
+  {/* Left: Job count */}
+  <div>
+    <span>
+      Showing <strong>{filteredJobs?.length}</strong> job{filteredJobs?.length !== 1 ? 's' : ''} result
+    </span>
+  </div>
+
+  {/* Right: Filter button (only visible on mobile) */}
+  <div className="d-md-none">
+    <Button variant='secondary' onClick={() => setShowDrawer(true)}>
+      <BsFillFunnelFill title="Filters" />
+    </Button>
+  </div>
+</div>
       
 
-      {filteredJobs?.length === 0 ? (
+      {
+      isLoading ? (
+  <div className="row">
+    {Array.from({ length: 8 }).map((_, idx) => (
+      <SkeletonJobCard key={idx} />
+    ))}
+  </div>)
+      
+      :filteredJobs?.length === 0 ? (
         <div className="text-center w-100">
           <p className="text-muted" style={{ fontSize: "18px", fontWeight: "500" }}>
             No jobs found
@@ -291,7 +366,9 @@ useEffect(() => {
     </div>
 
     {/* Meta Info Row */}
-    <div className="d-flex flex-wrap gap-2 mt-3 text-muted small">
+    <div className="d-flex flex-wrap gap-2 mt-3 text-muted small justify-content-between">
+      <div>
+
       <div className="d-flex align-items-center me-3">
         <FiMapPin className="me-1" />
         {job.address || "Location N/A"}
@@ -300,6 +377,9 @@ useEffect(() => {
         <MdOutlineAccessTime className="me-1" />
         {job.time || "Time N/A"}
       </div>
+      </div>
+      <div>
+
       <div className="d-flex align-items-center me-3">
         <SlCalender className="me-1" />
         {job.experiance_level || "Experience N/A"}
@@ -309,12 +389,20 @@ useEffect(() => {
         {job.salary_range_from || 0} - {job.salary_range_to || 0}/hour
       </div>
     </div>
+      </div>
     </div>
 
   </div>
 </div>
 
   ))}
+{/* ✅ Use Pagination Component */}
+
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={handlePageChange}
+  />
 </div>
 
 
@@ -323,40 +411,8 @@ useEffect(() => {
       }
     </div>
   </div>
-  <div className="d-flex justify-content-center mt-4">
-  <nav>
-    {/* <ul className="pagination">
-      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-        <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
-          &larr;
-        </button>
-      </li>
-      {Array.from({ length: totalPages }, (_, i) => (
-        <li
-          key={i + 1}
-          className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
-        >
-          <button className="page-link" onClick={() => handlePageChange(i + 1)}>
-            {i + 1}
-          </button>
-        </li>
-      ))}
-      <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-        <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
-          &rarr;
-        </button>
-      </li>
-    </ul> */}
 
-        {/* ✅ Use Pagination Component */}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-  </nav>
-</div>
-
+  
 </section>
 
 

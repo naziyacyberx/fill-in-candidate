@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/cardbox.css";
 import axios from "axios";
+import CategoryCardSkeleton from "../skeleton/candidate/recruiter/CategoryCardSkeleton";
 
 const professionMap = {
   "Dentist": 1,
@@ -14,6 +15,13 @@ const professionMap = {
 const CandidatesCategories = ({ cardData }) => {
   const navigate = useNavigate();
   console.log("cardData", cardData);
+  const [loading,setLoading] = useState(true)
+
+  useEffect(()=>{
+  if(cardData && cardData.length>0){
+    setLoading(false)
+  }
+  },[cardData])
   
 
  const handleCardClick = async (professionId) => {
@@ -46,7 +54,15 @@ const CandidatesCategories = ({ cardData }) => {
         <p className="card-title-section mb-5">Candidates Category</p>
 
         <div className="row">
-          {Array.isArray(cardData) &&
+          {
+          loading? <>
+          <div>
+
+        <CategoryCardSkeleton/>
+          </div>
+          </>
+    :    <>
+     {     Array.isArray(cardData) &&
             cardData.map((card, index) => (
               <div
                 key={index}
@@ -70,6 +86,9 @@ const CandidatesCategories = ({ cardData }) => {
                 </div>
               </div>
             ))}
+        </>
+            
+            }
         </div>
       </div>
     </section>

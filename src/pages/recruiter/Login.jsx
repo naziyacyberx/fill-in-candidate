@@ -63,15 +63,17 @@ const Login = () => {
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6  login-left-side">
+            <div className="col-md-6 d-lg-block d-none  login-left-side">
               <div >
                 {/* <div className="login-left-main"> */}
+                
                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
-              </div>
+              </div>  
             </div>
-            <div className="col-md-6">
+            <div className="col-lg-6 col-12">
               <div className="register-container">
                 <div className="auth-logo">
+                  
                   <img
                     className="imf-fluid"
                     src="/images/logo.png"

@@ -12,8 +12,7 @@ const Footer = () => {
           <div className="footer-box">  
             <img className="img-fluid footer-logo" src="/images/logo.png" alt="Logo" />
             <p className="footer-desc">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy.  
+            Fillin’ connects the dental community by making it easy to find and fill temporary or permanent roles from assistants to dentists. Whether you’re hiring or job hunting, Fillin’ keeps your practice or career moving.
             </p>  
   
             {/* Social icons */}
@@ -39,9 +38,9 @@ const Footer = () => {
             <ul>
               {/* <li><a href="/">Home</a></li> */}
               <li><Link to="/recruiter">Home</Link></li>
-              <li><Link to=" ">Jobs</Link></li>
+              <li><Link to="/recruiter/posted-jobs">Jobs</Link></li>
               <li><Link to="/recruiter/messages">Messages</Link></li>
-              <li><Link to="/recruiter/applies">Applied</Link></li>
+              {/* <li><Link to="/recruiter/applies">Applied</Link></li> */}
               
               {/* <li><a href="#">Jobs</a></li>
               <li><a href="#">Candidates</a></li>
@@ -53,10 +52,10 @@ const Footer = () => {
           <div className="footer-box">
             <h4>More</h4>
             <ul>
-              <li><Link to="/candidate/my-ratings-reviews">Review</Link></li>
-              <li><Link to="/candidate/saved-jobs">Saved</Link></li>
-              <li><Link to="/candidate/about-us">about-us</Link></li>
-              <li><Link to="/candidate/privacy-policy">Privacy</Link></li>
+              <li><Link to="/recruiter/ratings-and-reviews">Review</Link></li>
+              {/* <li><Link to="/recruiter/candidates">Candidates</Link></li> */}
+              <li><Link to="/recruiter/about-us">about-us</Link></li>
+              <li><Link to="/recruiter/privacy-policy">Privacy</Link></li>
               {/* <li><a href="#">Privacy</a></li>
               <li><a href="#">Help</a></li>
               <li><a href="#">Terms &amp; Conditions</a></li>

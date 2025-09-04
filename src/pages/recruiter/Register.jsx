@@ -28,6 +28,13 @@ const Register = () => {
     return regex.test(password);
   };
 
+  const validatePhone = (phone) => {
+  // Example: 10 digit number (India/US style). Adjust as per your country.
+  const regex = /^[0-9]{10}$/;
+  return regex.test(phone);
+};
+
+
   const handleRegister = async (e) => {
     e.preventDefault();
     const validationErrors = {};
@@ -44,6 +51,9 @@ const Register = () => {
       validationErrors.password =
         "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.";
     }
+if (!validatePhone(phone)) {
+  validationErrors.phone = "Invalid phone number. Must be 10 digits.";
+}
 
     if (password !== confirmPassword) {
       validationErrors.confirmPassword = "Passwords do not match.";
@@ -88,14 +98,14 @@ const Register = () => {
       <section className="login-section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-6 login-left-side">
+            <div className="col-md-6 d-none d-lg-block login-left-side">
               <div className="">
                 <img className="img-fluid" src="/images/login-bg.png" alt="" />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-lg-6 col-12">
               <div className="register-container">
-                <div className="auth-logo">
+                <div className="auth-logo cursor-pointer"  onClick={()=>{navigate("/recruiter")}}>
                   <img
                     className="img-fluid"
                     src="/images/logo.png"
@@ -134,18 +144,21 @@ const Register = () => {
                     )}
                   </div>
 
-                       <div className="form-group">
-                    <label htmlFor="email">Phone Number *</label>
-                    <input
-                      type="number"
-                      id="number"
-                      className="form-control"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      required
-                    />
-              
-                  </div>
+                  <div className="form-group">
+  <label htmlFor="phone">Phone Number *</label>
+  <input
+    type="text"
+    id="phone"
+    className="form-control"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    required
+  />
+  {error.phone && (
+    <small className="text-danger">{error.phone}</small>
+  )}
+</div>
+
 
                   <div className="form-group">
                     <label htmlFor="password">Password *</label>
